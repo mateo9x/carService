@@ -1,0 +1,44 @@
+.nav-bar {
+  height: 60px;
+  width: 100%;
+  background-color: var(--nav-bg-color);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.nav-bar-left-container {
+  display: inherit;
+  justify-content: left;
+}
+
+.logo-container > img {
+  height: 60px;
+  width: 150px;
+  padding: 0 10px;
+}
+
+.logo-container > img:hover {
+  cursor: pointer;
+}
+
+.nav-bar-right-container {
+  display: inherit;
+  justify-content: right;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 20px;
+}
+
+.nav-link:hover {
+  color: #9f9c9c;
+}
+
+.router-section {
+  height: 100%;
+  width: 100%;
+  margin-top: 20px;
+}

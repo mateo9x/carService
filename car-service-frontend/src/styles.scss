@@ -1,0 +1,12 @@
+:root {
+  --nav-bg-color: #3a3b3d;
+}
+
+html, body { height: 100%; }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@font-face {
+  font-family: 'impact';
+  src: url('../src/assets/fonts/impact.ttf');
+}
