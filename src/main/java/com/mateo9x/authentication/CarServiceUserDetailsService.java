@@ -24,7 +24,7 @@ public class CarServiceUserDetailsService implements UserDetailsService {
         if (user != null) {
             return new AuthenticatedUser(user.getId(), user.getEmail(), user.getPassword(), getRoles(user.getRoles()));
         }
-        throw new UsernameNotFoundException("Użytkownik nie znaleziony!");
+        throw new UsernameNotFoundException("Użytkownik ze wskazanym adresem email nie został znaleziony!");
     }
 
     private Collection<? extends GrantedAuthority> getRoles(String roles) {

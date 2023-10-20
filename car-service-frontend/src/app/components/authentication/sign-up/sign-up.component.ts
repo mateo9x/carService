@@ -47,8 +47,11 @@ export class SignUpComponent implements OnInit, OnDestroy {
       this.apiService.signUp(this.formService.convertFormToUserRequest(this.form)).subscribe({
         next: () => this.router.navigate(['sign-in']).then(() => this.snackBarService.openSnackBar('Użytkownik został zarejestrowany', SnackBarType.SUCCESS)),
         error: (error) => {
-          console.log(error);
-          this.snackBarService.openSnackBar('Nie udało zarejestrować się użytkownika', SnackBarType.ERROR)
+          if (error.error) {
+            this.snackBarService.openSnackBar(error.error.message, SnackBarType.ERROR)
+          } else {
+            this.snackBarService.openSnackBar('Nie udało zarejestrować się użytkownika', SnackBarType.ERROR)
+          }
         }
       });
     }
