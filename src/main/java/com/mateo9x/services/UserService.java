@@ -1,6 +1,8 @@
 package com.mateo9x.services;
 
 import com.mateo9x.authentication.AuthenticationFacade;
+import com.mateo9x.converters.UserConverter;
+import com.mateo9x.dtos.UserDto;
 import com.mateo9x.entities.User;
 import com.mateo9x.entities.Vehicle;
 import com.mateo9x.models.Authority;
@@ -19,22 +21,31 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationFacade authenticationFacade;
+    private final UserConverter userConverter;
 
-    public Optional<User> getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public Boolean isUserByEmailPresent(String email) {
+        return findUserByEmail(email).isPresent();
     }
 
-    public User saveUser(User user) {
+    public UserDto getUserByEmail(String email) {
+        return userConverter.toDto(findUserByEmail(email).orElse(null));
+    }
+
+    public UserDto saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Authority.USER.getAuthority());
-        return userRepository.save(user);
+        return userConverter.toDto(userRepository.save(user));
     }
 
     public void addVehicleToLoggedUser(Vehicle vehicle) {
-        Optional<User> userOptional = getUserByEmail(authenticationFacade.getCurrentUser().getUsername());
+        Optional<User> userOptional = findUserByEmail(authenticationFacade.getCurrentUser().getUsername());
         userOptional.ifPresentOrElse(user -> addVehicleToLoggedUser(user, vehicle), () -> {
             throw new UsernameNotFoundException("Użytkownik nie został znaleziony!");
         });
+    }
+
+    private Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     private void addVehicleToLoggedUser(User user, Vehicle vehicle) {

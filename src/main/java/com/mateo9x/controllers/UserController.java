@@ -1,5 +1,6 @@
 package com.mateo9x.controllers;
 
+import com.mateo9x.dtos.UserDto;
 import com.mateo9x.entities.User;
 import com.mateo9x.exceptions.UserExistsException;
 import com.mateo9x.services.UserService;
@@ -20,9 +21,9 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> saveUser(@RequestBody User user) {
+    public ResponseEntity<UserDto> saveUser(@RequestBody User user) {
         log.info("REST request to save user: {}", user);
-        if (userService.getUserByEmail(user.getEmail()).isPresent()) {
+        if (userService.isUserByEmailPresent(user.getEmail())) {
             throw new UserExistsException("Użytkownik z podanym adresem email istnieje!");
         }
         return ResponseEntity.ok(userService.saveUser(user));

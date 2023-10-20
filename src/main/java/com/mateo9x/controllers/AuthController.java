@@ -5,7 +5,7 @@ import com.mateo9x.authentication.AuthenticationFacade;
 import com.mateo9x.authentication.AuthenticationRequest;
 import com.mateo9x.authentication.JwtService;
 import com.mateo9x.controllers.response.JwtTokenResponse;
-import com.mateo9x.entities.User;
+import com.mateo9x.dtos.UserDto;
 import com.mateo9x.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -46,7 +46,7 @@ public class AuthController {
         if (authenticatedUser == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        User user = this.userService.getUserByEmail(authenticationFacade.getCurrentUser().getUsername()).orElse(null);
+        UserDto user = this.userService.getUserByEmail(authenticationFacade.getCurrentUser().getUsername());
         Set<String> authorities = this.authenticationFacade.getCurrentUser().getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());
@@ -63,7 +63,7 @@ public class AuthController {
 
     @Value(staticConstructor = "of")
     private static class UserLoggedResponse {
-        User user;
+        UserDto user;
         Set<String> authorities;
     }
 
