@@ -3,11 +3,13 @@
     <mat-label>Email</mat-label>
     <input matInput formControlName="email">
     <mat-error *ngIf="hasFormError('email','required')">Pole wymagane</mat-error>
+    <mat-error *ngIf="hasFormError('email','pattern')">Niepoprawny format adresu email</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Hasło</mat-label>
     <input matInput type="password" formControlName="password">
     <mat-error *ngIf="hasFormError('password','required')">Pole wymagane</mat-error>
+    <mat-error *ngIf="hasFormError('password','minlength')">Wymagane minimum 5 znaków</mat-error>
   </mat-form-field>
   <a routerLink="/sign-up" class="nav-link">Nie posiadasz konta? Zarejestruj się</a>
   <button mat-raised-button (click)="signIn()">Zaloguj się</button>

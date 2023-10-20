@@ -14,7 +14,7 @@ export class SignUpFormService {
     return this.fb.group({
       firstName: [null, [Validators.required, Validators.maxLength(100)]],
       lastName: [null, [Validators.required, Validators.maxLength(100)]],
-      email: [null, [Validators.required, Validators.email]],
+      email: [null, [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]],
       password: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       password2: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]]
     });
@@ -42,6 +42,10 @@ export class SignUpFormService {
 
   getPasswordControl(form: FormGroup): AbstractControl {
     return form.get('password') as AbstractControl;
+  }
+
+  getPassword2Control(form: FormGroup): AbstractControl {
+    return form.get('password2') as AbstractControl;
   }
 
 }

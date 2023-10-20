@@ -18,13 +18,15 @@ import {AppGuard} from './config/app.guard';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {ErrorStateMatcher, MAT_DATE_LOCALE, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
+import {NotFoundComponent} from './components/handlers/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     WelcomeComponent,
-    SignUpComponent
+    SignUpComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

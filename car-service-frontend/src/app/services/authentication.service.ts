@@ -26,7 +26,13 @@ export class AuthenticationService {
         this.setToken(token.jwt);
         this.getUserLogged(false);
       },
-      error: () => this.snackBarService.openSnackBar('Autoryzacja nie udana', SnackBarType.ERROR)
+      error: (error) => {
+        if (error.error) {
+          this.snackBarService.openSnackBar(error.error.message, SnackBarType.ERROR);
+        } else {
+          this.snackBarService.openSnackBar('Nie udało zalogować się', SnackBarType.ERROR);
+        }
+      }
     });
   }
 

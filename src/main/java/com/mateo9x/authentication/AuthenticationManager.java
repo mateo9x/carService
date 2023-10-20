@@ -16,7 +16,7 @@ public class AuthenticationManager {
     public Authentication authenticate(String email, String password) {
         AuthenticatedUser authenticatedUser = carServiceUserDetailsService.loadUserByUsername(email);
         if (!passwordEncoder.matches(password, authenticatedUser.getPassword())) {
-            throw new BadCredentialsException("");
+            throw new BadCredentialsException("Niepoprawne hasło");
         }
         return UsernamePasswordAuthenticationToken.authenticated(authenticatedUser, email, authenticatedUser.getAuthorities());
     }
