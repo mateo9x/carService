@@ -10,3 +10,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-family: 'impact';
   src: url('../src/assets/fonts/impact.ttf');
 }
+
+.nav-link {
+  color: black;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.nav-link:hover {
+  color: #504f4f;
+  text-decoration: underline;
+}
