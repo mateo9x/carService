@@ -83,9 +83,16 @@ body {
   color: black;
   text-decoration: none;
   padding: 10px;
+  background-image: linear-gradient(to right, #504f4f, #504f4f);
+  background-position: 0 100%;
+  background-size: 0 1px;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s,
+  background-position 0s 0.3s;
 }
 
-.nav-link:hover {
+.nav-link:hover, .nav-link:focus {
   color: #504f4f;
-  text-decoration: underline;
+  background-position: 100% 100%;
+  background-size: 100% 1px;
 }
