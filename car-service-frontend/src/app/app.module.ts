@@ -30,6 +30,8 @@ import {VehicleAddDialogComponent} from './components/vehicles/add-dialog/vehicl
 import {DatePipe} from '@angular/common';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
+import {ProfileComponent} from './components/profile/profile.component';
+import {UpdatePasswordComponent} from './components/profile/update-password/update-password.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import {MatSelectModule} from '@angular/material/select';
     WelcomeComponent,
     SignUpComponent,
     NotFoundComponent,
-    VehicleAddDialogComponent
+    VehicleAddDialogComponent,
+    ProfileComponent,
+    UpdatePasswordComponent
   ],
   imports: [
     BrowserModule,

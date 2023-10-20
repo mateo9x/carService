@@ -5,6 +5,7 @@ import {WelcomeComponent} from './components/welcome/welcome.component';
 import {SignUpComponent} from './components/authentication/sign-up/sign-up.component';
 import {AppGuard} from './config/app.guard';
 import {NotFoundComponent} from './components/handlers/not-found/not-found.component';
+import {ProfileComponent} from './components/profile/profile.component';
 
 const ROUTES: Routes = [
   {
@@ -23,6 +24,13 @@ const ROUTES: Routes = [
     component: SignUpComponent,
     title: 'Zarejestruj się',
     canActivate: [() => !inject(AppGuard).isAuthenticated()]
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    title: 'Mój profil',
+    canActivate: [() => inject(AppGuard).isAuthenticated()],
+    loadChildren: () => import('./components/profile/profile-routing.module').then(module => module.ProfileRoutingModule),
   },
   {
     path: '**',

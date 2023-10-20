@@ -44,6 +44,18 @@ public class UserService {
         });
     }
 
+    public void updatePassword(String newPassword) {
+        Optional<User> userOptional = findUserByEmail(authenticationFacade.getCurrentUser().getUsername());
+        userOptional.ifPresentOrElse(user -> updatePassword(user, newPassword), () -> {
+            throw new UsernameNotFoundException("Użytkownik nie został znaleziony!");
+        });
+    }
+
+    private void updatePassword(User user, String newPassword) {
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
+
     private Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }

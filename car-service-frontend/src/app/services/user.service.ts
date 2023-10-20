@@ -21,7 +21,20 @@ export class UserService {
         if (error.error) {
           this.snackBarService.openSnackBar(error.error.message, SnackBarType.ERROR)
         } else {
-          this.snackBarService.openSnackBar('Nie udało zarejestrować się użytkownika', SnackBarType.ERROR)
+          this.snackBarService.openSnackBar('Nie udało się zarejestrować użytkownika', SnackBarType.ERROR)
+        }
+      }
+    });
+  }
+
+  updatePassword(password: string) {
+    this.apiService.updatePassword(password).subscribe({
+      next: () => this.router.navigate(['profile']).then(() => this.snackBarService.openSnackBar('Hasło zostało zaktualizowane', SnackBarType.SUCCESS)),
+      error: (error) => {
+        if (error.error) {
+          this.snackBarService.openSnackBar(error.error.message, SnackBarType.ERROR)
+        } else {
+          this.snackBarService.openSnackBar('Nie udało się zaktualizować hasła', SnackBarType.ERROR)
         }
       }
     });

@@ -7,12 +7,16 @@ import {User} from '../../models/user.model';
   providedIn: 'root'
 })
 export class UserApiService {
-  AUTH_URL = APP_URL + API_PREFIX + '/users';
+  USER_URL = APP_URL + API_PREFIX + '/users';
 
   constructor(private httpClient: HttpClient) {
   }
 
   signUp(user: User) {
-    return this.httpClient.post<User>(this.AUTH_URL, user);
+    return this.httpClient.post<User>(this.USER_URL, user);
+  }
+
+  updatePassword(password: string) {
+    return this.httpClient.put<void>(`${this.USER_URL}/update-password`, password);
   }
 }
