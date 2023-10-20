@@ -10,18 +10,20 @@ import com.mateo9x.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.Value;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 @RequestMapping("/auth")
 @AllArgsConstructor
@@ -33,11 +35,13 @@ public class AuthController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<JwtTokenResponse> authenticate(@RequestBody AuthenticationRequest request) {
+        log.info("REST request to authenticate: {}", request);
         return ResponseEntity.ok(authenticationFacade.authenticate(request));
     }
 
     @GetMapping("/user-logged")
     public ResponseEntity<UserLoggedResponse> getUserLogged() {
+        log.info("REST request to get user logged");
         AuthenticatedUser authenticatedUser = authenticationFacade.getCurrentUser();
         if (authenticatedUser == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -50,8 +54,8 @@ public class AuthController {
     }
 
     @PostMapping("/invalidate")
-    public ResponseEntity<?> invalidate(HttpServletRequest httpServletRequest)
-    {
+    public ResponseEntity<?> invalidate(HttpServletRequest httpServletRequest) {
+        log.info("REST request to invalidate");
         String jwt = jwtService.getJwtToken(httpServletRequest);
         jwtService.invalidate(jwt);
         return ResponseEntity.ok().build();
@@ -59,8 +63,8 @@ public class AuthController {
 
     @Value(staticConstructor = "of")
     private static class UserLoggedResponse {
-         User user;
-         Set<String> authorities;
+        User user;
+        Set<String> authorities;
     }
 
 }

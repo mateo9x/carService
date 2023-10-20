@@ -1,0 +1,69 @@
+<form [formGroup]="form">
+  <h4>Dodaj pojazd</h4>
+  <mat-form-field>
+    <mat-label>Marka</mat-label>
+    <input matInput formControlName="brand">
+    <mat-error *ngIf="hasFormError('brand','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Model</mat-label>
+    <input matInput formControlName="model">
+    <mat-error *ngIf="hasFormError('model','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Rok produkcji</mat-label>
+    <input matInput type="number" formControlName="productionYear">
+    <mat-error *ngIf="hasFormError('productionYear','required')">Pole wymagane</mat-error>
+    <mat-error *ngIf="hasFormError('productionYear','min')">Minimalny rok produkcji 1900</mat-error>
+    <mat-error *ngIf="hasFormError('productionYear','max')">Rok produkcji nie może być większy niż aktualny</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Numer rejestracyjny</mat-label>
+    <input matInput formControlName="licensePlate">
+    <mat-error *ngIf="hasFormError('licensePlate','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>VIN</mat-label>
+    <input matInput formControlName="vin">
+    <mat-error *ngIf="hasFormError('vin','required')">Pole wymagane</mat-error>
+    <mat-error *ngIf="hasFormError('vin','minlength')">Minimum 5 znaków</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Data zakupu</mat-label>
+    <input matInput [matDatepicker]="purchaseDate" [max]="todayDate" formControlName="purchaseDate">
+    <mat-datepicker-toggle matIconSuffix [for]="purchaseDate"></mat-datepicker-toggle>
+    <mat-datepicker
+      startView="multi-year"
+      #purchaseDate></mat-datepicker>
+    <mat-error *ngIf="hasFormError('purchaseDate','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Rodzaj silnika</mat-label>
+    <mat-select formControlName="engineType">
+      <mat-option *ngFor="let engineType of engineTypes" [value]="engineType.value">
+        {{engineType.label}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="hasFormError('engineType','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Rodzaj skrzyni</mat-label>
+    <mat-select formControlName="transmissionType">
+      <mat-option *ngFor="let transmissionType of transmissionTypes" [value]="transmissionType.value">
+        {{transmissionType.label}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="hasFormError('transmissionType','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Przebieg w dniu zakupu [km]</mat-label>
+    <input matInput type="number" formControlName="purchaseMileage">
+    <mat-error *ngIf="hasFormError('purchaseMileage','required')">Pole wymagane</mat-error>
+    <mat-error *ngIf="hasFormError('purchaseMileage','min')">Przebieg nie może być mniejszy niż 0</mat-error>
+  </mat-form-field>
+
+  <div class="button-container">
+    <button mat-raised-button (click)="cancel()">Przypomnij później</button>
+    <button mat-raised-button (click)="addVehicle()">Dodaj pojazd</button>
+  </div>
+</form>

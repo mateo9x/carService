@@ -24,7 +24,7 @@ export class AuthenticationService {
     this.apiService.signInUser(request).subscribe({
       next: (token) => {
         this.setToken(token.jwt);
-        this.getUserLogged(false);
+        this.getUserLogged(true);
       },
       error: (error) => {
         if (error.error) {
@@ -36,12 +36,12 @@ export class AuthenticationService {
     });
   }
 
-  private getUserLogged(tokenStored: boolean) {
+  public getUserLogged(signInAttempt: boolean) {
     this.apiService.getUserLogged().subscribe({
       next: (userLogged) => {
         this.setUserLogged(userLogged.user);
         this.setAuthorities(userLogged.authorities);
-        if (!tokenStored) {
+        if (signInAttempt) {
           this.router.navigate(['']).then(() => this.snackBarService.openSnackBar('Zalogowano pomyślnie', SnackBarType.SUCCESS));
         }
       },
@@ -72,7 +72,7 @@ export class AuthenticationService {
   logUserOnInit() {
     const jwt = this.storageService.get('jwt');
     if (jwt) {
-      this.getUserLogged(true);
+      this.getUserLogged(false);
     }
   }
 

@@ -1,8 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from './models/user.model';
 import {AuthenticationService} from './services/authentication.service';
-import {Subscription} from 'rxjs';
+import {filter, Subscription} from 'rxjs';
 import {SpinnerService} from './services/common/spinner.service';
+import {MatDialog} from '@angular/material/dialog';
+import {VehicleAddDialogComponent} from './components/vehicles/add-dialog/vehicle-add-dialog.component';
+import {VehicleService} from './services/vehicle.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +18,9 @@ export class AppComponent implements OnInit, OnDestroy {
   subscriptions: Subscription = new Subscription();
 
   constructor(private authenticationService: AuthenticationService,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private vehicleService: VehicleService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -30,7 +35,12 @@ export class AppComponent implements OnInit, OnDestroy {
   setUser() {
     this.authenticationService.logUserOnInit();
     this.subscriptions.add(this.authenticationService.userObservable.subscribe({
-      next: (user) => this.userLogged = user
+      next: (user) => {
+        this.userLogged = user;
+        if (this.userLogged && this.userLogged.vehicles?.length === 0) {
+          this.openAddVehicleDialog();
+        }
+      }
     }));
   }
 
@@ -44,5 +54,19 @@ export class AppComponent implements OnInit, OnDestroy {
         this.loading = response;
       }
     }));
+  }
+
+  openAddVehicleDialog() {
+    const dialogRef = this.dialog.open(VehicleAddDialogComponent, {
+      autoFocus: false,
+      maxHeight: '90vh'
+    });
+    dialogRef.afterClosed()
+      .pipe(
+        filter((data) => data)
+      )
+      .subscribe({
+        next: (data) => this.vehicleService.saveVehicle(data)
+      });
   }
 }
