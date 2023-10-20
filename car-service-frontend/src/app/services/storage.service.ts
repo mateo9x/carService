@@ -10,7 +10,7 @@ export class StorageService {
   }
 
   get(key: string) {
-    return localStorage.getItem(key);
+    return JSON.parse(localStorage.getItem(key) as any);
   }
 
   delete(key: string) {

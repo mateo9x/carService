@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class AuthenticationManager {
-    private final UserDetailsService userDetailsService;
+    private final CarServiceUserDetailsService carServiceUserDetailsService;
     private final PasswordEncoder passwordEncoder;
 
     public Authentication authenticate(String email, String password) {
-        AuthenticatedUser authenticatedUser = userDetailsService.loadUserByUsername(email);
+        AuthenticatedUser authenticatedUser = carServiceUserDetailsService.loadUserByUsername(email);
         if (!passwordEncoder.matches(password, authenticatedUser.getPassword())) {
             throw new BadCredentialsException("");
         }

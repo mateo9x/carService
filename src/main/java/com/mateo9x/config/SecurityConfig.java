@@ -29,13 +29,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/v1/auth/authenticate")
+                        .requestMatchers(HttpMethod.POST, "/auth/authenticate")
                         .permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/users")
+                        .requestMatchers(HttpMethod.POST, "/users")
                         .permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**")
                         .permitAll()
-                        .requestMatchers("/api/**")
+                        .requestMatchers("/**")
                         .authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

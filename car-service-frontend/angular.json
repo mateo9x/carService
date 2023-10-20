@@ -69,8 +69,7 @@
               "browserTarget": "car-service-frontend:build:production"
             },
             "development": {
-              "browserTarget": "car-service-frontend:build:development",
-              "proxyConfig": "src/proxy.conf.json"
+              "browserTarget": "car-service-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"

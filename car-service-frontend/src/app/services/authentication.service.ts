@@ -23,23 +23,23 @@ export class AuthenticationService {
   public signinUser(request: AuthenticationRequest) {
     this.apiService.signInUser(request).subscribe({
       next: (token) => {
-        this.storageService.save('jwt', token.jwt);
-        this.getUserLogged();
+        this.setToken(token.jwt);
+        this.getUserLogged(false);
       },
       error: () => this.snackBarService.openSnackBar('Autoryzacja nie udana', SnackBarType.ERROR)
     });
   }
 
-  private getUserLogged() {
+  private getUserLogged(tokenStored: boolean) {
     this.apiService.getUserLogged().subscribe({
       next: (userLogged) => {
         this.setUserLogged(userLogged.user);
         this.setAuthorities(userLogged.authorities);
-        this.router.navigate(['']).then(() => this.snackBarService.openSnackBar('Zalogowano pomyślnie', SnackBarType.SUCCESS));
+        if (!tokenStored) {
+          this.router.navigate(['']).then(() => this.snackBarService.openSnackBar('Zalogowano pomyślnie', SnackBarType.SUCCESS));
+        }
       },
-      error: () => {
-        //TODO wylogowanie
-      }
+      error: () => this.logout()
     });
   }
 
@@ -47,19 +47,44 @@ export class AuthenticationService {
     this.storageService.save('authorities', authorities);
   }
 
-  public setUserLogged(user: User) {
+  private removeAuthorities() {
+    this.storageService.delete('authorities');
+  }
+
+  private setToken(token: string) {
+    this.storageService.save('jwt', token);
+  }
+
+  private removeToken() {
+    this.storageService.delete('jwt');
+  }
+
+  public setUserLogged(user: User | null) {
     this.userLogged.next(user);
   }
 
   logUserOnInit() {
     const jwt = this.storageService.get('jwt');
     if (jwt) {
-      this.getUserLogged();
+      this.getUserLogged(true);
     }
   }
 
   logout() {
-    //TODO
+    this.apiService.invalidate().subscribe({
+      next: () => {
+        this.removeAuthorities();
+        this.removeToken();
+        this.setUserLogged(null);
+        this.router.navigate(['']).then(() => this.snackBarService.openSnackBar('Wylogowano pomyślnie', SnackBarType.SUCCESS))
+      }
+    });
+  }
+
+  logoutOnError() {
+    this.removeAuthorities();
+    this.removeToken();
+    this.setUserLogged(null);
   }
 
 }
