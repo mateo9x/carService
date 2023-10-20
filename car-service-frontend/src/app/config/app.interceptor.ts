@@ -11,22 +11,22 @@ export class AppInterceptor implements HttpInterceptor {
               private authenticationService: AuthenticationService) {
   }
 
-  intercept(request: HttpRequest<any>,
-            next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = this.storageService.get('jwt');
-    let newRequest;
-    if (!!token) {
-      newRequest = request.clone({
-        withCredentials: true
-      });
-    } else {
-      newRequest = request.clone({
-        withCredentials: true
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    const jwt = this.storageService.get('jwt');
+
+    if (jwt) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: 'Bearer ' + jwt
+        }
       });
     }
-    return next.handle(newRequest).pipe(catchError((err) => {
+    return next.handle(request).pipe(catchError((err) => {
       if (err.status === 401 || err.status === 403) {
-        this.authenticationService.logout();
+        this.authenticationService.logoutOnError();
       }
       throw err;
     }));

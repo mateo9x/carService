@@ -30,8 +30,6 @@ public class AuthenticationFacade {
         AuthenticatedUser authenticatedUser = (AuthenticatedUser) authentication.getPrincipal();
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtService.createJwt(authenticatedUser);
-
-        return JwtTokenResponse.of(jwt);
+        return JwtTokenResponse.of(jwtService.createJwt(authenticatedUser));
     }
 }

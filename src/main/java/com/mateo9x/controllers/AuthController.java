@@ -3,9 +3,11 @@ package com.mateo9x.controllers;
 import com.mateo9x.authentication.AuthenticatedUser;
 import com.mateo9x.authentication.AuthenticationFacade;
 import com.mateo9x.authentication.AuthenticationRequest;
+import com.mateo9x.authentication.JwtService;
 import com.mateo9x.controllers.response.JwtTokenResponse;
 import com.mateo9x.entities.User;
 import com.mateo9x.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.Value;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,7 @@ import java.util.stream.Collectors;
 public class AuthController {
 
     private final UserService userService;
+    private final JwtService jwtService;
     private final AuthenticationFacade authenticationFacade;
 
     @PostMapping("/authenticate")
@@ -44,6 +47,14 @@ public class AuthController {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());
         return ResponseEntity.ok(UserLoggedResponse.of(user, authorities));
+    }
+
+    @PostMapping("/invalidate")
+    public ResponseEntity<?> invalidate(HttpServletRequest httpServletRequest)
+    {
+        String jwt = jwtService.getJwtToken(httpServletRequest);
+        jwtService.invalidate(jwt);
+        return ResponseEntity.ok().build();
     }
 
     @Value(staticConstructor = "of")

@@ -20,6 +20,10 @@ export class AuthenticationApiService {
   getUserLogged() {
     return this.httpClient.get<UserLoggedResponse>(`${this.AUTH_URL}/user-logged`);
   }
+
+  invalidate() {
+    return this.httpClient.post<void>(`${this.AUTH_URL}/invalidate`, {});
+  }
 }
 
 export interface JwtTokenResponse {

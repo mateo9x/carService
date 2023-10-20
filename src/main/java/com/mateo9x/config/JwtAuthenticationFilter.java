@@ -2,7 +2,7 @@ package com.mateo9x.config;
 
 import com.mateo9x.authentication.AuthenticatedUser;
 import com.mateo9x.authentication.JwtService;
-import com.mateo9x.authentication.UserDetailsService;
+import com.mateo9x.authentication.CarServiceUserDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import jakarta.servlet.FilterChain;
@@ -26,7 +26,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
+    private final CarServiceUserDetailsService carServiceUserDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -49,7 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private void authenticate(Jws<Claims> claimsJws, HttpServletRequest request) {
         String username = claimsJws.getBody().getSubject();
-        AuthenticatedUser authenticatedUser = userDetailsService.loadUserByUsername(username);
+        AuthenticatedUser authenticatedUser = carServiceUserDetailsService.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken.authenticated(authenticatedUser, authenticatedUser.getPassword(), authenticatedUser.getAuthorities());
         usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);

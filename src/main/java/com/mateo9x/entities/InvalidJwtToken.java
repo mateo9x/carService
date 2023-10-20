@@ -6,15 +6,16 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "users")
-public class User {
-
+@Document(collection = "invalid_jwt_tokens")
+public class InvalidJwtToken {
     @Id
     private String id;
-    private String email;
-    private String password;
-    private String roles;
+    private String jwt;
+    private LocalDateTime invalidatedDateTime;
+    private LocalDateTime expirationDateTime;
 }
