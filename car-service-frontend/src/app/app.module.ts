@@ -16,9 +16,20 @@ import {AppInterceptor} from './config/app.interceptor';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {AppGuard} from './config/app.guard';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
-import {ErrorStateMatcher, MAT_DATE_LOCALE, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
-import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
+import {
+  ErrorStateMatcher,
+  MAT_DATE_LOCALE,
+  MatNativeDateModule,
+  ShowOnDirtyErrorStateMatcher
+} from '@angular/material/core';
+import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
 import {NotFoundComponent} from './components/handlers/not-found/not-found.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {VehicleAddDialogComponent} from './components/vehicles/add-dialog/vehicle-add-dialog.component';
+import {DatePipe} from '@angular/common';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -26,7 +37,8 @@ import {NotFoundComponent} from './components/handlers/not-found/not-found.compo
     SignInComponent,
     WelcomeComponent,
     SignUpComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    VehicleAddDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +50,13 @@ import {NotFoundComponent} from './components/handlers/not-found/not-found.compo
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
@@ -53,7 +71,7 @@ import {NotFoundComponent} from './components/handlers/not-found/not-found.compo
     {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'},
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
-    AppGuard],
+    AppGuard, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

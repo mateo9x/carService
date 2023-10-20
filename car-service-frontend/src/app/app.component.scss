@@ -25,6 +25,22 @@
 .nav-bar-right-container {
   display: inherit;
   justify-content: right;
+  height: 100%;
+  align-items: center;
+}
+
+.profile-container {
+  padding: 20px;
+}
+
+.profile-icon {
+  color: var(--nav-text-color);
+}
+
+::ng-deep {
+  .mat-mdc-menu-panel {
+    margin: 10px !important;
+  }
 }
 
 .nav-link {

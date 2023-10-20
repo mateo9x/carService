@@ -7,7 +7,14 @@
     </div>
     <div class="nav-bar-right-container">
       <a class="nav-link" routerLink="sign-in" *ngIf="!userLogged">Zaloguj się</a>
-      <a class="nav-link" routerLink="sign-in" *ngIf="userLogged" (click)="logout()">Wyloguj się</a>
+      <ng-container class="profile-container" *ngIf="userLogged">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon class="profile-icon">person</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="logout()">Wyloguj się</button>
+        </mat-menu>
+      </ng-container>
     </div>
   </div>
   <div class="router-section">
