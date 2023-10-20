@@ -28,11 +28,11 @@
 }
 
 .nav-link {
-  color: white;
+  color: var(--nav-text-color);
 }
 
 .nav-link:hover {
-  color: #9f9c9c;
+  color: var(--nav-hover-color);
 }
 
 .router-section {

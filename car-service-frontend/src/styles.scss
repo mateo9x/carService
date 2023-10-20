@@ -1,23 +1,98 @@
 :root {
   --nav-bg-color: #3a3b3d;
+  --nav-text-color: white;
+  --nav-hover-color: #eae5e5;
+  --main-bg-color: #4ddae7;
+  --main-text-color: white;
 }
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 @font-face {
   font-family: 'impact';
   src: url('../src/assets/fonts/impact.ttf');
 }
 
+/* ANGULAR MATERIAL */
+
+.mat-mdc-raised-button.mat-unthemed {
+  --mdc-protected-button-container-color: var(--main-bg-color) !important;
+  --mdc-protected-button-label-text-color: var(--main-text-color) !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  caret-color: black !important;
+}
+
+.mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: var(--main-bg-color) !important;
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: black !important;
+}
+
+.mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background {
+  border-color: var(--main-bg-color) !important;
+  background-color: var(--main-bg-color) !important;
+}
+
+::ng-deep .mdc-text-field .mdc-text-field__input {
+  border-color: var(--main-bg-color) !important;
+}
+
+.mdc-text-field--filled .mdc-line-ripple:after {
+  border-color: var(--main-bg-color) !important;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+  background: var(--main-bg-color) !important;
+}
+
+.snack-bar-success, .snack-bar-success button {
+  border-radius: 10px !important;
+  background-color: #49830a !important;
+  --mdc-snackbar-container-color: #49830a !important;
+  color: white !important;
+}
+
+.snack-bar-warn, .snack-bar-warn button {
+  border-radius: 10px !important;
+  background-color: #d7a80e !important;
+  --mdc-snackbar-container-color: #d7a80e !important;
+  color: white !important;
+}
+
+.snack-bar-error, .snack-bar-error button {
+  border-radius: 10px !important;
+  background-color: #771313 !important;
+  --mdc-snackbar-container-color: #771313 !important;
+  color: white !important;
+}
+
+/* APP ELEMENTS */
+
 .nav-link {
   color: black;
   text-decoration: none;
   padding: 10px;
+  background-image: linear-gradient(to right, #504f4f, #504f4f);
+  background-position: 0 100%;
+  background-size: 0 1px;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s,
+  background-position 0s 0.3s;
 }
 
-.nav-link:hover {
+.nav-link:hover, .nav-link:focus {
   color: #504f4f;
-  text-decoration: underline;
+  background-position: 100% 100%;
+  background-size: 100% 1px;
 }
