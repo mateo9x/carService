@@ -12,7 +12,7 @@ export class SignInFormService {
 
   getFormGroup(): FormGroup {
     return this.fb.group({
-      email: [null, [Validators.required, Validators.email]],
+      email: [null, [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]],
       password: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]]
     });
   }

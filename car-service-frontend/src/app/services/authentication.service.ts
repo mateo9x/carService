@@ -26,7 +26,7 @@ export class AuthenticationService {
         this.setToken(token.jwt);
         this.getUserLogged(false);
       },
-      error: () => this.snackBarService.openSnackBar('Autoryzacja nie udana', SnackBarType.ERROR)
+      error: () => this.snackBarService.openSnackBar('Email i hasło nie pasują do siebie', SnackBarType.ERROR)
     });
   }
 
