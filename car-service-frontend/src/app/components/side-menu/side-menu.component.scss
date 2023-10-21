@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  background-color: var(--nav-bg-color);
+  height: 100%;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  text-align: left;
+  padding: 10px;
+  list-style-type: none;
+}
+
+li {
+  color: var(--nav-text-color);
+  padding: 10px;
+  width: 100%;
+}
+
+li:hover {
+  cursor: pointer;
+  color: var(--nav-hover-color);
+}
