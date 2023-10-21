@@ -11,17 +11,23 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 public class UserService {
 
+    private static final int DAYS_TILL_RESET_TOKEN_EXPIRE = 3;
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationFacade authenticationFacade;
     private final UserConverter userConverter;
+    private final MailService mailService;
 
     public Boolean isUserByEmailPresent(String email) {
         return findUserByEmail(email).isPresent();
@@ -34,6 +40,7 @@ public class UserService {
     public UserDto saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Authority.USER.getAuthority());
+        mailService.sendNewUserMail(user);
         return userConverter.toDto(userRepository.save(user));
     }
 
@@ -49,6 +56,54 @@ public class UserService {
         userOptional.ifPresentOrElse(user -> updatePassword(user, newPassword), () -> {
             throw new UsernameNotFoundException("Użytkownik nie został znaleziony!");
         });
+    }
+
+    @Transactional
+    public void startResetPasswordProcedure(String email) {
+        Optional<User> userOptional = findUserByEmail(email);
+        userOptional.ifPresentOrElse(this::startResetPasswordProcedure, () -> {
+            throw new UsernameNotFoundException("Użytkownik z podanym adresem email nie istnieje!");
+        });
+    }
+
+    public Boolean isResetPasswordTokenValid(String token) {
+        Optional<User> userOptional = findUserByRestPasswordToken(token);
+        if (userOptional.isPresent()) {
+            return isResetPasswordTokenValid(userOptional.get());
+        }
+        throw new UsernameNotFoundException("Token stracił swoją ważność!");
+    }
+
+    public void finishResetPasswordProcedure(String token, String newPassword) {
+        Optional<User> userOptional = findUserByRestPasswordToken(token);
+        if (userOptional.isPresent()) {
+            finishResetPasswordProcedure(userOptional.get(), newPassword);
+        } else {
+            throw new UsernameNotFoundException("Token stracił swoją ważność!");
+        }
+    }
+
+    private void finishResetPasswordProcedure(User user, String newPassword) {
+        user.setPassword(passwordEncoder.encode(newPassword));
+        user.setResetPasswordToken(null);
+        user.setResetPasswordTokenExpire(null);
+        userRepository.save(user);
+    }
+
+    private Optional<User> findUserByRestPasswordToken(String token) {
+        return userRepository.findByResetPasswordToken(token);
+    }
+
+    private Boolean isResetPasswordTokenValid(User user) {
+        return LocalDateTime.now().isBefore(user.getResetPasswordTokenExpire());
+    }
+
+    private void startResetPasswordProcedure(User user) {
+        UUID uuid = UUID.randomUUID();
+        user.setResetPasswordToken(uuid.toString());
+        user.setResetPasswordTokenExpire(LocalDateTime.now().plusDays(DAYS_TILL_RESET_TOKEN_EXPIRE));
+        userRepository.save(user);
+        mailService.sendResetPasswordUrl(user);
     }
 
     private void updatePassword(User user, String newPassword) {

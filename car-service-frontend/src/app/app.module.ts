@@ -33,6 +33,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {ProfileComponent} from './components/profile/profile.component';
 import {UpdatePasswordComponent} from './components/profile/update-password/update-password.component';
 import {AboutMeComponent} from './components/profile/about-me/about-me.component';
+import {ResetPasswordComponent} from './components/authentication/reset-password/reset-password.component';
+import {NewPasswordComponent} from './components/authentication/new-password/new-password/new-password.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import {AboutMeComponent} from './components/profile/about-me/about-me.component
     VehicleAddDialogComponent,
     ProfileComponent,
     UpdatePasswordComponent,
-    AboutMeComponent
+    AboutMeComponent,
+    ResetPasswordComponent,
+    NewPasswordComponent
   ],
   imports: [
     BrowserModule,
