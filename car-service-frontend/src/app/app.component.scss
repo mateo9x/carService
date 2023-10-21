@@ -29,6 +29,22 @@
   align-items: center;
 }
 
+.router-section {
+  height: 100%;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.non-authenticated-router {
+  height: 100%;
+  width: 100%;
+}
+
+.authenticated-router {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+}
+
 .profile-container {
   padding: 20px;
 }
@@ -49,12 +65,6 @@
 
 .nav-link:hover {
   color: var(--nav-hover-color);
-}
-
-.router-section {
-  height: 100%;
-  width: 100%;
-  margin-top: 20px;
 }
 
 .spinner {

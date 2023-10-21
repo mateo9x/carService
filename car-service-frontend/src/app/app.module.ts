@@ -34,7 +34,8 @@ import {ProfileComponent} from './components/profile/profile.component';
 import {UpdatePasswordComponent} from './components/profile/update-password/update-password.component';
 import {AboutMeComponent} from './components/profile/about-me/about-me.component';
 import {ResetPasswordComponent} from './components/authentication/reset-password/reset-password.component';
-import {NewPasswordComponent} from './components/authentication/new-password/new-password/new-password.component';
+import {NewPasswordComponent} from './components/authentication/new-password/new-password.component';
+import {SideMenuComponent} from './components/side-menu/side-menu.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {NewPasswordComponent} from './components/authentication/new-password/new
     UpdatePasswordComponent,
     AboutMeComponent,
     ResetPasswordComponent,
-    NewPasswordComponent
+    NewPasswordComponent,
+    SideMenuComponent
   ],
   imports: [
     BrowserModule,

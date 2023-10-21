@@ -7,44 +7,56 @@ import {AppGuard} from './config/app.guard';
 import {NotFoundComponent} from './components/handlers/not-found/not-found.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {ResetPasswordComponent} from './components/authentication/reset-password/reset-password.component';
-import {NewPasswordComponent} from './components/authentication/new-password/new-password/new-password.component';
+import {NewPasswordComponent} from './components/authentication/new-password/new-password.component';
 
 const ROUTES: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: WelcomeComponent,
     title: 'Car service'
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    component: SignInComponent,
+    title: 'Car service',
+    outlet: 'nonAuthenticated'
   },
   {
     path: 'sign-in',
     component: SignInComponent,
     title: 'Zaloguj się',
-    canActivate: [() => !inject(AppGuard).isAuthenticated()]
+    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    outlet: 'nonAuthenticated'
   },
   {
     path: 'sign-up',
     component: SignUpComponent,
     title: 'Zarejestruj się',
-    canActivate: [() => !inject(AppGuard).isAuthenticated()]
+    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    outlet: 'nonAuthenticated'
   },
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
     title: 'Resetuj hasło',
-    canActivate: [() => !inject(AppGuard).isAuthenticated()]
+    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    outlet: 'nonAuthenticated'
   },
   {
     path: 'new-password',
     component: NewPasswordComponent,
     title: 'Nowe hasło',
-    canActivate: [() => !inject(AppGuard).isAuthenticated()]
+    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    outlet: 'nonAuthenticated'
   },
   {
     path: 'profile',
     component: ProfileComponent,
     title: 'Mój profil',
     canActivate: [() => inject(AppGuard).isAuthenticated()],
-    loadChildren: () => import('./components/profile/profile-routing.module').then(module => module.ProfileRoutingModule),
+    loadChildren: () => import('./components/profile/profile-routing.module').then(module => module.ProfileRoutingModule)
   },
   {
     path: '**',

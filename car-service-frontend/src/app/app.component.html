@@ -6,7 +6,6 @@
       </div>
     </div>
     <div class="nav-bar-right-container">
-      <a class="nav-link" routerLink="sign-in" *ngIf="!userLogged">Zaloguj się</a>
       <ng-container class="profile-container" *ngIf="userLogged">
         <button mat-button [matMenuTriggerFor]="menu">
           <mat-icon class="profile-icon">person</mat-icon>
@@ -18,8 +17,25 @@
       </ng-container>
     </div>
   </div>
-  <div class="router-section">
-    <router-outlet></router-outlet>
+
+  <div class="container">
+    <ng-container *ngIf="userLogged; else nonAuthenticated">
+      <div class="authenticated-router">
+        <div class="side-menu">
+          <side-menu></side-menu>
+        </div>
+        <div class="router-section">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #nonAuthenticated>
+      <div class="non-authenticated-router">
+        <div class="router-section">
+        <router-outlet name="nonAuthenticated"></router-outlet>
+        </div>
+      </div>
+    </ng-template>
   </div>
 
 </div>
