@@ -19,6 +19,14 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.startPassword2Subscription();
+  }
+
+  ngOnDestroy() {
+    this.password2Subscription.unsubscribe();
+  }
+
+  startPassword2Subscription() {
     const password2Control = this.formService.getPassword2Control(this.form);
     this.password2Subscription = password2Control.valueChanges.subscribe({
       next: (password2Value) => {
@@ -31,11 +39,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
       }
     });
   }
-
-  ngOnDestroy() {
-    this.password2Subscription.unsubscribe();
-  }
-
 
   signUp() {
     this.form.markAllAsTouched();

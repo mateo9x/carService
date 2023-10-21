@@ -1,0 +1,11 @@
+<div class="container" *ngIf="userLogged$ | async as user">
+  <div class="row">
+    <h4>Imię:</h4> <span>{{user.firstName}}</span>
+  </div>
+  <div class="row">
+    <h4>Nazwisko:</h4> <span>{{user.lastName}}</span>
+  </div>
+  <div class="row">
+    <h4>Email:</h4> <span>{{user.email}}</span>
+  </div>
+</div>

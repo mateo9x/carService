@@ -12,5 +12,6 @@
     <mat-error *ngIf="hasFormError('password','minlength')">Wymagane minimum 5 znaków</mat-error>
   </mat-form-field>
   <a routerLink="/sign-up" class="nav-link">Nie posiadasz konta? Zarejestruj się</a>
+  <a routerLink="/reset-password" class="nav-link">Nie pamiętasz hasła?</a>
   <button mat-raised-button (click)="signIn()">Zaloguj się</button>
 </form>

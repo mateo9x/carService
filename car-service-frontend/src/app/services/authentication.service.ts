@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Subject} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.model";
 import {Router} from "@angular/router";
 import {StorageService} from './storage.service';
@@ -10,7 +10,7 @@ import {SnackBarService, SnackBarType} from './common/snack-bar.service';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private userLogged: Subject<User | null> = new Subject<User | null>();
+  private userLogged: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   userObservable = this.userLogged.asObservable();
 
 
