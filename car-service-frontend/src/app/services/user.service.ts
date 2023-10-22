@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user.model';
 import {UserApiService} from './api/user-api.service';
-import {SnackBarService, SnackBarType} from './common/snack-bar.service';
+import {SnackBarService, SnackBarType} from './util/snack-bar.service';
 import {Router} from '@angular/router';
-import {SpinnerService} from './common/spinner.service';
+import {SpinnerService} from './util/spinner.service';
 
 @Injectable({
   providedIn: 'root'

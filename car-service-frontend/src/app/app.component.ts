@@ -2,10 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from './models/user.model';
 import {AuthenticationService} from './services/authentication.service';
 import {filter, Subscription} from 'rxjs';
-import {SpinnerService} from './services/common/spinner.service';
+import {SpinnerService} from './services/util/spinner.service';
 import {MatDialog} from '@angular/material/dialog';
 import {VehicleAddDialogComponent} from './components/vehicles/add-dialog/vehicle-add-dialog.component';
 import {VehicleService} from './services/vehicle.service';
+import {ThemeService} from './services/util/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -20,12 +21,14 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private authenticationService: AuthenticationService,
               private spinnerService: SpinnerService,
               private vehicleService: VehicleService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private themeService: ThemeService) {
   }
 
   ngOnInit() {
     this.setUser();
     this.prepareSpinner();
+    this.setTheme();
   }
 
   ngOnDestroy() {
@@ -68,5 +71,9 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (data) => this.vehicleService.saveVehicle(data)
       });
+  }
+
+  setTheme() {
+    this.themeService.loadTheme();
   }
 }

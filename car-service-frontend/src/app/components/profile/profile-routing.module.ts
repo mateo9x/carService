@@ -3,6 +3,7 @@ import {UpdatePasswordComponent} from './update-password/update-password.compone
 import {inject, NgModule} from '@angular/core';
 import {AppGuard} from '../../config/app.guard';
 import {AboutMeComponent} from './about-me/about-me.component';
+import {PreferencesComponent} from './preferences/preferences.component';
 
 const PROFILE_ROUTES: Routes = [
   {
@@ -22,6 +23,12 @@ const PROFILE_ROUTES: Routes = [
     component: UpdatePasswordComponent,
     canActivate: [() => inject(AppGuard).isAuthenticated()],
     title: 'Zmiana hasła'
+  },
+  {
+    path: 'preferences',
+    component: PreferencesComponent,
+    canActivate: [() => inject(AppGuard).isAuthenticated()],
+    title: 'Preferencje'
   }
 ];
 
