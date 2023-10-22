@@ -1,0 +1,20 @@
+form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.input-data {
+  margin: auto auto 20px;
+  max-width:40%;
+  display: grid;
+  grid-template-columns: auto;
+}
+
+span {
+  color: red;
+  margin: 0;
+  font-size: 14px;
+}

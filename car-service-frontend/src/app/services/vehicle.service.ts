@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Vehicle} from '../models/vehicle.model';
 import {VehicleApiService} from './api/vehicle-api.service';
 import {AuthenticationService} from './authentication.service';
-import {SnackBarService, SnackBarType} from './common/snack-bar.service';
+import {SnackBarService, SnackBarType} from './util/snack-bar.service';
 
 @Injectable({
   providedIn: 'root'

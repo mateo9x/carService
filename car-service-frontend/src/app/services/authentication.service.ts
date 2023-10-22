@@ -4,7 +4,7 @@ import {User} from "../models/user.model";
 import {Router} from "@angular/router";
 import {StorageService} from './storage.service';
 import {AuthenticationApiService} from './api/authentication-api.service';
-import {SnackBarService, SnackBarType} from './common/snack-bar.service';
+import {SnackBarService, SnackBarType} from './util/snack-bar.service';
 
 @Injectable({
   providedIn: 'root'

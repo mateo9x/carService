@@ -1,0 +1,12 @@
+<form [formGroup]="form">
+  <div class="input-data">
+    <mat-form-field>
+      <mat-label>Wybierz motyw</mat-label>
+      <mat-select formControlName="selectedTheme" (ngModelChange)="changeTheme()">
+        <mat-option *ngFor="let theme of themes" [value]="theme.value">{{theme.label}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <span *ngIf="!themeSaved" class="error-span">W celu trwałej zmiany kolorystyki zapisz ustawienia</span>
+  </div>
+  <button mat-raised-button (click)="save()">Zapisz zmiany</button>
+</form>
