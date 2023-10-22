@@ -18,7 +18,7 @@ public class MailService {
     private final AppProperties appProperties;
 
     public void sendResetPasswordUrl(User user) {
-        String url = appProperties.getAppUrl() + "/new-password?" + user.getResetPasswordToken();
+        String url = appProperties.getAppUrl() + "/(nonAuthenticated:new-password)?" + user.getResetPasswordToken();
         String userFullName = user.getFirstName() + " " + user.getLastName();
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("noreply@carservice.pl");
