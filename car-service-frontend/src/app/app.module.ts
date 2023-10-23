@@ -37,6 +37,7 @@ import {ResetPasswordComponent} from './components/authentication/reset-password
 import {NewPasswordComponent} from './components/authentication/new-password/new-password.component';
 import {SideMenuComponent} from './components/side-menu/side-menu.component';
 import {PreferencesComponent} from './components/profile/preferences/preferences.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -54,24 +55,25 @@ import {PreferencesComponent} from './components/profile/preferences/preferences
     SideMenuComponent,
     PreferencesComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatInputModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatIconModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSelectModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatMenuModule,
+        MatIconModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        MatTooltipModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
     {

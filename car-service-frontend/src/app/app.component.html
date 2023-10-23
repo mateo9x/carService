@@ -1,42 +1,40 @@
 <div class="wrapper">
-  <div class="nav-bar">
-    <div class="nav-bar-left-container">
-      <div class="logo-container">
-        <img src="assets/images/nav-logo.png" alt="" routerLink=""/>
-      </div>
-    </div>
-    <div class="nav-bar-right-container">
-      <ng-container class="profile-container" *ngIf="userLogged">
-        <button mat-button [matMenuTriggerFor]="menu">
-          <mat-icon class="profile-icon">person</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item routerLink="profile">Profil</button>
-          <button mat-menu-item (click)="logout()">Wyloguj się</button>
-        </mat-menu>
-      </ng-container>
-    </div>
-  </div>
 
-  <div class="container">
-    <ng-container *ngIf="userLogged; else nonAuthenticated">
-      <div class="authenticated-router">
-        <div class="side-menu">
-          <side-menu></side-menu>
-        </div>
-        <div class="router-section">
-          <router-outlet></router-outlet>
+  <ng-container *ngIf="userLogged; else nonAuthenticated">
+    <div class="nav-bar">
+      <div class="nav-bar-left-container">
+        <div class="logo-container">
+          <img src="assets/images/nav-logo.png" alt="" routerLink=""/>
         </div>
       </div>
-    </ng-container>
-    <ng-template #nonAuthenticated>
-      <div class="non-authenticated-router">
-        <div class="router-section">
+      <div class="nav-bar-right-container">
+        <ng-container class="profile-container" *ngIf="userLogged">
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon class="profile-icon">person</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="profile">Profil</button>
+            <button mat-menu-item (click)="logout()">Wyloguj się</button>
+          </mat-menu>
+        </ng-container>
+      </div>
+    </div>
+    <div class="authenticated-router">
+      <div class="side-menu">
+        <side-menu></side-menu>
+      </div>
+      <div class="router-section">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #nonAuthenticated>
+    <div class="non-authenticated-router">
+      <div class="router-section">
         <router-outlet name="nonAuthenticated"></router-outlet>
-        </div>
       </div>
-    </ng-template>
-  </div>
+    </div>
+  </ng-template>
 
 </div>
 
