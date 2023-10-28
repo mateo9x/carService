@@ -4,11 +4,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid black;
+  gap: 10px;
 }
 
 .menu-nav > a {
-  border-left: 1px solid black;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
 }
 
 .router-section {
