@@ -6,7 +6,7 @@ import {DateService} from '../../../services/util/date.service';
 @Injectable({
   providedIn: 'root'
 })
-export class VehicleAddDialogFormService {
+export class VehicleEditDialogFormService {
 
   constructor(private fb: FormBuilder,
               private dateService: DateService) {
@@ -14,6 +14,7 @@ export class VehicleAddDialogFormService {
 
   getFormGroup(): FormGroup {
     return this.fb.group({
+      id: [null, [Validators.required]],
       brand: [null, [Validators.required, Validators.maxLength(100)]],
       model: [null, [Validators.required, Validators.maxLength(100)]],
       productionYear: [null, [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]],
@@ -26,7 +27,21 @@ export class VehicleAddDialogFormService {
     });
   }
 
+  convertVehicleToForm(form: FormGroup, vehicle: Vehicle): void {
+    this.getIdControl(form).setValue(vehicle.id);
+    this.getBrandControl(form).setValue(vehicle.brand);
+    this.getModelControl(form).setValue(vehicle.model);
+    this.getProductionYearControl(form).setValue(vehicle.productionYear);
+    this.getLicensePlateControl(form).setValue(vehicle.licensePlate);
+    this.getVinControl(form).setValue(vehicle.vin);
+    this.getPurchaseDateControl(form).setValue(vehicle.purchaseDate);
+    this.getEngineTypeControl(form).setValue(vehicle.engineType);
+    this.getTransmissionType(form).setValue(vehicle.transmissionType);
+    this.getPurchaseMileageControl(form).setValue(vehicle.purchaseMileage);
+  }
+
   convertFormToVehicleRequest(form: FormGroup): Vehicle {
+    const id = this.getIdControl(form).value;
     const brand = this.getBrandControl(form).value;
     const model = this.getModelControl(form).value;
     const productionYear = this.getProductionYearControl(form).value;
@@ -38,7 +53,11 @@ export class VehicleAddDialogFormService {
     const engineType = this.getEngineTypeControl(form).value;
     const transmissionType = this.getTransmissionType(form).value;
     const purchaseMileage = this.getPurchaseMileageControl(form).value;
-    return new Vehicle(brand, model, productionYear, licensePlate, vin, purchaseDate, engineType, transmissionType, purchaseMileage);
+    return new Vehicle(brand, model, productionYear, licensePlate, vin, purchaseDate, engineType, transmissionType, purchaseMileage, id);
+  }
+
+  getIdControl(form: FormGroup): AbstractControl {
+    return form.get('id') as AbstractControl;
   }
 
   getBrandControl(form: FormGroup): AbstractControl {

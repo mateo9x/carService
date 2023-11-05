@@ -10,7 +10,7 @@ export class Vehicle {
   transmissionType: string;
   purchaseMileage: number;
 
-  constructor(brand: string, model: string, productionYear: number, licensePlate: string, vin: string, purchaseDate: string, engineType: string, transmissionType: string, purchaseMileage: number) {
+  constructor(brand: string, model: string, productionYear: number, licensePlate: string, vin: string, purchaseDate: string, engineType: string, transmissionType: string, purchaseMileage: number, id?: string) {
     this.brand = brand;
     this.model = model;
     this.productionYear = productionYear;
@@ -20,5 +20,6 @@ export class Vehicle {
     this.engineType = engineType;
     this.transmissionType = transmissionType;
     this.purchaseMileage = purchaseMileage
+    this.id = id;
   }
 }

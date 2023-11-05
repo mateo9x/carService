@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {VehicleAddDialogComponent} from './components/vehicles/add-dialog/vehicle-add-dialog.component';
 import {VehicleService} from './services/vehicle.service';
 import {ThemeService} from './services/util/theme.service';
+import {SnackBarService, SnackBarType} from './services/util/snack-bar.service';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
               private spinnerService: SpinnerService,
               private vehicleService: VehicleService,
               private dialog: MatDialog,
+              private snackBarService: SnackBarService,
               private themeService: ThemeService) {
   }
 
@@ -70,7 +72,18 @@ export class AppComponent implements OnInit, OnDestroy {
         filter((data) => data)
       )
       .subscribe({
-        next: (data) => this.vehicleService.saveVehicle(data)
+        next: (data) => this.vehicleService.saveVehicle(data).subscribe({
+          next: () => {
+            this.snackBarService.openSnackBar('Pojazd dodany pomyślnie', SnackBarType.SUCCESS);
+          },
+          error: (error) => {
+            if (error.error) {
+              this.snackBarService.openSnackBar(error.error.message, SnackBarType.ERROR);
+            } else {
+              this.snackBarService.openSnackBar('Pojazd nie został dodany', SnackBarType.ERROR);
+            }
+          }
+        })
       });
   }
 

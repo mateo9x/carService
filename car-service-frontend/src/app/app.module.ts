@@ -38,6 +38,9 @@ import {NewPasswordComponent} from './components/authentication/new-password/new
 import {SideMenuComponent} from './components/side-menu/side-menu.component';
 import {PreferencesComponent} from './components/profile/preferences/preferences.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MyVehiclesComponent} from './components/vehicles/my-vehicles/my-vehicles.component';
+import {MyVehicleCardComponent} from './components/vehicles/my-vehicles/my-vehicle-card/my-vehicle-card.component';
+import {VehicleEditDialogComponent} from './components/vehicles/edit-dialog/vehicle-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     ResetPasswordComponent,
     NewPasswordComponent,
     SideMenuComponent,
-    PreferencesComponent
+    PreferencesComponent,
+    MyVehiclesComponent,
+    MyVehicleCardComponent,
+    VehicleEditDialogComponent
   ],
     imports: [
         BrowserModule,
