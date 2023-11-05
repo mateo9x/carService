@@ -9,19 +9,20 @@ import {ProfileComponent} from './components/profile/profile.component';
 import {ResetPasswordComponent} from './components/authentication/reset-password/reset-password.component';
 import {NewPasswordComponent} from './components/authentication/new-password/new-password.component';
 import {MyVehiclesComponent} from './components/vehicles/my-vehicles/my-vehicles.component';
+import {MyInsurancesComponent} from './components/insurance/my-insurances/my-insurances.component';
 
 const ROUTES: Routes = [
   {
     path: '',
     pathMatch: 'full',
     component: WelcomeComponent,
-    title: 'Car service'
+    title: 'Car Service'
   },
   {
     path: '',
     pathMatch: 'full',
     component: SignInComponent,
-    title: 'Car service',
+    title: 'Car Service',
     outlet: 'nonAuthenticated'
   },
   {
@@ -63,6 +64,12 @@ const ROUTES: Routes = [
     path: 'my-vehicles',
     component: MyVehiclesComponent,
     title: 'Moje pojazdy',
+    canActivate: [() => inject(AppGuard).isAuthenticated()]
+  },
+  {
+    path: 'my-insurances',
+    component: MyInsurancesComponent,
+    title: 'Moje ubezpieczenia',
     canActivate: [() => inject(AppGuard).isAuthenticated()]
   },
   {

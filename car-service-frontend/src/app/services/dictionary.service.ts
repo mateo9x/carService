@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 })
 export class DictionaryService {
 
-  public getDictionary(type: DictionaryType) {
+  public getDictionary(type: DictionaryType): {label: string, value: any}[] {
     switch (type) {
       case DictionaryType.ENGINE_TYPES:
         return [
@@ -20,6 +20,24 @@ export class DictionaryService {
           {label: 'Skrzynia automatyczna', value: 'AUTOMATIC'},
           {label: 'Skrzynia ręczna', value: 'MANUAL'}
         ];
+      case DictionaryType.AC_PROTECTION_TYPES:
+        return [
+          {label: 'Żywioły', value: 'NATURE'},
+          {label: 'Zwierzęta', value: 'ANIMALS'},
+          {label: 'Kradzież', value: 'THEFT'}
+        ]
+      case DictionaryType.INSURANCE_COMPANIES:
+        return [
+          {label: 'PZU', value: 'PZU'},
+          {label: 'Uniqa', value: 'UNIQA'},
+          {label: 'Link4', value: 'LINK4'}
+        ]
+      case DictionaryType.LOAN_PARTS_AMOUNT:
+        return [
+          {label: 'Jedna', value: 1},
+          {label: 'Dwie', value: 2},
+          {label: 'Cztery', value: 4}
+        ];
       default:
         return [];
     }
@@ -29,5 +47,8 @@ export class DictionaryService {
 
 export enum DictionaryType {
   ENGINE_TYPES,
-  TRANSMISSION_TYPES
+  TRANSMISSION_TYPES,
+  AC_PROTECTION_TYPES,
+  INSURANCE_COMPANIES,
+  LOAN_PARTS_AMOUNT
 }
