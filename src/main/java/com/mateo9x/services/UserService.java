@@ -83,6 +83,11 @@ public class UserService {
         }
     }
 
+    public Optional<User> getUserLogged() {
+        String email = authenticationFacade.getCurrentUser().getUsername();
+        return userRepository.findByEmail(email);
+    }
+
     private void finishResetPasswordProcedure(User user, String newPassword) {
         user.setPassword(passwordEncoder.encode(newPassword));
         user.setResetPasswordToken(null);

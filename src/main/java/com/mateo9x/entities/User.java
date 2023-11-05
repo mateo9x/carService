@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -25,7 +24,7 @@ public class User {
     private String password;
     private String roles;
     @DBRef
-    private List<Vehicle> vehicles = new ArrayList<>();
+    private List<Vehicle> vehicles;
     private String resetPasswordToken;
     private LocalDateTime resetPasswordTokenExpire;
 }

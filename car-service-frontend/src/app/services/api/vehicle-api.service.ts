@@ -15,4 +15,16 @@ export class VehicleApiService {
   saveVehicle(vehicleRequest: Vehicle) {
     return this.httpClient.post<Vehicle>(this.VEHICLE_URL, vehicleRequest);
   }
+
+  updateVehicle(vehicle: Vehicle) {
+    return this.httpClient.put<Vehicle>(this.VEHICLE_URL, vehicle);
+  }
+
+  getMyVehicles() {
+    return this.httpClient.get<Vehicle[]>(`${this.VEHICLE_URL}/my-vehicles`);
+  }
+
+  deleteVehicle(id: string) {
+    return this.httpClient.delete<void>(`${this.VEHICLE_URL}/${id}`);
+  }
 }

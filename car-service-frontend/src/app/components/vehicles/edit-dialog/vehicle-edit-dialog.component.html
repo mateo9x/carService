@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <h4>Dodaj pojazd</h4>
+  <h4>Edytuj pojazd</h4>
   <mat-form-field>
     <mat-label>Marka</mat-label>
     <input matInput formControlName="brand">
@@ -64,7 +64,7 @@
   </mat-form-field>
 
   <div class="button-container">
-    <button mat-raised-button (click)="cancel()">Przypomnij później</button>
-    <button mat-raised-button (click)="addVehicle()">Dodaj pojazd</button>
+    <button mat-raised-button (click)="cancel()">Anuluj</button>
+    <button mat-raised-button (click)="updateVehicle()">Aktualizuj pojazd</button>
   </div>
 </form>

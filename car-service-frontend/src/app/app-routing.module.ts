@@ -8,6 +8,7 @@ import {NotFoundComponent} from './components/handlers/not-found/not-found.compo
 import {ProfileComponent} from './components/profile/profile.component';
 import {ResetPasswordComponent} from './components/authentication/reset-password/reset-password.component';
 import {NewPasswordComponent} from './components/authentication/new-password/new-password.component';
+import {MyVehiclesComponent} from './components/vehicles/my-vehicles/my-vehicles.component';
 
 const ROUTES: Routes = [
   {
@@ -57,6 +58,12 @@ const ROUTES: Routes = [
     title: 'Mój profil',
     canActivate: [() => inject(AppGuard).isAuthenticated()],
     loadChildren: () => import('./components/profile/profile-routing.module').then(module => module.ProfileRoutingModule)
+  },
+  {
+    path: 'my-vehicles',
+    component: MyVehiclesComponent,
+    title: 'Moje pojazdy',
+    canActivate: [() => inject(AppGuard).isAuthenticated()]
   },
   {
     path: '**',

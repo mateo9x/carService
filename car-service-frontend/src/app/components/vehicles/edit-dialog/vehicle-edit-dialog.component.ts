@@ -1,31 +1,37 @@
-import {Component} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {VehicleAddDialogFormService} from './vehicle-add-dialog-form.service';
-import {MatDialogRef} from '@angular/material/dialog';
+import {VehicleEditDialogFormService} from './vehicle-edit-dialog-form.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DictionaryService, DictionaryType} from '../../../services/dictionary.service';
+import {Vehicle} from '../../../models/vehicle.model';
 
 @Component({
-  selector: 'vehicle-add-dialog',
-  templateUrl: './vehicle-add-dialog.component.html',
-  styleUrls: ['./vehicle-add-dialog.component.scss']
+  selector: 'vehicle-edit-dialog',
+  templateUrl: './vehicle-edit-dialog.component.html',
+  styleUrls: ['./vehicle-edit-dialog.component.scss']
 })
-export class VehicleAddDialogComponent {
+export class VehicleEditDialogComponent implements OnInit {
   form: FormGroup;
   todayDate = new Date();
   engineTypes = this.getDictionary(DictionaryType.ENGINE_TYPES);
   transmissionTypes = this.getDictionary(DictionaryType.TRANSMISSION_TYPES);
 
   constructor(private dialogRef: MatDialogRef<any>,
-              private formService: VehicleAddDialogFormService,
-              private dictionaryService: DictionaryService) {
+              private formService: VehicleEditDialogFormService,
+              private dictionaryService: DictionaryService,
+              @Inject(MAT_DIALOG_DATA) private vehicle: Vehicle) {
     this.form = this.formService.getFormGroup();
+  }
+
+  ngOnInit() {
+    this.formService.convertVehicleToForm(this.form, this.vehicle);
   }
 
   cancel() {
     this.dialogRef.close();
   }
 
-  addVehicle() {
+  updateVehicle() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
       this.dialogRef.close(this.formService.convertFormToVehicleRequest(this.form));
