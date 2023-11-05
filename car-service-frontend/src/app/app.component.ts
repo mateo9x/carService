@@ -49,6 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authenticationService.logout();
+    this.dialog.closeAll();
   }
 
   prepareSpinner() {

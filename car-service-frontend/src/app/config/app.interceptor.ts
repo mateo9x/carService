@@ -20,7 +20,7 @@ export class AppInterceptor implements HttpInterceptor {
     if (jwt) {
       request = request.clone({
         setHeaders: {
-          Authorization: 'Bearer ' + jwt
+          Authorization: 'Bearer ' + JSON.parse(jwt)
         }
       });
     }
