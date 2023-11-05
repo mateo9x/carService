@@ -21,7 +21,7 @@ export class UserService {
     this.apiService.signUp(userRequest).subscribe({
       next: () => {
         this.setSpinner(false);
-        this.router.navigate(['sign-in']).then(() => this.snackBarService.openSnackBar('Użytkownik został zarejestrowany', SnackBarType.SUCCESS));
+        this.router.navigate(['']).then(() => this.snackBarService.openSnackBar('Użytkownik został zarejestrowany', SnackBarType.SUCCESS));
       },
       error: (error) => {
         this.setSpinner(false);

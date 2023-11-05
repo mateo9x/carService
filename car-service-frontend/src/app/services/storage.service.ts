@@ -10,7 +10,11 @@ export class StorageService {
   }
 
   get(key: string) {
-    return JSON.parse(localStorage.getItem(key) as any);
+    const item = localStorage.getItem(key);
+    if (item) {
+      return item;
+    }
+    return null;
   }
 
   delete(key: string) {
