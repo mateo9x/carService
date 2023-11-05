@@ -1,0 +1,58 @@
+<form [formGroup]="form">
+  <h4>Dodaj ubezpieczenie</h4>
+  <mat-form-field>
+    <mat-label>Data od</mat-label>
+    <input matInput [matDatepicker]="dateFrom" formControlName="dateFrom" (dateChange)="setDateTo()">
+    <mat-datepicker-toggle matIconSuffix [for]="dateFrom"></mat-datepicker-toggle>
+    <mat-datepicker
+      startView="multi-year"
+      #dateFrom></mat-datepicker>
+    <mat-error *ngIf="hasFormError('dateFrom','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Data do</mat-label>
+    <input matInput [matDatepicker]="dateTo" formControlName="dateTo">
+    <mat-datepicker-toggle matIconSuffix [for]="dateTo"></mat-datepicker-toggle>
+    <mat-datepicker
+      startView="multi-year"
+      #dateTo></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Firma ubezpieczeniowa</mat-label>
+    <mat-select formControlName="company">
+      <mat-option *ngFor="let company of companies"
+                  [value]="company.value">{{company.label}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Liczba rat</mat-label>
+    <mat-select formControlName="loanPartsAmount">
+      <mat-option *ngFor="let loanPartsAmount of loanPartsAmounts"
+                  [value]="loanPartsAmount.value">{{loanPartsAmount.label}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="hasFormError('loanPartsAmount','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+  <div class="checkbox-container">
+    <mat-label>Assistance</mat-label>
+    <mat-checkbox formControlName="assistance"/>
+    <mat-error *ngIf="hasFormError('assistance','required')">Pole wymagane</mat-error>
+  </div>
+  <div class="checkbox-container">
+    <mat-label>AC</mat-label>
+    <mat-checkbox formControlName="ac"/>
+    <mat-error *ngIf="hasFormError('ac','required')">Pole wymagane</mat-error>
+  </div>
+  <mat-form-field>
+    <mat-label>Typ ochrony AC</mat-label>
+    <mat-select formControlName="acProtectionTypes" multiple>
+      <mat-option *ngFor="let acProtectionType of acProtectionTypes"
+                  [value]="acProtectionType.value">{{acProtectionType.label}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="hasFormError('acProtectionTypes','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+
+  <div class="button-container">
+    <button mat-raised-button (click)="cancel()">Anuluj</button>
+    <button mat-raised-button (click)="addInsurance()">Dodaj ubezpieczenie</button>
+  </div>
+</form>

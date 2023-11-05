@@ -41,6 +41,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MyVehiclesComponent} from './components/vehicles/my-vehicles/my-vehicles.component';
 import {MyVehicleCardComponent} from './components/vehicles/my-vehicles/my-vehicle-card/my-vehicle-card.component';
 import {VehicleEditDialogComponent} from './components/vehicles/edit-dialog/vehicle-edit-dialog.component';
+import {MyInsurancesComponent} from './components/insurance/my-insurances/my-insurances.component';
+import {InsuranceAddDialogComponent} from './components/insurance/add-dialog/insurance-add-dialog.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MyInsuranceCardComponent} from './components/insurance/my-insurance-card/my-insurance-card.component';
 
 @NgModule({
   declarations: [
@@ -59,27 +63,31 @@ import {VehicleEditDialogComponent} from './components/vehicles/edit-dialog/vehi
     PreferencesComponent,
     MyVehiclesComponent,
     MyVehicleCardComponent,
-    VehicleEditDialogComponent
+    VehicleEditDialogComponent,
+    MyInsurancesComponent,
+    InsuranceAddDialogComponent,
+    MyInsuranceCardComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        MatButtonModule,
-        MatInputModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatSnackBarModule,
-        MatProgressSpinnerModule,
-        MatMenuModule,
-        MatIconModule,
-        MatDialogModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatSelectModule,
-        MatTooltipModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatCheckboxModule
+  ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
     {

@@ -1,0 +1,18 @@
+<div class="container" *ngIf="insurance">
+  <div class="flex-container">
+    <div class="text-container"><span>Data od:</span> {{insurance.dateFrom}}</div>
+    <div class="text-container"><span>Data do:</span> {{insurance.dateTo}}</div>
+  </div>
+  <div class="flex-container">
+    <div class="text-container"><span>Firma ubezpieczeniowa:</span> {{getDictionaryLabel(insurance.company, DictionaryType.INSURANCE_COMPANIES)}}</div>
+    <div class="text-container"><span>Liczba rat:</span> {{insurance.loanPartsAmount}}</div>
+  </div>
+  <div class="flex-container">
+    <div class="text-container"><span>Data zapłaty:</span> {{insurance.paymentDeadlines}}</div>
+    <div class="text-container"><span>Assistance:</span> {{getBooleanLabel(insurance.assistance)}}</div>
+  </div>
+  <div class="flex-container">
+    <div class="text-container"><span>AC:</span> {{getBooleanLabel(insurance.ac)}}</div>
+    <div class="text-container"><span>Typ ochrony AC:</span> {{getDictionaryLabels(insurance.acProtectionTypes, DictionaryType.AC_PROTECTION_TYPES)}}</div>
+  </div>
+</div>
