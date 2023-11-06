@@ -10,6 +10,7 @@ import {ResetPasswordComponent} from './components/authentication/reset-password
 import {NewPasswordComponent} from './components/authentication/new-password/new-password.component';
 import {MyVehiclesComponent} from './components/vehicles/my-vehicles/my-vehicles.component';
 import {MyInsurancesComponent} from './components/insurance/my-insurances/my-insurances.component';
+import {MyInspectionsComponent} from './components/inspection/my-inspections/my-inspections.component';
 
 const ROUTES: Routes = [
   {
@@ -70,6 +71,12 @@ const ROUTES: Routes = [
     path: 'my-insurances',
     component: MyInsurancesComponent,
     title: 'Moje ubezpieczenia',
+    canActivate: [() => inject(AppGuard).isAuthenticated()]
+  },
+  {
+    path: 'my-inspections',
+    component: MyInspectionsComponent,
+    title: 'Moje przeglądy',
     canActivate: [() => inject(AppGuard).isAuthenticated()]
   },
   {

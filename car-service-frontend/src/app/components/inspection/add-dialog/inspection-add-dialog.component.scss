@@ -1,0 +1,17 @@
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  gap: 10px;
+}
+
+h4 {
+  text-align: center;
+}
+
+.button-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

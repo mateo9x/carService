@@ -45,6 +45,9 @@ import {MyInsurancesComponent} from './components/insurance/my-insurances/my-ins
 import {InsuranceAddDialogComponent} from './components/insurance/add-dialog/insurance-add-dialog.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MyInsuranceCardComponent} from './components/insurance/my-insurance-card/my-insurance-card.component';
+import {MyInspectionsComponent} from './components/inspection/my-inspections/my-inspections.component';
+import {MyInspectionCardComponent} from './components/inspection/my-inspection-card/my-inspection-card.component';
+import {InspectionAddDialogComponent} from './components/inspection/add-dialog/inspection-add-dialog.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,10 @@ import {MyInsuranceCardComponent} from './components/insurance/my-insurance-card
     VehicleEditDialogComponent,
     MyInsurancesComponent,
     InsuranceAddDialogComponent,
-    MyInsuranceCardComponent
+    MyInsuranceCardComponent,
+    MyInspectionsComponent,
+    MyInspectionCardComponent,
+    InspectionAddDialogComponent
   ],
   imports: [
     BrowserModule,

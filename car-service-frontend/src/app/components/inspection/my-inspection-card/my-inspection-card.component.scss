@@ -7,27 +7,31 @@
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
 }
 
+.container > * {
+  flex-grow: 1;
+}
+
 .flex-container {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   padding: 10px;
-}
-
-.icon-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 10px;
-  padding: 10px;
-}
-
-mat-icon {
-  transform: scale(1);
 }
 
 .text-container {
   display: flex;
   gap: 5px;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding: 10px;
+}
+
+mat-icon {
+  transform: scale(1);
 }

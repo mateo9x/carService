@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+mat-select {
+  max-width: 300px;
+}
+
+.my-insurance-cards-container {
+  width: 100%;
+  height: 100px;
+}
+
+#noInspection {
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 1%;
+  left: 50%;
+}

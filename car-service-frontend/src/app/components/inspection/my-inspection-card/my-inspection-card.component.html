@@ -1,0 +1,29 @@
+<div class="container" *ngIf="inspection">
+  <div class="flex-container">
+    <div class="text-container"><span>Data:</span> {{inspection.date}}</div>
+  </div>
+  <div class="flex-container">
+    <div class="text-container"><span>Wymiana oleju:</span> {{getBooleanLabel(inspection.oilChanged)}}</div>
+    <div class="text-container"><span>Wymiana filtra oleju:</span> {{getBooleanLabel(inspection.oilFilterChanged)}}
+    </div>
+    <div class="text-container"><span>Typ oleju:</span> {{inspection.oilType}}</div>
+  </div>
+  <div class="flex-container">
+    <div class="text-container"><span>Wymiana filtra paliwa:</span> {{getBooleanLabel(inspection.fuelFilterChanged)}}
+    </div>
+    <div class="text-container"><span>Wymiana świec:</span> {{getBooleanLabel(inspection.sparkPlugChanged)}}</div>
+    <div class="text-container"><span>Wymiana filtra powierza:</span> {{getBooleanLabel(inspection.airFilterChanged)}}
+    </div>
+    <div class="text-container"><span>Wymiana filtra powierza:</span> {{getBooleanLabel(inspection.cabinFilterChanged)}}
+    </div>
+  </div>
+  <div class="flex-container">
+    <div class="text-container"><span>Dodatkowe informacje:</span> {{inspection.additionalInfo}}</div>
+    <div class="text-container"><span>Przebieg w dniu przeglądu:</span> {{inspection.currentMileage}} [km]
+    </div>
+    <div class="text-container"><span>Przebieg następnego przeglądu:</span> {{inspection.nextServiceMileage}} [km]</div>
+  </div>
+  <div class="icon-container">
+    <mat-icon matTooltip="Usuń" (click)="deleteInspection(inspection.id)">delete_sweep</mat-icon>
+  </div>
+</div>
