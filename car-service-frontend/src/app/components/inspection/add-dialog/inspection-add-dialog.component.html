@@ -1,0 +1,63 @@
+<form [formGroup]="form">
+  <h4>Dodaj przegląd</h4>
+  <mat-form-field>
+    <mat-label>Data</mat-label>
+    <input matInput [matDatepicker]="date" formControlName="date">
+    <mat-datepicker-toggle matIconSuffix [for]="date"></mat-datepicker-toggle>
+    <mat-datepicker
+      startView="multi-year"
+      #date></mat-datepicker>
+    <mat-error *ngIf="hasFormError('date','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+  <div class="checkbox-container">
+    <mat-label>Wymiana oleju</mat-label>
+    <mat-checkbox formControlName="oilChanged"/>
+  </div>
+  <div class="checkbox-container">
+    <mat-label>Wymiana filtra oleju</mat-label>
+    <mat-checkbox formControlName="oilFilterChanged"/>
+  </div>
+  <mat-form-field>
+    <mat-label>Typ oleju</mat-label>
+    <input matInput formControlName="oilType"/>
+  </mat-form-field>
+  <div class="checkbox-container">
+    <mat-label>Wymiana filtra paliwa</mat-label>
+    <mat-checkbox formControlName="fuelFilterChanged"/>
+  </div>
+  <div class="checkbox-container">
+    <mat-label>Wymiana świec</mat-label>
+    <mat-checkbox formControlName="sparkPlugChanged"/>
+  </div>
+  <div class="checkbox-container">
+    <mat-label>Wymiana filtra powietrza</mat-label>
+    <mat-checkbox formControlName="airFilterChanged"/>
+  </div>
+  <div class="checkbox-container">
+    <mat-label>Wymiana filtra kabinowego</mat-label>
+    <mat-checkbox formControlName="cabinFilterChanged"/>
+  </div>
+  <mat-form-field>
+    <mat-label>Dodatkowe informacje</mat-label>
+    <textarea matInput formControlName="additionalInfo"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Przegląd przy przebiegu [km]</mat-label>
+    <input matInput type="number" formControlName="currentMileage"/>
+    <mat-error *ngIf="hasFormError('currentMileage','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Kolejny przegląd [km]</mat-label>
+    <input matInput type="number" formControlName="nextServiceMileage"/>
+    <mat-error *ngIf="hasFormError('nextServiceMileage', 'valueTooLow')">Następny przegląd nie może być przed
+      rzeczywistym
+      przebiegiem wykonanego przeglądu
+    </mat-error>
+    <mat-error *ngIf="hasFormError('nextServiceMileage','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+
+  <div class="button-container">
+    <button mat-raised-button (click)="cancel()">Anuluj</button>
+    <button mat-raised-button (click)="addInspection()">Dodaj przegląd</button>
+  </div>
+</form>

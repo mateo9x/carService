@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="top-nav">
+    <mat-select placeholder="Wybierz pojazd" (valueChange)="getInspectionsForVehicle($event)">
+      <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{vehicle.brand}} {{vehicle.model}}
+        ({{vehicle.licensePlate}})
+      </mat-option>
+    </mat-select>
+  </div>
+
+  <ng-container *ngIf="inspections.length > 0;else noInspection">
+    <div class="my-insurance-cards-container" *ngFor="let inspection of inspections">
+      <my-inspection-card [inspection]="inspection"
+                          (deleteInspectionEmitter)="deleteInspection($event)"></my-inspection-card>
+    </div>
+  </ng-container>
+
+  <ng-template #noInspection>
+    <div id="noInspection" *ngIf="vehicleIdSelected">
+      Brak informacji o przeglądach dla danego pojazdu
+    </div>
+  </ng-template>
+
+  <div class="button-container">
+    <button mat-raised-button (click)="addInspection(vehicleIdSelected)" [disabled]="!vehicleIdSelected">Dodaj
+      przegląd
+    </button>
+  </div>
+
+</div>

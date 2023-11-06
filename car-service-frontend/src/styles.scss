@@ -109,6 +109,10 @@ body {
   background: var(--main-bg-color) !important;
 }
 
+.mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after, .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
+  color: var(--main-bg-color) !important;
+}
+
 .snack-bar-success, .snack-bar-success button {
   border-radius: 10px !important;
   background-color: #49830a !important;

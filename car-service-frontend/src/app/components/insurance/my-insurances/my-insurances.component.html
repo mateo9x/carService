@@ -7,7 +7,7 @@
     </mat-select>
   </div>
 
-  <ng-container *ngIf="insurances;else noInsurance">
+  <ng-container *ngIf="insurances.length > 0;else noInsurance">
     <div class="my-insurance-cards-container" *ngFor="let insurance of insurances">
       <my-insurance-card [insurance]="insurance" (deleteInsuranceEmitter)="deleteInsurance($event)"></my-insurance-card>
     </div>
@@ -20,7 +20,9 @@
   </ng-template>
 
   <div class="button-container">
-    <button mat-raised-button (click)="addInsurance(vehicleIdSelected)" [disabled]="!vehicleIdSelected">Dodaj ubezpieczenie</button>
+    <button mat-raised-button (click)="addInsurance(vehicleIdSelected)" [disabled]="!vehicleIdSelected">Dodaj
+      ubezpieczenie
+    </button>
   </div>
 
 </div>
