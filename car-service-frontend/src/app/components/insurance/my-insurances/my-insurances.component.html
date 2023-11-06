@@ -9,7 +9,7 @@
 
   <ng-container *ngIf="insurances;else noInsurance">
     <div class="my-insurance-cards-container" *ngFor="let insurance of insurances">
-      <my-insurance-card [insurance]="insurance"></my-insurance-card>
+      <my-insurance-card [insurance]="insurance" (deleteInsuranceEmitter)="deleteInsurance($event)"></my-insurance-card>
     </div>
   </ng-container>
 

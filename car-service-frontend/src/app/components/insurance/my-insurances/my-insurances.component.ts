@@ -71,4 +71,14 @@ export class MyInsurancesComponent implements OnInit {
     }
   }
 
+  deleteInsurance(id: string) {
+    this.insuranceService.deleteInsurance(id).subscribe({
+      next: () => {
+        this.getInsurancesForVehicle(this.vehicleIdSelected as string);
+        this.snackBarService.openSnackBar('Ubezpieczenie usunięte pomyślnie', SnackBarType.SUCCESS);
+      },
+      error: () => this.snackBarService.openSnackBar('Ubezpieczenie nie zostało usunięte', SnackBarType.ERROR)
+    });
+  }
+
 }
