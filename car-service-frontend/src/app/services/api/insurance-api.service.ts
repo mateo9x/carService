@@ -19,4 +19,8 @@ export class InsuranceApiService {
   getInsurancesByVehicleId(vehicleId: string) {
     return this.httpClient.get<Insurance[]>(`${this.INSURANCE_URL}/vehicle/${vehicleId}`);
   }
+
+  deleteInsurance(id: string) {
+    return this.httpClient.delete<void>(`${this.INSURANCE_URL}/${id}`);
+  }
 }

@@ -15,4 +15,7 @@
     <div class="text-container"><span>AC:</span> {{getBooleanLabel(insurance.ac)}}</div>
     <div class="text-container"><span>Typ ochrony AC:</span> {{getDictionaryLabels(insurance.acProtectionTypes, DictionaryType.AC_PROTECTION_TYPES)}}</div>
   </div>
+  <div class="icon-container">
+    <mat-icon matTooltip="Usuń" (click)="deleteInsurance(insurance.id)">delete_sweep</mat-icon>
+  </div>
 </div>

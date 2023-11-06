@@ -16,4 +16,8 @@ export class InsuranceService {
   getInsurancesByVehicleId(id: string) {
     return this.apiService.getInsurancesByVehicleId(id);
   }
+
+  deleteInsurance(id: string) {
+    return this.apiService.deleteInsurance(id);
+  }
 }

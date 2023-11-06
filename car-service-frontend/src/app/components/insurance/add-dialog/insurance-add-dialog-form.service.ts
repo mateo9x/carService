@@ -20,7 +20,7 @@ export class InsuranceAddDialogFormService {
       loanPartsAmount: [null, [Validators.required]],
       assistance: [false, [Validators.required]],
       ac: [false, [Validators.required]],
-      acProtectionTypes: [null, [Validators.required]]
+      acProtectionTypes: [null, []]
     });
   }
 

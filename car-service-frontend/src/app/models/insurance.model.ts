@@ -1,5 +1,5 @@
 export class Insurance {
-  id?: number;
+  id?: string;
   vehicleId: string;
   dateFrom: string;
   dateTo: string;
@@ -10,7 +10,7 @@ export class Insurance {
   ac: boolean;
   acProtectionTypes: string[];
 
-  constructor(vehicleId: string, dateFrom: string, dateTo: string, company: string, loanPartsAmount: number, paymentDeadlines: string[], assistance: boolean, ac: boolean, acProtectionTypes: string[], id?: number) {
+  constructor(vehicleId: string, dateFrom: string, dateTo: string, company: string, loanPartsAmount: number, paymentDeadlines: string[], assistance: boolean, ac: boolean, acProtectionTypes: string[], id?: string) {
     this.id = id;
     this.vehicleId = vehicleId;
     this.dateFrom = dateFrom;
