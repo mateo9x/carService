@@ -28,6 +28,7 @@ export class AuthenticationApiService {
 
 export interface JwtTokenResponse {
   jwt: string;
+  daysSinceLastAuthentication: number;
 }
 
 export interface UserLoggedResponse {

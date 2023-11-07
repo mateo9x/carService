@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {StorageService} from './storage.service';
 import {AuthenticationApiService} from './api/authentication-api.service';
 import {SnackBarService, SnackBarType} from './util/snack-bar.service';
+import {InspectionService} from './inspection.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +18,18 @@ export class AuthenticationService {
   constructor(private apiService: AuthenticationApiService,
               private snackBarService: SnackBarService,
               private storageService: StorageService,
-              private router: Router) {
+              private router: Router,
+              private inspectionService: InspectionService) {
   }
 
   public signinUser(request: AuthenticationRequest) {
     this.apiService.signInUser(request).subscribe({
-      next: (token) => {
-        this.setToken(token.jwt);
+      next: (response) => {
+        this.setToken(response.jwt);
         this.getUserLogged(true);
+        if (response.daysSinceLastAuthentication >= 7) {
+          this.inspectionService.updateMileageForVehicles();
+        }
       },
       error: (error) => {
         if (error.error) {
