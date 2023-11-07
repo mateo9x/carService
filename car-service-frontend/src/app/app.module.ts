@@ -48,6 +48,9 @@ import {MyInsuranceCardComponent} from './components/insurance/my-insurance-card
 import {MyInspectionsComponent} from './components/inspection/my-inspections/my-inspections.component';
 import {MyInspectionCardComponent} from './components/inspection/my-inspection-card/my-inspection-card.component';
 import {InspectionAddDialogComponent} from './components/inspection/add-dialog/inspection-add-dialog.component';
+import {
+  InspectionUpdateMileageDialogComponent
+} from './components/inspection/update-mileage-dialog/inspection-update-mileage-dialog.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +75,8 @@ import {InspectionAddDialogComponent} from './components/inspection/add-dialog/i
     MyInsuranceCardComponent,
     MyInspectionsComponent,
     MyInspectionCardComponent,
-    InspectionAddDialogComponent
+    InspectionAddDialogComponent,
+    InspectionUpdateMileageDialogComponent
   ],
   imports: [
     BrowserModule,

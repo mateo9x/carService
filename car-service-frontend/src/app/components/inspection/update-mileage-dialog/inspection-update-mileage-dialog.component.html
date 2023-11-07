@@ -1,0 +1,37 @@
+<div class="container">
+  <h4>Edytuj przebieg</h4>
+  <ng-container *ngFor="let form of forms; let i = index">
+    <form [formGroup]="form">
+
+      <mat-form-field>
+        <mat-label>Marka</mat-label>
+        <input matInput [formControl]="getFormControl(form, 'brand')">
+        <mat-error *ngIf="hasFormError(form, 'brand','required')">Pole wymagane</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Model</mat-label>
+        <input matInput [formControl]="getFormControl(form, 'model')">
+        <mat-error *ngIf="hasFormError(form,'model','required')">Pole wymagane</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Numer rejestracyjny</mat-label>
+        <input matInput [formControl]="getFormControl(form, 'licensePlate')">
+        <mat-error *ngIf="hasFormError(form,'licensePlate','required')">Pole wymagane</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Przebieg aktualny [km]</mat-label>
+        <input matInput type="number" [formControl]="getFormControl(form, 'currentMileage')">
+        <mat-error *ngIf="hasFormError(form,'currentMileage','required')">Pole wymagane</mat-error>
+      </mat-form-field>
+
+    </form>
+  </ng-container>
+  <div class="button-container">
+    <button mat-raised-button (click)="cancel()">Anuluj</button>
+    <button mat-raised-button (click)="updateMileages()">Aktualizuj przebiegi</button>
+  </div>
+
+</div>
