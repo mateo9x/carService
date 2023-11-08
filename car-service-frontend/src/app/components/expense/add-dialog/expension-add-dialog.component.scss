@@ -1,0 +1,60 @@
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  gap: 10px;
+}
+
+h4 {
+  text-align: center;
+}
+
+.attachments-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.attachment-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.attachment-upload-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+#file-input {
+  display: none;
+}
+
+.file-input-label {
+  border: 1px solid black;
+  border-radius: 6%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.file-input-label:hover {
+  cursor: pointer;
+  background-color: #e0dddd;
+}
+
+.button-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+mat-icon {
+  transform: scale(1);
+}

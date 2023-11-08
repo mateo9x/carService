@@ -1,0 +1,39 @@
+<form [formGroup]="form">
+  <h4>Dodaj wydatek</h4>
+  <mat-form-field>
+    <mat-label>Data</mat-label>
+    <input matInput [matDatepicker]="date" formControlName="date">
+    <mat-datepicker-toggle matIconSuffix [for]="date"></mat-datepicker-toggle>
+    <mat-datepicker
+      startView="multi-year"
+      #date></mat-datepicker>
+    <mat-error *ngIf="hasFormError('date','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Informacje</mat-label>
+    <textarea matInput formControlName="info"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Kwota wydatku [PLN]</mat-label>
+    <input matInput type="number" formControlName="amount"/>
+    <mat-error *ngIf="hasFormError('amount','required')">Pole wymagane</mat-error>
+    <mat-error *ngIf="hasFormError('amount','min')">Minimalna wartość 1 PLN</mat-error>
+  </mat-form-field>
+  <div class="attachment-upload-container">
+    <input type="file" id="file-input" name="file-input" (change)="addAttachment($event)"/>
+    <label class="file-input-label" for="file-input">Dodaj plik</label>
+  </div>
+  <div class="attachments-container">
+    <ng-container *ngIf="attachments.length> 0">
+      <div class="attachment-container" *ngFor="let attachment of attachments">
+        {{attachment.file.name}}
+        <mat-icon matTooltip="Usuń" (click)="deleteAttachment(attachment.id)">delete_sweep</mat-icon>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="button-container">
+    <button mat-raised-button (click)="cancel()">Anuluj</button>
+    <button mat-raised-button (click)="addExpension()">Dodaj wydatek</button>
+  </div>
+</form>

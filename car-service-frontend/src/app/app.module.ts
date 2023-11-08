@@ -51,6 +51,9 @@ import {InspectionAddDialogComponent} from './components/inspection/add-dialog/i
 import {
   InspectionUpdateMileageDialogComponent
 } from './components/inspection/update-mileage-dialog/inspection-update-mileage-dialog.component';
+import {MyExpensesComponent} from './components/expense/my-expenses/my-expenses.component';
+import {ExpensionAddDialogComponent} from './components/expense/add-dialog/expension-add-dialog.component';
+import {MyExpensionCardComponent} from './components/expense/my-expension-card/my-expension-card.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +79,10 @@ import {
     MyInspectionsComponent,
     MyInspectionCardComponent,
     InspectionAddDialogComponent,
-    InspectionUpdateMileageDialogComponent
+    InspectionUpdateMileageDialogComponent,
+    MyExpensesComponent,
+    ExpensionAddDialogComponent,
+    MyExpensionCardComponent
   ],
   imports: [
     BrowserModule,
