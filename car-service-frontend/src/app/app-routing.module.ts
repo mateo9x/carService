@@ -11,6 +11,7 @@ import {NewPasswordComponent} from './components/authentication/new-password/new
 import {MyVehiclesComponent} from './components/vehicles/my-vehicles/my-vehicles.component';
 import {MyInsurancesComponent} from './components/insurance/my-insurances/my-insurances.component';
 import {MyInspectionsComponent} from './components/inspection/my-inspections/my-inspections.component';
+import {MyExpensesComponent} from './components/expense/my-expenses/my-expenses.component';
 
 const ROUTES: Routes = [
   {
@@ -77,6 +78,12 @@ const ROUTES: Routes = [
     path: 'my-inspections',
     component: MyInspectionsComponent,
     title: 'Moje przeglądy',
+    canActivate: [() => inject(AppGuard).isAuthenticated()]
+  },
+  {
+    path: 'my-expenses',
+    component: MyExpensesComponent,
+    title: 'Moje wydatki',
     canActivate: [() => inject(AppGuard).isAuthenticated()]
   },
   {

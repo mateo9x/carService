@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="top-nav">
+    <mat-select placeholder="Wybierz pojazd" (valueChange)="getExpensesForVehicle($event)">
+      <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{vehicle.brand}} {{vehicle.model}}
+        ({{vehicle.licensePlate}})
+      </mat-option>
+    </mat-select>
+  </div>
+
+  <ng-container *ngIf="expenses.length > 0;else noExpenses">
+    <div class="my-expension-cards-container" *ngFor="let expension of expenses">
+      <my-expension-card [expension]="expension"
+                         (deleteExpensionEmitter)="deleteExpension($event)"></my-expension-card>
+    </div>
+  </ng-container>
+
+  <ng-template #noExpenses>
+    <div id="noExpenses" *ngIf="vehicleIdSelected">
+      Brak informacji o wydatkach dla danego pojazdu
+    </div>
+  </ng-template>
+
+  <div class="button-container">
+    <button mat-raised-button (click)="addExpension(vehicleIdSelected)" [disabled]="!vehicleIdSelected">Dodaj
+      wydatek
+    </button>
+  </div>
+
+</div>

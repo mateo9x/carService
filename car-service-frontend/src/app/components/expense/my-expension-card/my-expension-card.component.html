@@ -1,0 +1,8 @@
+<div class="container" *ngIf="expension">
+  <div class="flex-container">
+    <div class="text-container"><span>Data:</span> {{expension.date}}</div>
+  </div>
+  <div class="icon-container">
+    <mat-icon matTooltip="Usuń" (click)="deleteExpension(expension.id)">delete_sweep</mat-icon>
+  </div>
+</div>
