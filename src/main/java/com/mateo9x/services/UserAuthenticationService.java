@@ -25,7 +25,7 @@ public class UserAuthenticationService {
                     .sorted(Comparator.comparing(UserAuthentication::getAuthenticationDateTime, Comparator.reverseOrder()))
                     .map(UserAuthentication::getAuthenticationDateTime)
                     .findFirst()
-                    .orElse(null);
+                    .orElse(LocalDateTime.now());
             days = ChronoUnit.DAYS.between(lastAuthentication, LocalDateTime.now());
         }
         return days;
