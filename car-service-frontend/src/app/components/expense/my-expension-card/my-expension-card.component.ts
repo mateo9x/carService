@@ -13,14 +13,11 @@ export class MyExpensionCardComponent {
   @Output()
   deleteExpensionEmitter: EventEmitter<string> = new EventEmitter<string>();
 
-  getBooleanLabel(value: boolean) {
-    if (value) {
-      return 'TAK';
-    }
-    return 'NIE';
-  }
-
   deleteExpension(id: string | undefined) {
     this.deleteExpensionEmitter.emit(id as string);
+  }
+
+  downloadAttachment(attachment: string) {
+
   }
 }
