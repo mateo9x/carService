@@ -39,6 +39,12 @@ public class InsuranceService {
         insuranceRepository.deleteById(id);
     }
 
+    public void deleteAllVehicleInsurances(String vehicleId) {
+        getInsurancesByVehicleId(vehicleId).stream()
+                .map(Insurance::getId)
+                .forEach(this::deleteInsuranceById);
+    }
+
     private List<LocalDate> preparePaymentDeadlines(Insurance insurance) {
         List<LocalDate> dates = new ArrayList<>();
         if (LOAN_PART_1.equals(insurance.getLoanPartsAmount())) {

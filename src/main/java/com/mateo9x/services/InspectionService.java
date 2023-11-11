@@ -31,4 +31,10 @@ public class InspectionService {
     public void deleteInspection(String id) {
         inspectionRepository.deleteById(id);
     }
+
+    public void deleteAllVehicleInspections(String vehicleId) {
+        getInspectionsForVehicle(vehicleId).stream()
+                .map(Inspection::getId)
+                .forEach(this::deleteInspection);
+    }
 }
