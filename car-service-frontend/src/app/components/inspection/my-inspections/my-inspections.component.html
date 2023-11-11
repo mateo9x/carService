@@ -13,7 +13,7 @@
   </div>
 
   <ng-container *ngIf="inspections.length > 0;else noInspection">
-    <div class="my-insurance-cards-container" *ngFor="let inspection of inspections">
+    <div class="my-inspection-cards-container" *ngFor="let inspection of inspections">
       <my-inspection-card [inspection]="inspection"
                           (deleteInspectionEmitter)="deleteInspection($event)"></my-inspection-card>
     </div>

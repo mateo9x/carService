@@ -18,10 +18,14 @@ mat-select {
   max-width: 300px;
 }
 
-.my-insurance-cards-container {
+.my-inspection-cards-container {
+  display: flex;
   width: 100%;
-  height: 100px;
   margin-bottom: 20px;
+}
+
+my-inspection-card {
+  width: 100%;
 }
 
 #noInspection {
