@@ -8,5 +8,29 @@
     </mat-form-field>
     <span *ngIf="!themeSaved" class="error-span">W celu trwałej zmiany kolorystyki zapisz ustawienia</span>
   </div>
+  <div class="input-data">
+    <div class="checkbox-container">
+      <mat-label>Powiadomienia dot. ubezpieczenia</mat-label>
+      <mat-checkbox formControlName="notifyInsurance"></mat-checkbox>
+    </div>
+  </div>
+  <div class="input-data">
+    <mat-form-field>
+      <mat-label>Dni do zapłaty ubezpieczenia</mat-label>
+      <input matInput type="number" formControlName="daysBeforeInsuranceExpire">
+    </mat-form-field>
+  </div>
+  <div class="input-data">
+    <div class="checkbox-container">
+      <mat-label>Powiadomienia dot. przeglądów</mat-label>
+      <mat-checkbox formControlName="notifyInspections"></mat-checkbox>
+    </div>
+  </div>
+  <div class="input-data">
+    <mat-form-field>
+      <mat-label>Kilometry do przeglądu</mat-label>
+      <input matInput type="number" formControlName="mileageBeforeInspectionExpire">
+    </mat-form-field>
+  </div>
   <button mat-raised-button (click)="save()">Zapisz zmiany</button>
 </form>

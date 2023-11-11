@@ -7,10 +7,10 @@ form {
 }
 
 .input-data {
-  margin: auto auto 20px;
-  max-width:40%;
-  display: grid;
-  grid-template-columns: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 span {
