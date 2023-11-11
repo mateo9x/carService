@@ -23,9 +23,7 @@ public class InsuranceService {
         if (insuranceRepository.findByDatesBetween(insurance.getDateFrom(), insurance.getDateTo()).isPresent()) {
             throw new InsuranceException("Ubezpieczenie dla tego pojazdu istnieje w wybranym okresie");
         }
-        if (insurance.getDateFrom().isAfter(LocalDate.now())) {
-            insurance.setPaymentDeadlines(preparePaymentDeadlines(insurance));
-        }
+        insurance.setPaymentDeadlines(preparePaymentDeadlines(insurance));
         return insuranceRepository.save(insurance);
     }
 
