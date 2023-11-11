@@ -19,9 +19,9 @@ export class MyInsuranceCardComponent {
 
   getBooleanLabel(value: boolean) {
     if (value) {
-      return 'TAK';
+      return 'Tak';
     }
-    return 'NIE';
+    return 'Nie';
   }
 
   getDictionaryLabel(value: string, dictionaryType: DictionaryType) {

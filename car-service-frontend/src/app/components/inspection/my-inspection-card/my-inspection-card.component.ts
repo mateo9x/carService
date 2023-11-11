@@ -15,9 +15,9 @@ export class MyInspectionCardComponent {
 
   getBooleanLabel(value: boolean) {
     if (value) {
-      return 'TAK';
+      return 'Tak';
     }
-    return 'NIE';
+    return 'Nie';
   }
 
   deleteInspection(id: string | undefined) {
