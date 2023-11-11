@@ -1,19 +1,39 @@
 <div class="container" *ngIf="insurance">
   <div class="flex-container">
-    <div class="text-container"><span>Data od:</span> {{insurance.dateFrom}}</div>
-    <div class="text-container"><span>Data do:</span> {{insurance.dateTo}}</div>
+    <div class="text-container">
+      <div><span>Data od:</span> {{insurance.dateFrom}}</div>
+    </div>
+    <div class="text-container">
+      <div><span>Data do:</span> {{insurance.dateTo}}</div>
+    </div>
   </div>
   <div class="flex-container">
-    <div class="text-container"><span>Firma ubezpieczeniowa:</span> {{getDictionaryLabel(insurance.company, DictionaryType.INSURANCE_COMPANIES)}}</div>
-    <div class="text-container"><span>Liczba rat:</span> {{insurance.loanPartsAmount}}</div>
+    <div class="text-container">
+      <div>
+        <span>Firma ubezpieczeniowa:</span> {{getDictionaryLabel(insurance.company, DictionaryType.INSURANCE_COMPANIES)}}
+      </div>
+    </div>
+    <div class="text-container">
+      <div><span>Liczba rat:</span> {{insurance.loanPartsAmount}}</div>
+    </div>
   </div>
   <div class="flex-container">
-    <div class="text-container"><span>Data zapłaty:</span> {{insurance.paymentDeadlines}}</div>
-    <div class="text-container"><span>Assistance:</span> {{getBooleanLabel(insurance.assistance)}}</div>
+    <div class="text-container">
+      <div><span>Data zapłaty:</span> {{insurance.paymentDeadlines}}</div>
+    </div>
+    <div class="text-container">
+      <div><span>Assistance:</span> {{getBooleanLabel(insurance.assistance)}}</div>
+    </div>
   </div>
   <div class="flex-container">
-    <div class="text-container"><span>AC:</span> {{getBooleanLabel(insurance.ac)}}</div>
-    <div class="text-container"><span>Typ ochrony AC:</span> {{getDictionaryLabels(insurance.acProtectionTypes, DictionaryType.AC_PROTECTION_TYPES)}}</div>
+    <div class="text-container">
+      <div><span>AC:</span> {{getBooleanLabel(insurance.ac)}}</div>
+    </div>
+    <div class="text-container">
+      <div>
+        <span>Typ ochrony AC:</span> {{getDictionaryLabels(insurance.acProtectionTypes, DictionaryType.AC_PROTECTION_TYPES)}}
+      </div>
+    </div>
   </div>
   <div class="icon-container">
     <mat-icon matTooltip="Usuń" (click)="deleteInsurance(insurance.id)">delete_sweep</mat-icon>

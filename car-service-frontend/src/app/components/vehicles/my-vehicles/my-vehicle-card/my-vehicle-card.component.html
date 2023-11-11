@@ -2,35 +2,53 @@
   <div class="container">
     <div class="flex-container">
       <div class="text-container">
-        <span>Marka:</span> {{vehicle.brand}}
+        <div>
+          <span>Marka:</span> {{vehicle.brand}}
+        </div>
       </div>
       <div class="text-container">
-        <span>Model:</span> {{vehicle.model}}
+        <div>
+          <span>Model:</span> {{vehicle.model}}
+        </div>
       </div>
       <div class="text-container">
-        <span>Rok produkcji:</span> {{vehicle.productionYear}}
-      </div>
-    </div>
-    <div class="flex-container">
-      <div class="text-container">
-        <span>Numer rejestracyjny:</span> {{vehicle.licensePlate}}
-      </div>
-      <div class="text-container">
-        <span>VIN:</span> {{vehicle.vin}}
-      </div>
-      <div class="text-container">
-        <span>Data zakupu:</span> {{vehicle.purchaseDate}}
+        <div>
+          <span>Rok produkcji:</span> {{vehicle.productionYear}}
+        </div>
       </div>
     </div>
     <div class="flex-container">
       <div class="text-container">
-        <span>Rodzaj silnika:</span> {{getDictionaryLabel(vehicle.engineType, DictionaryType.ENGINE_TYPES)}}
+        <div>
+          <span>Numer rejestracyjny:</span> {{vehicle.licensePlate}}
+        </div>
       </div>
       <div class="text-container">
-        <span>Skrzynia:</span> {{getDictionaryLabel(vehicle.transmissionType, DictionaryType.TRANSMISSION_TYPES)}}
+        <div>
+          <span>VIN:</span> {{vehicle.vin}}
+        </div>
       </div>
       <div class="text-container">
-        <span>Przebieg w dniu zakupu:</span> {{vehicle.purchaseMileage}} [km]
+        <div>
+          <span>Data zakupu:</span> {{vehicle.purchaseDate}}
+        </div>
+      </div>
+    </div>
+    <div class="flex-container">
+      <div class="text-container">
+        <div>
+          <span>Rodzaj silnika:</span> {{getDictionaryLabel(vehicle.engineType, DictionaryType.ENGINE_TYPES)}}
+        </div>
+      </div>
+      <div class="text-container">
+        <div>
+          <span>Skrzynia:</span> {{getDictionaryLabel(vehicle.transmissionType, DictionaryType.TRANSMISSION_TYPES)}}
+        </div>
+      </div>
+      <div class="text-container">
+        <div>
+          <span>Przebieg w dniu zakupu:</span> {{vehicle.purchaseMileage}} [km]
+        </div>
       </div>
     </div>
 

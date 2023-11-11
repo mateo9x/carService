@@ -19,8 +19,12 @@ mat-select {
 }
 
 .my-insurance-cards-container {
+  display: flex;
   width: 100%;
-  height: 100px;
+}
+
+my-insurance-card {
+  width: 100%;
 }
 
 #noInsurance {
