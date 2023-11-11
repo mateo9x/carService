@@ -4,7 +4,7 @@ import {Vehicle} from '../../../models/vehicle.model';
 import {VehicleAddDialogComponent} from '../add-dialog/vehicle-add-dialog.component';
 import {filter} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
-import {SnackBarService, SnackBarType} from '../../../services/util/snack-bar.service';
+import {SnackBarService, SnackBarType} from '../../../util/services/snack-bar.service';
 import {VehicleEditDialogComponent} from '../edit-dialog/vehicle-edit-dialog.component';
 
 @Component({

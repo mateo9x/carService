@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {ThemeService} from '../../../services/util/theme.service';
+import {ThemeService} from '../../../util/services/theme.service';
 import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
-import {SnackBarService, SnackBarType} from '../../../services/util/snack-bar.service';
+import {SnackBarService, SnackBarType} from '../../../util/services/snack-bar.service';
 
 @Component({
   selector: 'preferences',

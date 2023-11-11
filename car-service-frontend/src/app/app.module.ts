@@ -51,9 +51,10 @@ import {InspectionAddDialogComponent} from './components/inspection/add-dialog/i
 import {
   InspectionUpdateMileageDialogComponent
 } from './components/inspection/update-mileage-dialog/inspection-update-mileage-dialog.component';
-import {MyExpensesComponent} from './components/expense/my-expenses/my-expenses.component';
-import {ExpensionAddDialogComponent} from './components/expense/add-dialog/expension-add-dialog.component';
-import {MyExpensionCardComponent} from './components/expense/my-expension-card/my-expension-card.component';
+import {MyExpensesComponent} from './components/expension/my-expenses/my-expenses.component';
+import {ExpensionAddDialogComponent} from './components/expension/add-dialog/expension-add-dialog.component';
+import {MyExpensionCardComponent} from './components/expension/my-expension-card/my-expension-card.component';
+import {AttachmentPipe} from './util/pipes/attachment.pipe';
 
 @NgModule({
   declarations: [
@@ -84,26 +85,27 @@ import {MyExpensionCardComponent} from './components/expense/my-expension-card/m
     ExpensionAddDialogComponent,
     MyExpensionCardComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatInputModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatIconModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSelectModule,
-    MatTooltipModule,
-    MatCheckboxModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatMenuModule,
+        MatIconModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        MatTooltipModule,
+        MatCheckboxModule,
+        AttachmentPipe
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
     {

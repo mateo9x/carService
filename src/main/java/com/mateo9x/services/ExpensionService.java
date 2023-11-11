@@ -1,6 +1,7 @@
 package com.mateo9x.services;
 
 import com.mateo9x.entities.Expension;
+import com.mateo9x.enums.AttachmentType;
 import com.mateo9x.repositories.ExpensionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 @Service
 @AllArgsConstructor
@@ -21,10 +25,10 @@ public class ExpensionService {
 
     @Transactional
     public Expension saveExpension(Expension expension, List<MultipartFile> multipartFiles) {
-        if (multipartFiles != null && !multipartFiles.isEmpty()) {
-            List<String> paths = new ArrayList<>();
-            multipartFiles.forEach((multipartFile -> paths.add(attachmentService.saveAttachment(multipartFile))));
-            expension.setAttachmentsNames(paths);
+        if (isNotEmpty(multipartFiles)) {
+            List<String> attachmentsNames = new ArrayList<>();
+            multipartFiles.forEach(multipartFile -> attachmentsNames.add(attachmentService.saveAttachment(multipartFile, AttachmentType.EXPENSION)));
+            expension.setAttachmentsNames(attachmentsNames);
         }
         return expensionRepository.save(expension);
     }
@@ -36,6 +40,13 @@ public class ExpensionService {
     }
 
     public void deleteExpension(String id) {
-        expensionRepository.deleteById(id);
+        Optional<Expension> expensionOptional = expensionRepository.findById(id);
+        if (expensionOptional.isPresent()) {
+            Expension expension = expensionOptional.get();
+            if (isNotEmpty(expension.getAttachmentsNames())) {
+                expension.getAttachmentsNames().forEach(attachmentName -> attachmentService.deleteAttachment(attachmentName, AttachmentType.EXPENSION));
+            }
+            expensionRepository.deleteById(id);
+        }
     }
 }

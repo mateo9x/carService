@@ -5,7 +5,7 @@ import {
   InspectionUpdateMileageDialogComponent
 } from '../components/inspection/update-mileage-dialog/inspection-update-mileage-dialog.component';
 import {filter} from 'rxjs';
-import {SnackBarService, SnackBarType} from './util/snack-bar.service';
+import {SnackBarService, SnackBarType} from '../util/services/snack-bar.service';
 import {MatDialog} from '@angular/material/dialog';
 
 @Injectable({

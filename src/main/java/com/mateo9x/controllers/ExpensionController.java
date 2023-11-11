@@ -26,8 +26,8 @@ public class ExpensionController {
 
 
     @PostMapping
-    public ResponseEntity<Expension> saveExpension(@RequestPart(value = "attachments", required = false) List<MultipartFile> attachments,
-                                                 @RequestPart(value = "expension") Expension expension) {
+    public ResponseEntity<Expension> saveExpension(@RequestPart(value = "expension") Expension expension,
+                                                   @RequestPart(value = "attachments", required = false) List<MultipartFile> attachments) {
         log.info("REST request to save expension: {}", expension);
         return ResponseEntity.ok(expensionService.saveExpension(expension, attachments));
     }

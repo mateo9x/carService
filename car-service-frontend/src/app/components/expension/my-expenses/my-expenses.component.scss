@@ -19,9 +19,13 @@ mat-select {
 }
 
 .my-expension-cards-container {
+  display: flex;
   width: 100%;
-  height: 100px;
   margin-bottom: 20px;
+}
+
+my-expension-card {
+  width: 100%;
 }
 
 #noExpenses {
