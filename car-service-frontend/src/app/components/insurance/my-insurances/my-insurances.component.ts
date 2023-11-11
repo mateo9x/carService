@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {filter} from 'rxjs';
 import {SnackBarService, SnackBarType} from '../../../util/services/snack-bar.service';
 import {InsuranceAddDialogComponent} from '../add-dialog/insurance-add-dialog.component';
+import {ConfirmDialogComponent} from '../../util/confirm-dialog.component';
 
 @Component({
   selector: 'my-insurances',
@@ -72,12 +73,24 @@ export class MyInsurancesComponent implements OnInit {
   }
 
   deleteInsurance(id: string) {
-    this.insuranceService.deleteInsurance(id).subscribe({
-      next: () => {
-        this.getInsurancesForVehicle(this.vehicleIdSelected as string);
-        this.snackBarService.openSnackBar('Ubezpieczenie usunięte pomyślnie', SnackBarType.SUCCESS);
-      },
-      error: () => this.snackBarService.openSnackBar('Ubezpieczenie nie zostało usunięte', SnackBarType.ERROR)
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Usuń ubezpieczenie',
+        message: 'Czy na pewno chcesz usunąć wybrane ubezpieczenie?'
+      }
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (value) => {
+        if (value) {
+          this.insuranceService.deleteInsurance(id).subscribe({
+            next: () => {
+              this.getInsurancesForVehicle(this.vehicleIdSelected as string);
+              this.snackBarService.openSnackBar('Ubezpieczenie usunięte pomyślnie', SnackBarType.SUCCESS);
+            },
+            error: () => this.snackBarService.openSnackBar('Ubezpieczenie nie zostało usunięte', SnackBarType.ERROR)
+          });
+        }
+      }
     });
   }
 

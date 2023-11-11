@@ -18,6 +18,9 @@ public class VehicleService {
 
     private final VehicleRepository vehicleRepository;
     private final UserService userService;
+    private final ExpensionService expensionService;
+    private final InspectionService inspectionService;
+    private final InsuranceService insuranceService;
 
     @Transactional
     public Vehicle saveVehicle(Vehicle vehicleRequest) {
@@ -37,7 +40,11 @@ public class VehicleService {
         return vehicles;
     }
 
+    @Transactional
     public void deleteVehicle(String id) {
+        expensionService.deleteAllVehicleExpenses(id);
+        insuranceService.deleteAllVehicleInsurances(id);
+        inspectionService.deleteAllVehicleInspections(id);
         vehicleRepository.deleteById(id);
     }
 

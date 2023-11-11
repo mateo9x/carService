@@ -49,4 +49,10 @@ public class ExpensionService {
             expensionRepository.deleteById(id);
         }
     }
+
+    public void deleteAllVehicleExpenses(String vehicleId) {
+        getExpensesByVehicleId(vehicleId).stream()
+                .map(Expension::getId)
+                .forEach(this::deleteExpension);
+    }
 }

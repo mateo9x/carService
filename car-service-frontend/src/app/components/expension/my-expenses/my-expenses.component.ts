@@ -7,6 +7,7 @@ import {SnackBarService, SnackBarType} from '../../../util/services/snack-bar.se
 import {ExpensionService} from '../../../services/expension.service';
 import {Expension} from '../../../models/expension.model';
 import {ExpensionAddDialogComponent} from '../add-dialog/expension-add-dialog.component';
+import {ConfirmDialogComponent} from '../../util/confirm-dialog.component';
 
 @Component({
   selector: 'my-expenses',
@@ -72,12 +73,24 @@ export class MyExpensesComponent implements OnInit {
   }
 
   deleteExpension(id: string) {
-    this.expensionService.deleteExpension(id).subscribe({
-      next: () => {
-        this.getExpensesForVehicle(this.vehicleIdSelected as string);
-        this.snackBarService.openSnackBar('Wydatek usunięty pomyślnie', SnackBarType.SUCCESS);
-      },
-      error: () => this.snackBarService.openSnackBar('Wydatek nie został usunięty', SnackBarType.ERROR)
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Usuń wydatek',
+        message: 'Czy na pewno chcesz usunąć wybrany wydatek?'
+      }
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (value) => {
+        if (value) {
+          this.expensionService.deleteExpension(id).subscribe({
+            next: () => {
+              this.getExpensesForVehicle(this.vehicleIdSelected as string);
+              this.snackBarService.openSnackBar('Wydatek usunięty pomyślnie', SnackBarType.SUCCESS);
+            },
+            error: () => this.snackBarService.openSnackBar('Wydatek nie został usunięty', SnackBarType.ERROR)
+          });
+        }
+      }
     });
   }
 

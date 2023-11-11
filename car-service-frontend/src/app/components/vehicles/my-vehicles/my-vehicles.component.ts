@@ -6,6 +6,7 @@ import {filter} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {SnackBarService, SnackBarType} from '../../../util/services/snack-bar.service';
 import {VehicleEditDialogComponent} from '../edit-dialog/vehicle-edit-dialog.component';
+import {ConfirmDialogComponent} from '../../util/confirm-dialog.component';
 
 @Component({
   selector: 'my-vehicles',
@@ -85,12 +86,24 @@ export class MyVehiclesComponent implements OnInit {
   }
 
   deleteVehicle(id: string) {
-    this.vehicleService.deleteVehicle(id).subscribe({
-      next: () => {
-        this.snackBarService.openSnackBar('Pojazd usunięty pomyślnie', SnackBarType.SUCCESS);
-        this.getMyVehicles();
-      },
-      error: () => this.snackBarService.openSnackBar('Pojazd nie został usunięty', SnackBarType.ERROR)
-    })
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Usuń pojazd',
+        message: 'Czy na pewno chcesz usunąć wybrany pojazd?'
+      }
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (value) => {
+        if (value) {
+          this.vehicleService.deleteVehicle(id).subscribe({
+            next: () => {
+              this.snackBarService.openSnackBar('Pojazd usunięty pomyślnie', SnackBarType.SUCCESS);
+              this.getMyVehicles();
+            },
+            error: () => this.snackBarService.openSnackBar('Pojazd nie został usunięty', SnackBarType.ERROR)
+          })
+        }
+      }
+    });
   }
 }

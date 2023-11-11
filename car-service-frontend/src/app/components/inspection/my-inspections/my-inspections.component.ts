@@ -7,6 +7,7 @@ import {SnackBarService, SnackBarType} from '../../../util/services/snack-bar.se
 import {InspectionService} from '../../../services/inspection.service';
 import {Inspection} from '../../../models/inspection.model';
 import {InspectionAddDialogComponent} from '../add-dialog/inspection-add-dialog.component';
+import {ConfirmDialogComponent} from '../../util/confirm-dialog.component';
 
 @Component({
   selector: 'my-inspections',
@@ -72,12 +73,24 @@ export class MyInspectionsComponent implements OnInit {
   }
 
   deleteInspection(id: string) {
-    this.inspectionService.deleteInspection(id).subscribe({
-      next: () => {
-        this.getInspectionsForVehicle(this.vehicleIdSelected as string);
-        this.snackBarService.openSnackBar('Przegląd usunięty pomyślnie', SnackBarType.SUCCESS);
-      },
-      error: () => this.snackBarService.openSnackBar('Przegląd nie został usunięty', SnackBarType.ERROR)
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Usuń przegląd',
+        message: 'Czy na pewno chcesz usunąć wybrany przegląd?'
+      }
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (value) => {
+        if (value) {
+          this.inspectionService.deleteInspection(id).subscribe({
+            next: () => {
+              this.getInspectionsForVehicle(this.vehicleIdSelected as string);
+              this.snackBarService.openSnackBar('Przegląd usunięty pomyślnie', SnackBarType.SUCCESS);
+            },
+            error: () => this.snackBarService.openSnackBar('Przegląd nie został usunięty', SnackBarType.ERROR)
+          });
+        }
+      }
     });
   }
 
