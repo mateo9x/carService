@@ -3,7 +3,7 @@ import {VehicleService} from '../../../services/vehicle.service';
 import {Vehicle} from '../../../models/vehicle.model';
 import {MatDialog} from '@angular/material/dialog';
 import {filter} from 'rxjs';
-import {SnackBarService, SnackBarType} from '../../../services/util/snack-bar.service';
+import {SnackBarService, SnackBarType} from '../../../util/services/snack-bar.service';
 import {ExpensionService} from '../../../services/expension.service';
 import {Expension} from '../../../models/expension.model';
 import {ExpensionAddDialogComponent} from '../add-dialog/expension-add-dialog.component';

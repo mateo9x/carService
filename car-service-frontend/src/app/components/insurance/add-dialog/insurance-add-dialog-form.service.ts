@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DateService} from '../../../services/util/date.service';
+import {DateService} from '../../../util/services/date.service';
 import {Insurance} from '../../../models/insurance.model';
 
 @Injectable({

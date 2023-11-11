@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Vehicle} from '../../../models/vehicle.model';
-import {DateService} from '../../../services/util/date.service';
+import {DateService} from '../../../util/services/date.service';
 
 @Injectable({
   providedIn: 'root'

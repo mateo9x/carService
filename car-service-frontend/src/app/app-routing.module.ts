@@ -11,7 +11,7 @@ import {NewPasswordComponent} from './components/authentication/new-password/new
 import {MyVehiclesComponent} from './components/vehicles/my-vehicles/my-vehicles.component';
 import {MyInsurancesComponent} from './components/insurance/my-insurances/my-insurances.component';
 import {MyInspectionsComponent} from './components/inspection/my-inspections/my-inspections.component';
-import {MyExpensesComponent} from './components/expense/my-expenses/my-expenses.component';
+import {MyExpensesComponent} from './components/expension/my-expenses/my-expenses.component';
 
 const ROUTES: Routes = [
   {

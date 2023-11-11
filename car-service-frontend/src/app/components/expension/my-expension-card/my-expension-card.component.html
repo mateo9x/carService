@@ -8,10 +8,12 @@
   <div class="flex-container">
     <div class="text-container"><span>Informacje:</span> {{expension.info}}</div>
   </div>
-  <div class="flex-container" >
+  <div class="flex-container">
     <div class="text-container"><span>Załączniki:</span>
-      <ng-container *ngFor="let attachment of expension.attachmentsNames">{{attachment}}
-        <mat-icon matTooltip="Pobierz" (click)="downloadAttachment(attachment)">download_for_offline</mat-icon>
+      <ng-container *ngFor="let attachment of expension.attachmentsNames">
+        <div class="attachment-container">{{attachment | attachmentPipe}}
+          <mat-icon matTooltip="Pobierz" (click)="downloadAttachment(attachment)">download_for_offline</mat-icon>
+        </div>
       </ng-container>
     </div>
   </div>

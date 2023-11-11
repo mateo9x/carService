@@ -2,12 +2,12 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from './models/user.model';
 import {AuthenticationService} from './services/authentication.service';
 import {filter, Subscription} from 'rxjs';
-import {SpinnerService} from './services/util/spinner.service';
+import {SpinnerService} from './util/services/spinner.service';
 import {MatDialog} from '@angular/material/dialog';
 import {VehicleAddDialogComponent} from './components/vehicles/add-dialog/vehicle-add-dialog.component';
 import {VehicleService} from './services/vehicle.service';
-import {ThemeService} from './services/util/theme.service';
-import {SnackBarService, SnackBarType} from './services/util/snack-bar.service';
+import {ThemeService} from './util/services/theme.service';
+import {SnackBarService, SnackBarType} from './util/services/snack-bar.service';
 
 @Component({
   selector: 'app-root',
