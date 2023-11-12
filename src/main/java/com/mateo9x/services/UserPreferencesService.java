@@ -27,4 +27,8 @@ public class UserPreferencesService {
         Optional<User> userOptional = userService.getUserLogged();
         return userOptional.flatMap(user -> userPreferencesRepository.findByUserId(user.getId())).orElse(null);
     }
+
+    public UserPreferences getUserPreferencesByUserId(String userId) {
+        return userPreferencesRepository.findByUserId(userId).orElse(null);
+    }
 }

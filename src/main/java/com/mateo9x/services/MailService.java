@@ -1,6 +1,8 @@
 package com.mateo9x.services;
 
 import com.mateo9x.config.AppProperties;
+import com.mateo9x.dtos.UserDto;
+import com.mateo9x.entities.Inspection;
 import com.mateo9x.entities.User;
 import com.mateo9x.exceptions.EmailException;
 import lombok.AllArgsConstructor;
@@ -8,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @Slf4j
 @Service
@@ -44,6 +48,35 @@ public class MailService {
             javaMailSender.send(message);
         } catch (Exception e) {
             log.warn("Nie udało się wysłać maila powitalnego dla użytkownika: {}, z powodu: {}", user.getEmail(), e.getMessage());
+        }
+    }
+
+    public void sendInspectionNotify(UserDto user, Inspection inspection, String vehicleName) {
+        String userFullName = user.getFirstName() + " " + user.getLastName();
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("noreply@carservice.pl");
+        message.setTo(user.getEmail());
+        message.setSubject("Car Service - Przegląd");
+        message.setText("Witaj " + userFullName + String.format("!\n\nZbliża się termin wykonania przeglądu pojazdu %s.\nNajbliższy przegląd przy przebiegu: %s\n\nPozdrawiamy :)", vehicleName, inspection.getNextServiceMileage().toString()));
+        try {
+            javaMailSender.send(message);
+        } catch (Exception e) {
+            log.warn("Nie udało się wysłać maila dotyczącego przeglądu dla użytkownika: {} i pojazdu: {}, z powodu: {}", user.getEmail(), vehicleName, e.getMessage());
+        }
+    }
+
+    public void sendInsuranceNotify(UserDto user, LocalDate upcomingPaymentDeadline, String vehicleName) {
+        String userFullName = user.getFirstName() + " " + user.getLastName();
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("noreply@carservice.pl");
+        message.setTo(user.getEmail());
+        message.setSubject("Car Service - Ubezpieczenie");
+        message.setText("Witaj " + userFullName + String.format("!\n\nZbliża się termin zapłaty ubezpieczenia dla pojazdu %s.\nData najbliższej spłaty: %s\n\nPozdrawiamy :)", vehicleName, upcomingPaymentDeadline));
+
+        try {
+            javaMailSender.send(message);
+        } catch (Exception e) {
+            log.warn("Nie udało się wysłać maila dotyczącego ubezpiczenia dla użytkownika: {} i pojazdu: {}, z powodu: {}", user.getEmail(), vehicleName, e.getMessage());
         }
     }
 }
