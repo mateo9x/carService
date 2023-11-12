@@ -14,8 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -86,6 +88,12 @@ public class UserService {
     public Optional<User> getUserLogged() {
         String email = authenticationFacade.getCurrentUser().getUsername();
         return userRepository.findByEmail(email);
+    }
+
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(userConverter::toDto)
+                .collect(Collectors.toList());
     }
 
     private void finishResetPasswordProcedure(User user, String newPassword) {
