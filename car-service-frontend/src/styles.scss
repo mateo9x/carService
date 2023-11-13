@@ -115,12 +115,16 @@ body {
   border-color: var(--main-bg-color) !important;
 }
 
-.mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+.mat-primary .mat-pseudo-checkbox-checked {
   background: var(--main-bg-color) !important;
 }
 
 .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after, .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
   color: var(--main-bg-color) !important;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after, .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
+  color: white!important;
 }
 
 .snack-bar-success, .snack-bar-success button {
