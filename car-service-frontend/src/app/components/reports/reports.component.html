@@ -1,0 +1,54 @@
+<div class="container">
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-select placeholder="Wybierz pojazdy" formControlName="vehicles" multiple>
+        <ng-container *ngIf="vehicles.length > 0; else noVehicles">
+          <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{vehicle.brand}} {{vehicle.model}}
+            ({{vehicle.licensePlate}})
+          </mat-option>
+        </ng-container>
+        <ng-template #noVehicles>
+          <mat-option>Brak pojazdów</mat-option>
+        </ng-template>
+      </mat-select>
+      <mat-error *ngIf="hasFormError('vehicles', 'required')">Pole wymagane</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Wybierz zakres danych" formControlName="reportRanges" multiple>
+        <mat-option *ngFor="let reportRange of reportRanges" [value]="reportRange.value">{{reportRange.label}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="hasFormError('reportRanges', 'required')">Pole wymagane</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Wybierz format" formControlName="reportType">
+        <mat-option *ngFor="let reportType of reportTypes" [value]="reportType">{{reportType}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="hasFormError('reportType', 'required')">Pole wymagane</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Data od</mat-label>
+      <input matInput [matDatepicker]="dateFrom" formControlName="dateFrom" [max]="getDateToValue()">
+      <mat-datepicker-toggle matIconSuffix [for]="dateFrom"></mat-datepicker-toggle>
+      <mat-datepicker
+        startView="multi-year"
+        #dateFrom></mat-datepicker>
+      <mat-error *ngIf="hasFormError('dateFrom','required')">Pole wymagane</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Data do</mat-label>
+      <input matInput [matDatepicker]="dateTo" formControlName="dateTo" [min]="getDateFromValue()">
+      <mat-datepicker-toggle matIconSuffix [for]="dateTo"></mat-datepicker-toggle>
+      <mat-datepicker
+        startView="multi-year"
+        #dateTo></mat-datepicker>
+      <mat-error *ngIf="hasFormError('dateTo','required')">Pole wymagane</mat-error>
+    </mat-form-field>
+    <div class="button-container">
+      <button mat-raised-button (click)="generateReport()">Generuj raport</button>
+    </div>
+  </form>
+</div>

@@ -5,7 +5,7 @@ import com.mateo9x.converters.UserConverter;
 import com.mateo9x.dtos.UserDto;
 import com.mateo9x.entities.User;
 import com.mateo9x.entities.Vehicle;
-import com.mateo9x.models.Authority;
+import com.mateo9x.enums.Authority;
 import com.mateo9x.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

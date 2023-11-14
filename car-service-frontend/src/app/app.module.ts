@@ -56,6 +56,7 @@ import {ExpensionAddDialogComponent} from './components/expension/add-dialog/exp
 import {MyExpensionCardComponent} from './components/expension/my-expension-card/my-expension-card.component';
 import {AttachmentPipe} from './util/pipes/attachment.pipe';
 import {ConfirmDialogComponent} from './components/util/confirm-dialog.component';
+import {ReportsComponent} from './components/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import {ConfirmDialogComponent} from './components/util/confirm-dialog.component
     MyExpensesComponent,
     ExpensionAddDialogComponent,
     MyExpensionCardComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ReportsComponent
   ],
     imports: [
         BrowserModule,

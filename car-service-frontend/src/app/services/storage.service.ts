@@ -11,6 +11,7 @@ export class StorageService {
 
   get(key: string) {
     const item = localStorage.getItem(key);
+
     if (item) {
       return item;
     }
