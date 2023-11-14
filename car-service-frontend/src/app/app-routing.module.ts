@@ -12,6 +12,7 @@ import {MyVehiclesComponent} from './components/vehicles/my-vehicles/my-vehicles
 import {MyInsurancesComponent} from './components/insurance/my-insurances/my-insurances.component';
 import {MyInspectionsComponent} from './components/inspection/my-inspections/my-inspections.component';
 import {MyExpensesComponent} from './components/expension/my-expenses/my-expenses.component';
+import {ReportsComponent} from './components/reports/reports.component';
 
 const ROUTES: Routes = [
   {
@@ -65,25 +66,31 @@ const ROUTES: Routes = [
   {
     path: 'my-vehicles',
     component: MyVehiclesComponent,
-    title: 'Moje pojazdy',
+    title: 'Pojazdy',
     canActivate: [() => inject(AppGuard).isAuthenticated()]
   },
   {
     path: 'my-insurances',
     component: MyInsurancesComponent,
-    title: 'Moje ubezpieczenia',
+    title: 'Ubezpieczenia',
     canActivate: [() => inject(AppGuard).isAuthenticated()]
   },
   {
     path: 'my-inspections',
     component: MyInspectionsComponent,
-    title: 'Moje przeglądy',
+    title: 'Przeglądy',
     canActivate: [() => inject(AppGuard).isAuthenticated()]
   },
   {
     path: 'my-expenses',
     component: MyExpensesComponent,
-    title: 'Moje wydatki',
+    title: 'Wydatki',
+    canActivate: [() => inject(AppGuard).isAuthenticated()]
+  },
+  {
+    path: 'reports',
+    component: ReportsComponent,
+    title: 'Raporty',
     canActivate: [() => inject(AppGuard).isAuthenticated()]
   },
   {

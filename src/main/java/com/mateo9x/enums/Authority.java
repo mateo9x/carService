@@ -1,4 +1,4 @@
-package com.mateo9x.models;
+package com.mateo9x.enums;
 
 public enum Authority
 {

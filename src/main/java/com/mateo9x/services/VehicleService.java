@@ -48,6 +48,11 @@ public class VehicleService {
         vehicleRepository.deleteById(id);
     }
 
+    public String getVehicleFullNameByVehicleId(String vehicleId) {
+        Optional<Vehicle> vehicleOptional = vehicleRepository.findById(vehicleId);
+        return vehicleOptional.map(vehicle -> vehicle.getBrand() + " " + vehicle.getModel() + " (" + vehicle.getLicensePlate() + ")").orElse("");
+    }
+
     private void getUserVehicles(List<Vehicle> vehicles, User user) {
         vehicles.addAll(user.getVehicles().stream().filter(Objects::nonNull).toList());
     }
