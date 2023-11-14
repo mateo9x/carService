@@ -49,7 +49,7 @@ public class ReportService {
                 }
                 writeSection(workbook, sheet, key, rowNum);
                 writeHeader(workbook, sheet, reportData.getData().keySet(), rowNum);
-                writeData(workbook, sheet, reportData.getData(), rowNum);
+                writeData(workbook, sheet, reportData.getData(), rowNum, rowNum.get());
                 autoSizeColumns(sheet, reportData.getData().keySet().size());
             }
 
@@ -64,9 +64,9 @@ public class ReportService {
         }
     }
 
-    private boolean isProperCell(String headerKey, XSSFSheet sheet, int currentRowNum, int headerRowNum, int iterationNum) {
+    private boolean isProperCell(String headerKey, XSSFSheet sheet, int headerRowNum, int iterationNum) {
         Row headerRow = sheet.getRow(headerRowNum);
-        if (headerRow.getCell(iterationNum).getStringCellValue().equals(headerKey)) {
+        if (CellType.STRING.equals(headerRow.getCell(iterationNum).getCellType()) && headerKey.equals(headerRow.getCell(iterationNum).getStringCellValue())) {
             return true;
         }
         return false;
@@ -117,12 +117,14 @@ public class ReportService {
         }
     }
 
-    private void writeData(XSSFWorkbook workbook, XSSFSheet sheet, Map<String, List<Object>> data, AtomicInteger rowNumAtomic) {
+    private void writeData(XSSFWorkbook workbook, XSSFSheet sheet, Map<String, List<Object>> data, AtomicInteger rowNumAtomic, int headerRowNum) {
         for (Map.Entry<String, List<Object>> entry : data.entrySet()) {
             Row row = sheet.createRow(rowNumAtomic.incrementAndGet());
             for (int colNum = 0; colNum < entry.getValue().size(); colNum++) {
-                Object valueToSave = entry.getValue().get(colNum);
-                writeRow(row, valueToSave, colNum);
+                if (isProperCell(entry.getKey(), sheet, headerRowNum, colNum)) {
+                    Object valueToSave = entry.getValue().get(colNum);
+                    writeRow(row, valueToSave, colNum);
+                }
             }
         }
 
