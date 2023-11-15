@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+
 @Component
 @AllArgsConstructor
 public class ReportExpensionDataProvider implements ReportDataProvider {
@@ -41,6 +43,7 @@ public class ReportExpensionDataProvider implements ReportDataProvider {
                 map.put("DATA", expensionsBetweenDates.stream().map(Expension::getDate).collect(Collectors.toList()));
                 map.put("INFORMACJE", expensionsBetweenDates.stream().map(Expension::getInfo).collect(Collectors.toList()));
                 map.put("KWOTA", expensionsBetweenDates.stream().map(Expension::getAmount).collect(Collectors.toList()));
+                map.put("ZAŁĄCZNIKI", expensionsBetweenDates.stream().map(Expension::getAttachmentsNames).map(this::normalizeAttachmentName).collect(Collectors.toList()));
             }
         }
         return ReportData.of(map);
@@ -48,5 +51,14 @@ public class ReportExpensionDataProvider implements ReportDataProvider {
 
     private String getVehicleFullName(String vehicleId) {
         return vehicleService.getVehicleFullNameByVehicleId(vehicleId);
+    }
+
+    private String normalizeAttachmentName(List<String> attachmentNames) {
+        if (isNotEmpty(attachmentNames)) {
+            List<String> normalizedNames = new ArrayList<>();
+            attachmentNames.forEach(attachmentName -> normalizedNames.add(attachmentName.substring(attachmentName.indexOf("_") + 1)));
+            return String.join(",", normalizedNames);
+        }
+        return null;
     }
 }

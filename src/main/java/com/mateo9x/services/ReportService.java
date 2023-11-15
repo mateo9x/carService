@@ -49,7 +49,7 @@ public class ReportService {
                 }
                 writeSection(workbook, sheet, key, rowNum);
                 writeHeader(workbook, sheet, reportData.getData().keySet(), rowNum);
-                writeData(workbook, sheet, reportData.getData(), rowNum, rowNum.get());
+                writeData(sheet, reportData.getData(), rowNum, rowNum.get());
                 autoSizeColumns(sheet, reportData.getData().keySet().size());
             }
 
@@ -61,20 +61,6 @@ public class ReportService {
         } catch (IOException e) {
             log.error("Failed to generate xlsx report: {} {}", e, e.getMessage());
             throw new ReportException("Failed to generate xlsx report");
-        }
-    }
-
-    private boolean isProperCell(String headerKey, XSSFSheet sheet, int headerRowNum, int iterationNum) {
-        Row headerRow = sheet.getRow(headerRowNum);
-        if (CellType.STRING.equals(headerRow.getCell(iterationNum).getCellType()) && headerKey.equals(headerRow.getCell(iterationNum).getStringCellValue())) {
-            return true;
-        }
-        return false;
-    }
-
-    private void autoSizeColumns(XSSFSheet sheet, int columns) {
-        for (int i = 0; i < columns; i++) {
-            sheet.autoSizeColumn(i);
         }
     }
 
@@ -117,14 +103,25 @@ public class ReportService {
         }
     }
 
-    private void writeData(XSSFWorkbook workbook, XSSFSheet sheet, Map<String, List<Object>> data, AtomicInteger rowNumAtomic, int headerRowNum) {
+//    private boolean isProperCell(String headerKey, XSSFSheet sheet, int headerRowNum, int iterationNum) {
+//        Row headerRow = sheet.getRow(headerRowNum);
+//        return CellType.STRING.equals(headerRow.getCell(iterationNum).getCellType()) && headerKey.equals(headerRow.getCell(iterationNum).getStringCellValue());
+//    }
+
+    private void autoSizeColumns(XSSFSheet sheet, int columns) {
+        for (int i = 0; i < columns; i++) {
+            sheet.autoSizeColumn(i);
+        }
+    }
+
+    private void writeData(XSSFSheet sheet, Map<String, List<Object>> data, AtomicInteger rowNumAtomic, int headerRowNum) {
         for (Map.Entry<String, List<Object>> entry : data.entrySet()) {
-            Row row = sheet.createRow(rowNumAtomic.incrementAndGet());
             for (int colNum = 0; colNum < entry.getValue().size(); colNum++) {
-                if (isProperCell(entry.getKey(), sheet, headerRowNum, colNum)) {
+//                if (isProperCell(entry.getKey(), sheet, headerRowNum, colNum)) {
+                    Row row = sheet.createRow(rowNumAtomic.incrementAndGet());
                     Object valueToSave = entry.getValue().get(colNum);
                     writeRow(row, valueToSave, colNum);
-                }
+//                }
             }
         }
 
@@ -152,6 +149,8 @@ public class ReportService {
             cell.setCellValue(localDate.toString());
         } else if (value != null) {
             log.error("Unexpected cell value type {}", value.getClass());
+        } else {
+            cell.setCellValue("-");
         }
     }
 
