@@ -96,6 +96,7 @@ export class AuthenticationService {
     this.removeAuthorities();
     this.removeToken();
     this.setUserLogged(null);
+    this.router.navigate(['']);
   }
 
 }
