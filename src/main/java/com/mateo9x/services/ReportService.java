@@ -49,7 +49,7 @@ public class ReportService {
                 }
                 writeSection(workbook, sheet, key, rowNum);
                 writeHeader(workbook, sheet, reportData.getData().keySet(), rowNum);
-                writeData(workbook, sheet, reportData.getData(), rowNum, rowNum.get());
+                writeData(sheet, reportData.getData(), rowNum);
                 autoSizeColumns(sheet, reportData.getData().keySet().size());
             }
 
@@ -64,20 +64,6 @@ public class ReportService {
         }
     }
 
-    private boolean isProperCell(String headerKey, XSSFSheet sheet, int headerRowNum, int iterationNum) {
-        Row headerRow = sheet.getRow(headerRowNum);
-        if (CellType.STRING.equals(headerRow.getCell(iterationNum).getCellType()) && headerKey.equals(headerRow.getCell(iterationNum).getStringCellValue())) {
-            return true;
-        }
-        return false;
-    }
-
-    private void autoSizeColumns(XSSFSheet sheet, int columns) {
-        for (int i = 0; i < columns; i++) {
-            sheet.autoSizeColumn(i);
-        }
-    }
-
     public File generatePdfReport(Map<String, ReportData> reportDataMap) {
         try {
             FileInputStream xlsxFile = new FileInputStream(generateXlsxReport(reportDataMap));
@@ -89,7 +75,14 @@ public class ReportService {
             Document pdfDocument = new Document();
             PdfWriter.getInstance(pdfDocument, outputStream);
             pdfDocument.open();
-            PdfPTable pdfTable = new PdfPTable(5);
+            int maxColumns = 0;
+            for (Map.Entry<String, ReportData> mapEntry : reportDataMap.entrySet()) {
+                int size = mapEntry.getValue().getData().keySet().size();
+                if (size > maxColumns) {
+                    maxColumns = size;
+                }
+            }
+            PdfPTable pdfTable = new PdfPTable(maxColumns);
             PdfPCell pdfCell;
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
@@ -117,29 +110,39 @@ public class ReportService {
         }
     }
 
-    private void writeData(XSSFWorkbook workbook, XSSFSheet sheet, Map<String, List<Object>> data, AtomicInteger rowNumAtomic, int headerRowNum) {
-        for (Map.Entry<String, List<Object>> entry : data.entrySet()) {
-            Row row = sheet.createRow(rowNumAtomic.incrementAndGet());
-            for (int colNum = 0; colNum < entry.getValue().size(); colNum++) {
-                if (isProperCell(entry.getKey(), sheet, headerRowNum, colNum)) {
-                    Object valueToSave = entry.getValue().get(colNum);
-                    writeRow(row, valueToSave, colNum);
-                }
-            }
+    private void autoSizeColumns(XSSFSheet sheet, int columns) {
+        for (int i = 0; i < columns; i++) {
+            sheet.autoSizeColumn(i);
         }
-
-
-//        for (Map.Entry<String, List<Object>> entry : data.entrySet()) {
-//            Row row = sheet.createRow(rowNumAtomic.incrementAndGet());
-//            for (int colNum = 0; colNum < entry.getValue().size(); colNum++) {
-//                Object valueToSave = entry.getValue().get(colNum);
-//                writeRow(row, valueToSave, colNum);
-//            }
-//        }
     }
 
-    private void writeRow(Row row, Object value, int colNum) {
+    private void writeData(XSSFSheet sheet, Map<String, List<Object>> data, AtomicInteger rowNumAtomic) {
+        int headerRowNum = rowNumAtomic.get();
+        for (int colNum = 0; colNum < data.entrySet().size(); colNum++) {
+            Map.Entry<String, List<Object>> colEntry = data.entrySet().stream().toList().get(colNum);
+            rowNumAtomic.set(headerRowNum);
+            for (int rowNum = 0; rowNum < colEntry.getValue().size(); rowNum++) {
+                if (rowNum == 0) {
+                    rowNumAtomic.addAndGet(rowNum + 1);
+                } else {
+                    rowNumAtomic.addAndGet(rowNum);
+                }
+
+                Row row = sheet.getRow(rowNumAtomic.get());
+                if (row == null) {
+                    row = sheet.createRow(rowNumAtomic.get());
+                }
+                Object valueToSave = colEntry.getValue().get(rowNum);
+                writeCell(row, valueToSave, colNum, null);
+            }
+        }
+    }
+
+    private void writeCell(Row row, Object value, int colNum, CellStyle cellStyle) {
         Cell cell = row.createCell(colNum);
+        if (cellStyle != null) {
+            cell.setCellStyle(cellStyle);
+        }
         if (value instanceof String) {
             cell.setCellValue((String) value);
         } else if (value instanceof Integer) {
@@ -152,29 +155,27 @@ public class ReportService {
             cell.setCellValue(localDate.toString());
         } else if (value != null) {
             log.error("Unexpected cell value type {}", value.getClass());
+        } else {
+            cell.setCellValue("-");
         }
     }
 
     private void writeSection(XSSFWorkbook workbook, XSSFSheet sheet, String value, AtomicInteger rowNum) {
         Row row = sheet.createRow(rowNum.get());
         row.setHeight((short) -1);
-        Cell cell = row.createCell(0);
-        cell.setCellStyle(getHeaderCellStyle(workbook));
-        cell.setCellValue(value);
+        CellStyle cellStyle = getHeaderCellStyle(workbook);
+        writeCell(row, value, 0, cellStyle);
         rowNum.incrementAndGet();
         rowNum.incrementAndGet();
     }
 
     private void writeHeader(XSSFWorkbook workbook, XSSFSheet sheet, Set<String> headers, AtomicInteger rowNum) {
         List<String> headersList = headers.stream().toList();
-        Row row = sheet.createRow(rowNum.get());
+        Row row = sheet.createRow(rowNum.incrementAndGet());
         row.setHeight((short) -1);
-
+        CellStyle cellStyle = getHeaderCellStyle(workbook);
         for (int colNum = 0; colNum < headersList.size(); colNum++) {
-            Cell cell = row.createCell(colNum);
-            cell.setCellStyle(getHeaderCellStyle(workbook));
-            String value = headersList.get(colNum);
-            cell.setCellValue(value);
+            writeCell(row, headersList.get(colNum), colNum, cellStyle);
         }
     }
 

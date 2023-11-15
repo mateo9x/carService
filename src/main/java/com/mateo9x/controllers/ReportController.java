@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 @Slf4j
 @RestController
@@ -34,7 +34,7 @@ public class ReportController {
     public byte[] generateReport(@PathVariable ReportType reportType, @RequestBody ReportDataRequest reportDataRequest) {
         log.info("REST request to generate report: {}", reportType);
 
-        Map<String, ReportData> reportDataMap = new HashMap<>();
+        Map<String, ReportData> reportDataMap = new TreeMap<>();
 
         reportDataRequest.getReportRanges()
                 .forEach(reportRange -> {
