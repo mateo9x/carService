@@ -1,17 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {VehicleService} from '../../services/vehicle.service';
 import {Vehicle} from '../../models/vehicle.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ReportsService} from '../../services/reports.service';
 import {ReportData} from '../../services/api/reports-api.service';
 import {DateService} from '../../util/services/date.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss']
 })
-export class ReportsComponent implements OnInit {
+export class ReportsComponent implements OnInit, OnDestroy {
   form: FormGroup;
   vehicles: Vehicle[] = [];
   reportTypes = ['XLSX', 'PDF'];
@@ -20,6 +21,8 @@ export class ReportsComponent implements OnInit {
     {label: 'Przeglądy', value: 'INSPECTION'},
     {label: 'Wydatki', value: 'EXPENSION'}
   ];
+  generating = false;
+  generatingSubscription: Subscription = new Subscription();
 
   constructor(private formBuilder: FormBuilder,
               private vehicleService: VehicleService,
@@ -36,6 +39,13 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit() {
     this.getMyVehicles();
+    this.generatingSubscription = this.reportsService.generatingObserablve.subscribe({
+      next: (generating) => this.generating = generating
+    });
+  }
+
+  ngOnDestroy() {
+    this.generatingSubscription.unsubscribe();
   }
 
   getMyVehicles() {
@@ -48,6 +58,7 @@ export class ReportsComponent implements OnInit {
   generateReport() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
+      this.generating = true;
       const reportData = this.prepareReportData();
       const reportType = this.getReportTypeValue();
       this.reportsService.generateReport(reportData, reportType);
