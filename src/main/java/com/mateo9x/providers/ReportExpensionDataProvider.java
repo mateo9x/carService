@@ -42,7 +42,7 @@ public class ReportExpensionDataProvider implements ReportDataProvider {
                 map.put("POJAZD", expensionsBetweenDates.stream().map(Expension::getVehicleId).map(this::getVehicleFullName).collect(Collectors.toList()));
                 map.put("DATA", expensionsBetweenDates.stream().map(Expension::getDate).collect(Collectors.toList()));
                 map.put("INFORMACJE", expensionsBetweenDates.stream().map(Expension::getInfo).collect(Collectors.toList()));
-                map.put("KWOTA", expensionsBetweenDates.stream().map(Expension::getAmount).collect(Collectors.toList()));
+                map.put("KWOTA [PLN]", expensionsBetweenDates.stream().map(Expension::getAmount).collect(Collectors.toList()));
                 map.put("ZAŁĄCZNIKI", expensionsBetweenDates.stream().map(Expension::getAttachmentsNames).map(this::normalizeAttachmentName).collect(Collectors.toList()));
             }
         }

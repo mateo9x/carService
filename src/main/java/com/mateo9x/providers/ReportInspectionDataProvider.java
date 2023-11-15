@@ -47,8 +47,8 @@ public class ReportInspectionDataProvider implements ReportDataProvider {
                 map.put("WYMIANA FILTRA POWIETRZA", inspectionsBetweenDates.stream().map(Inspection::getAirFilterChanged).map(this::getBooleanLabel).collect(Collectors.toList()));
                 map.put("WYMIANA FILTRA KABINOWEGO", inspectionsBetweenDates.stream().map(Inspection::getCabinFilterChanged).map(this::getBooleanLabel).collect(Collectors.toList()));
                 map.put("DODATKOWE INFORMACJE", inspectionsBetweenDates.stream().map(Inspection::getAdditionalInfo).collect(Collectors.toList()));
-                map.put("AKTUALNY PRZEBIEG", inspectionsBetweenDates.stream().map(Inspection::getCurrentMileage).collect(Collectors.toList()));
-                map.put("PRZEBIEG NASTĘPNEGO PRZEGLĄDU", inspectionsBetweenDates.stream().map(Inspection::getNextServiceMileage).collect(Collectors.toList()));
+                map.put("AKTUALNY PRZEBIEG [KM]", inspectionsBetweenDates.stream().map(Inspection::getCurrentMileage).collect(Collectors.toList()));
+                map.put("PRZEBIEG NASTĘPNEGO PRZEGLĄDU [KM]", inspectionsBetweenDates.stream().map(Inspection::getNextServiceMileage).collect(Collectors.toList()));
             }
         }
         return ReportData.of(map);
