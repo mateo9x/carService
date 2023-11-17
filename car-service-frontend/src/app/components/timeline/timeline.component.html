@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="top-nav">
+    <mat-select placeholder="Wybierz pojazd" (valueChange)="getTimelineForVehicle($event)">
+      <ng-container *ngIf="vehicles.length > 0; else noVehicles">
+        <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{vehicle.brand}} {{vehicle.model}}
+          ({{vehicle.licensePlate}})
+        </mat-option>
+      </ng-container>
+      <ng-template #noVehicles>
+        <mat-option>Brak pojazdów</mat-option>
+      </ng-template>
+    </mat-select>
+  </div>
+
+  <ng-container *ngIf="timelineHistory.length > 0;else noTimeline">
+    <ngx-timeline [events]="timelineHistory" [langCode]="'en'" [periodCustomTemplate]="periodCustomTemplate"
+                  [dateInstantCustomTemplate]="dateInstantCustomTemplate">
+      <ng-template #dateInstantCustomTemplate let-item=item>
+    <span>
+      {{item.timestamp | date: 'MM-dd'}}
+    </span>
+      </ng-template>
+      <ng-template #periodCustomTemplate let-period=period let-index=index let-event=event>
+        <div [ngClass]="{'transparent first-line': !index}" class="line"></div>
+        <div class="period-label-container">
+          {{getLabelDate(period.firstDate)}}
+        </div>
+      </ng-template>
+    </ngx-timeline>
+  </ng-container>
+
+  <ng-template #noTimeline>
+    <div id="noTimeline" *ngIf="vehicleIdSelected">
+      Brak osi czasu dla danego pojazdu
+    </div>
+  </ng-template>
+
+</div>

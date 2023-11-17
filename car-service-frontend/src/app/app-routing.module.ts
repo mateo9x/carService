@@ -13,6 +13,7 @@ import {MyInsurancesComponent} from './components/insurance/my-insurances/my-ins
 import {MyInspectionsComponent} from './components/inspection/my-inspections/my-inspections.component';
 import {MyExpensesComponent} from './components/expension/my-expenses/my-expenses.component';
 import {ReportsComponent} from './components/reports/reports.component';
+import {TimelineComponent} from './components/timeline/timeline.component';
 
 const ROUTES: Routes = [
   {
@@ -91,6 +92,12 @@ const ROUTES: Routes = [
     path: 'reports',
     component: ReportsComponent,
     title: 'Raporty',
+    canActivate: [() => inject(AppGuard).isAuthenticated()]
+  },
+  {
+    path: 'timeline',
+    component: TimelineComponent,
+    title: 'Oś czasu',
     canActivate: [() => inject(AppGuard).isAuthenticated()]
   },
   {

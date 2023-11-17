@@ -57,6 +57,8 @@ import {MyExpensionCardComponent} from './components/expension/my-expension-card
 import {AttachmentPipe} from './util/pipes/attachment.pipe';
 import {ConfirmDialogComponent} from './components/util/confirm-dialog.component';
 import {ReportsComponent} from './components/reports/reports.component';
+import {TimelineComponent} from './components/timeline/timeline.component';
+import {NgxTimelineModule} from '@frxjs/ngx-timeline';
 
 @NgModule({
   declarations: [
@@ -87,29 +89,31 @@ import {ReportsComponent} from './components/reports/reports.component';
     ExpensionAddDialogComponent,
     MyExpensionCardComponent,
     ConfirmDialogComponent,
-    ReportsComponent
+    ReportsComponent,
+    TimelineComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        MatButtonModule,
-        MatInputModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatSnackBarModule,
-        MatProgressSpinnerModule,
-        MatMenuModule,
-        MatIconModule,
-        MatDialogModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatSelectModule,
-        MatTooltipModule,
-        MatCheckboxModule,
-        AttachmentPipe
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatCheckboxModule,
+    AttachmentPipe,
+    NgxTimelineModule
+  ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
     {
