@@ -5,5 +5,7 @@ With this application You can:
 
 - Add your vehicles  
 - Add inspections  
-- Add insurances  
+- Add insurances
+- Check vehicle timeline history
+- Generate report for selected vehicles, data range and date range
 - Configure annotations for upcoming oil inspections, services, insurances payments etc.  
