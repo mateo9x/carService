@@ -17,8 +17,9 @@ export class DictionaryService {
         ];
       case DictionaryType.TRANSMISSION_TYPES:
         return [
-          {label: 'Skrzynia automatyczna', value: 'AUTOMATIC'},
-          {label: 'Skrzynia ręczna', value: 'MANUAL'}
+          {label: 'automatyczna', value: 'AUTOMATIC'},
+          {label: 'ręczna', value: 'MANUAL'},
+          {label: 'sekwencyjna', value: 'SEQUENCE'}
         ];
       case DictionaryType.AC_PROTECTION_TYPES:
         return [
