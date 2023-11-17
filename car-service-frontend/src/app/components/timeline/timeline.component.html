@@ -13,7 +13,20 @@
   </div>
 
   <ng-container *ngIf="timelineHistory.length > 0;else noTimeline">
-    <ngx-timeline [events]="timelineHistory" [langCode]="'en'"></ngx-timeline>
+    <ngx-timeline [events]="timelineHistory" [langCode]="'en'" [periodCustomTemplate]="periodCustomTemplate"
+                  [dateInstantCustomTemplate]="dateInstantCustomTemplate">
+      <ng-template #dateInstantCustomTemplate let-item=item>
+    <span>
+      {{item.timestamp | date: 'MM-dd'}}
+    </span>
+      </ng-template>
+      <ng-template #periodCustomTemplate let-period=period let-index=index let-event=event>
+        <div [ngClass]="{'transparent first-line': !index}" class="line"></div>
+        <div class="period-label-container">
+          {{getLabelDate(period.firstDate)}}
+        </div>
+      </ng-template>
+    </ngx-timeline>
   </ng-container>
 
   <ng-template #noTimeline>

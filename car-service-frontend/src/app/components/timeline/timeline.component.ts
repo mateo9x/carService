@@ -37,4 +37,9 @@ export class TimelineComponent implements OnInit {
       error: () => this.timelineHistory = []
     });
   }
+
+  getLabelDate(date: Date) {
+    let dateFormatted= date.toLocaleString('default', {month: 'long', year: 'numeric'});
+    return dateFormatted.replace(dateFormatted.charAt(0), dateFormatted.charAt(0).toUpperCase());
+  }
 }

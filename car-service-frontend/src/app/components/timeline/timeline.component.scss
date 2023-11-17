@@ -32,7 +32,19 @@ ngx-timeline {
 }
 
 ::ng-deep {
-  .period-container, .icon {
+  .icon {
     background: var(--main-bg-color) !important;
   }
+}
+
+.period-label-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: var(--main-bg-color);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  color: white;
 }
