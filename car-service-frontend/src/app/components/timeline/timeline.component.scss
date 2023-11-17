@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+mat-select {
+  max-width: 300px;
+}
+
+ngx-timeline {
+  width: 100%;
+  padding: 10px;
+}
+
+#noTimeline {
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+::ng-deep {
+  .period-container, .icon {
+    background: var(--main-bg-color) !important;
+  }
+}

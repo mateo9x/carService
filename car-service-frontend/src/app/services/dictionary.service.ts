@@ -17,9 +17,9 @@ export class DictionaryService {
         ];
       case DictionaryType.TRANSMISSION_TYPES:
         return [
-          {label: 'automatyczna', value: 'AUTOMATIC'},
-          {label: 'ręczna', value: 'MANUAL'},
-          {label: 'sekwencyjna', value: 'SEQUENCE'}
+          {label: 'Automatyczna', value: 'AUTOMATIC'},
+          {label: 'Ręczna', value: 'MANUAL'},
+          {label: 'Sekwencyjna', value: 'SEQUENCE'}
         ];
       case DictionaryType.AC_PROTECTION_TYPES:
         return [

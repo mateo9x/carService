@@ -53,6 +53,10 @@ public class VehicleService {
         return vehicleOptional.map(vehicle -> vehicle.getBrand() + " " + vehicle.getModel() + " (" + vehicle.getLicensePlate() + ")").orElse("");
     }
 
+    public Vehicle getVehicleById(String vehicleId) {
+       return vehicleRepository.findById(vehicleId).orElse(null);
+    }
+
     private void getUserVehicles(List<Vehicle> vehicles, User user) {
         vehicles.addAll(user.getVehicles().stream().filter(Objects::nonNull).toList());
     }
