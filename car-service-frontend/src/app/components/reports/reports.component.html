@@ -48,7 +48,7 @@
       <mat-error *ngIf="hasFormError('dateTo','required')">Pole wymagane</mat-error>
     </mat-form-field>
     <div class="button-container">
-      <button mat-raised-button (click)="generateReport()">Generuj raport</button>
+      <button mat-raised-button (click)="generateReport()" [disabled]="generating">Generuj raport</button>
     </div>
   </form>
 </div>

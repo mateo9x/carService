@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 @Slf4j
@@ -45,6 +46,10 @@ public class ReportController {
                     reportDataMap.put(reportRange.getLabel(), reportDataProvider.prepareData(reportDataRequest));
                 });
 
+        if (!hasMapData(reportDataMap)) {
+            throw new ReportException("No data for selected vehicles between selected ranges");
+        }
+
         File file;
         if (ReportType.XLSX.equals(reportType)) {
             file = reportService.generateXlsxReport(reportDataMap);
@@ -57,5 +62,13 @@ public class ReportController {
             log.error("REST couldn't get report: {}", e.getMessage());
             throw new RuntimeException(e);
         }
+    }
+
+    private boolean hasMapData(Map<String, ReportData> reportDataMap) {
+        return reportDataMap.values().stream()
+                .map(ReportData::getData)
+                .filter(Objects::nonNull)
+                .filter(element -> !element.isEmpty())
+                .toList().size() > 0;
     }
 }
