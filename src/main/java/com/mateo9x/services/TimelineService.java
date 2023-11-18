@@ -57,7 +57,7 @@ public class TimelineService {
                 .id(timelineHistoryId.incrementAndGet())
                 .timestamp(Timestamp.from(vehicle.getPurchaseDate().atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .title("Zakup pojazdu")
-                .description(String.format("Rok produkcji: %s. Przebieg w dniu zakupu: %s", vehicle.getProductionYear(), vehicle.getPurchaseMileage()))
+                .description(String.format("Rok produkcji: %s. Przebieg w dniu zakupu: %s km", vehicle.getProductionYear(), vehicle.getPurchaseMileage()))
                 .build();
     }
 
@@ -65,8 +65,8 @@ public class TimelineService {
         return TimelineHistory.builder()
                 .id(timelineHistoryId.incrementAndGet())
                 .timestamp(Timestamp.from(expension.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant()))
-                .title("Wydatek")
-                .description(String.format("Kwota: %.2f. Dodatkowe informacje: %s", expension.getAmount(), expension.getInfo()))
+                .title("Poniesiony wydatek")
+                .description(String.format("Kwota: %.2f PLN. Dodatkowe informacje: %s", expension.getAmount(), expension.getInfo()))
                 .build();
     }
 
@@ -74,7 +74,7 @@ public class TimelineService {
         return TimelineHistory.builder()
                 .id(timelineHistoryId.incrementAndGet())
                 .timestamp(Timestamp.from(inspection.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant()))
-                .title("Przegląd")
+                .title("Wykonany przegląd")
                 .description(String.format("Przegląd przy przebiegu: %s km, Następny przegląd: %s km", inspection.getCurrentMileage(), inspection.getNextServiceMileage()))
                 .build();
 
@@ -84,7 +84,7 @@ public class TimelineService {
         return TimelineHistory.builder()
                 .id(timelineHistoryId.incrementAndGet())
                 .timestamp(Timestamp.from(insurance.getDateFrom().atStartOfDay(ZoneId.systemDefault()).toInstant()))
-                .title("Ubezpieczenie")
+                .title("Zakup ubezpieczenia")
                 .description(String.format("Ubezpieczyciel %s. Polisa ważna od: %s do %s", insurance.getCompany(), insurance.getDateFrom(), insurance.getDateTo()))
                 .build();
     }
