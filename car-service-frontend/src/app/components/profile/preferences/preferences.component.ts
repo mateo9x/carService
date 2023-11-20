@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ThemeService} from '../../../util/services/theme.service';
 import {FormGroup} from '@angular/forms';
 import {SnackBarService, SnackBarType} from '../../../util/services/snack-bar.service';
 import {UserPreferencesService} from '../../../services/user-preferences.service';
@@ -14,19 +13,11 @@ import {Subscription} from 'rxjs';
 })
 export class PreferencesComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  themeSaved = true;
-  themes = [
-    {label: 'Domyślny', value: 'default'},
-    {label: 'Zielony', value: 'green'},
-    {label: 'Ciemny', value: 'black'},
-    {label: 'Żółty', value: 'yellow'}
-  ];
   userPreferences: UserPreferences | null = null;
   notifyInsuranceSubscription: Subscription = new Subscription();
   notifyInspectionSubscription: Subscription = new Subscription();
 
   constructor(private formService: PreferencesFormService,
-              private themeService: ThemeService,
               private snackBarService: SnackBarService,
               private userPreferencesService: UserPreferencesService) {
     this.form = this.formService.getFormGroup();
@@ -82,19 +73,12 @@ export class PreferencesComponent implements OnInit, OnDestroy {
     });
   }
 
-  changeTheme() {
-    this.themeService.setTheme(this.formService.getSelectedThemeControl(this.form).value, false);
-    this.themeSaved = false;
-  }
-
   save() {
     const userPreferences = this.formService.convertFormToUserPreferences(this.form);
     userPreferences.id = this.userPreferences?.id;
     userPreferences.userId = this.userPreferences?.userId;
     this.userPreferencesService.saveUserPreferences(userPreferences).subscribe({
       next: () => {
-        this.themeService.setTheme(this.formService.getSelectedThemeControl(this.form).value, true);
-        this.themeSaved = true;
         this.snackBarService.openSnackBar('Preferencje zaktualizowane', SnackBarType.SUCCESS);
       },
       error: () => this.snackBarService.openSnackBar('Preferencje nie zostały zaktualizowane', SnackBarType.ERROR)

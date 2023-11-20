@@ -12,7 +12,6 @@ export class PreferencesFormService {
 
   getFormGroup(): FormGroup {
     return this.fb.group({
-      selectedTheme: [null, []],
       notifyInsurance: [false, []],
       daysBeforeInsuranceExpire: [null, []],
       notifyInspections: [false, []],
@@ -33,10 +32,6 @@ export class PreferencesFormService {
     const notifyInspections = this.getNotifyInspectionsControl(form).value;
     const mileageBeforeInspectionExpire = this.getDaysBeforeInsuranceExpireControl(form).value;
     return new UserPreferences(notifyInsurance, daysBeforeInsuranceExpire, notifyInspections, mileageBeforeInspectionExpire);
-  }
-
-  getSelectedThemeControl(form: FormGroup) {
-    return form.get('selectedTheme') as AbstractControl;
   }
 
   getNotifyInsuranceControl(form: FormGroup) {

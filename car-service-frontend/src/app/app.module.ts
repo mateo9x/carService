@@ -60,6 +60,7 @@ import {ReportsComponent} from './components/reports/reports.component';
 import {TimelineComponent} from './components/timeline/timeline.component';
 import {NgxTimelineModule} from '@frxjs/ngx-timeline';
 import {MatListModule} from '@angular/material/list';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -114,7 +115,8 @@ import {MatListModule} from '@angular/material/list';
         MatCheckboxModule,
         AttachmentPipe,
         NgxTimelineModule,
-        MatListModule
+        MatListModule,
+        MatSlideToggleModule
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},

@@ -7,11 +7,19 @@
   height: 100%;
 }
 
+side-menu {
+  width: 280px !important;
+}
+
 .router-section {
   padding: 20px;
   height: 100%;
-  width: 100%;
+  width: calc(100% - 280px);
   overflow: auto;
+}
+
+.non-authenticated-router > .router-section {
+  width: 100%;
 }
 
 .non-authenticated-router {

@@ -1,7 +1,9 @@
 <div class="wrapper">
+  <h4>Pojazdy</h4>
   <ng-container *ngIf="vehicles.length > 0; else noVehicles">
     <div class="vehicle-card" *ngFor="let vehicle of vehicles">
-      <my-vehicle-card [vehicle]="vehicle" (deleteVehicleEmitter)="deleteVehicle($event)" (editVehicleDialogEmitter)="openEditVehicleDialog($event)"></my-vehicle-card>
+      <my-vehicle-card [vehicle]="vehicle" (deleteVehicleEmitter)="deleteVehicle($event)"
+                       (editVehicleDialogEmitter)="openEditVehicleDialog($event)"></my-vehicle-card>
     </div>
   </ng-container>
 

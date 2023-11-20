@@ -18,6 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
   userLogged: User | null = null;
   loading = false;
   subscriptions: Subscription = new Subscription();
+  darkMode = false;
 
   constructor(private authenticationService: AuthenticationService,
               private spinnerService: SpinnerService,
@@ -82,7 +83,12 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
+  changeTheme(darkMode: boolean) {
+    const value = darkMode ? 'dark' : 'light';
+    this.themeService.setTheme(value);
+  }
+
   setTheme() {
-    this.themeService.loadTheme();
+    this.darkMode = this.themeService.loadTheme();
   }
 }

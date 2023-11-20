@@ -85,6 +85,11 @@ body {
   src: url('../src/assets/fonts/impact.ttf');
 }
 
+@font-face {
+  font-family: 'Orbitron';
+  src: url('../src/assets/fonts/Orbitron.ttf');
+}
+
 /* ANGULAR MATERIAL */
 
 .mat-mdc-raised-button.mat-unthemed {
@@ -126,7 +131,25 @@ body {
 }
 
 .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after, .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
-  color: white!important;
+  color: white !important;
+}
+
+.mat-mdc-slide-toggle .mdc-form-field .mdc-switch {
+  --mdc-switch-selected-handle-color: var(--main-bg-color);
+  --mdc-switch-selected-pressed-handle-color: var(--main-bg-color);
+  --mdc-switch-selected-pressed-state-layer-color: var(--main-bg-color);
+  --mdc-switch-selected-hover-state-layer-color: var(--main-bg-color);
+  --mdc-switch-selected-hover-handle-color: var(--main-bg-color);
+  --mdc-switch-selected-focus-state-layer-color: var(--main-bg-color);
+  --mdc-switch-selected-focus-handle-color: var(--main-bg-color);
+  --mdc-switch-selected-track-color: #e0e0e0;
+  --mdc-switch-selected-pressed-track-color: #e0e0e0;
+  --mdc-switch-selected-hover-track-color: #e0e0e0;
+  --mdc-switch-selected-focus-track-color: #e0e0e0;
+}
+
+.mat-calendar-body-cell-content.mat-focus-indicator:hover {
+  color: white !important;
 }
 
 .snack-bar-success, .snack-bar-success button {
@@ -200,4 +223,9 @@ mat-icon:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+h4 {
+  text-align: center;
+  font-family: Orbitron, Roboto, sans-serif;
 }
