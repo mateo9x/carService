@@ -1,10 +1,37 @@
 <div class="container">
-  <ul>
-    <li routerLink="my-vehicles">Pojazdy</li>
-    <li routerLink="my-insurances">Ubezpieczenia</li>
-    <li routerLink="my-inspections">Przeglądy</li>
-    <li routerLink="my-expenses">Wydatki</li>
-    <li routerLink="timeline">Oś czasu</li>
-    <li routerLink="reports">Raporty</li>
-  </ul>
+  <div class="logo-container" routerLink="/">
+    <img alt="" src="assets/images/nav-logo.png">
+  </div>
+  <mat-nav-list class="nav-list">
+    <mat-list-item class="list-item" [style]="'list-item'" routerLink="my-vehicles" [routerLinkActive]="['is-active']">
+      <span>Pojazdy</span>
+      <mat-icon [fontIcon]="'directions_car'"></mat-icon>
+    </mat-list-item>
+    <mat-list-item class="list-item" routerLink="my-insurances" [routerLinkActive]="['is-active']">
+      <span>Ubezpieczenia</span>
+      <mat-icon [fontIcon]="'credit_card'"></mat-icon>
+    </mat-list-item>
+    <mat-list-item class="list-item" routerLink="my-inspections" [routerLinkActive]="['is-active']">
+      <span>Przeglądy</span>
+      <mat-icon [fontIcon]="'car_repair'"></mat-icon>
+    </mat-list-item>
+    <mat-list-item class="list-item" routerLink="my-expenses" [routerLinkActive]="['is-active']">
+      <span>Wydatki</span>
+      <mat-icon [fontIcon]="'attach_money'"></mat-icon>
+    </mat-list-item>
+    <mat-list-item class="list-item" routerLink="timeline" [routerLinkActive]="['is-active']">
+      <span>Oś czasu</span>
+      <mat-icon [fontIcon]="'timeline'"></mat-icon>
+    </mat-list-item>
+    <mat-list-item class="list-item" routerLink="reports" [routerLinkActive]="['is-active']">
+      <span>Raporty</span>
+      <mat-icon [fontIcon]="'insert_drive_file'"></mat-icon>
+    </mat-list-item>
+  </mat-nav-list>
+  <div class="bottom-container">
+    <div class="icon-container">
+      <mat-icon [fontIcon]="'person'" routerLink="profile" matTooltip="Profil"></mat-icon>
+      <mat-icon [fontIcon]="'logout'" (click)="logout()" matTooltip="Wyloguj się"></mat-icon>
+    </div>
+  </div>
 </div>

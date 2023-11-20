@@ -2,55 +2,16 @@
   height: 100%;
 }
 
-.nav-bar {
-  height: 60px;
-  width: 100%;
-  background-color: var(--nav-bg-color);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-}
-
-.nav-bar-left-container {
-  display: inherit;
-  justify-content: left;
-  height: 60px;
-}
-
-.logo-container {
-  display: flex;
-  width: 220px;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo-container > img {
-  height: 60px;
-  width: 100px;
-  padding: 0 10px;
-}
-
-.logo-container > img:hover {
-  cursor: pointer;
-}
-
-.nav-bar-right-container {
-  display: inherit;
-  justify-content: right;
-  align-items: center;
-  height: 60px;
-}
-
 .side-menu {
-  width: 220px;
+  width: 280px;
   height: 100%;
 }
 
 .router-section {
-  margin-top: 20px;
-  height: calc(100% - 20px);
+  padding: 20px;
+  height: 100%;
   width: 100%;
-  overflow:auto;
+  overflow: auto;
 }
 
 .non-authenticated-router {
@@ -61,30 +22,8 @@
 
 .authenticated-router {
   display: flex;
-  height: calc(100% - 60px);
+  height: 100%;
   width: 100%;
-}
-
-.profile-container {
-  padding: 20px;
-}
-
-.profile-icon {
-  color: var(--nav-text-color);
-}
-
-::ng-deep {
-  .mat-mdc-menu-panel {
-    margin: 10px !important;
-  }
-}
-
-.nav-link {
-  color: var(--nav-text-color);
-}
-
-.nav-link:hover {
-  color: var(--nav-hover-color);
 }
 
 .spinner {

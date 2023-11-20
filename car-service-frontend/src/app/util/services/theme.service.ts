@@ -27,6 +27,7 @@ export class ThemeService {
     switch (colorValue) {
       case 'default': {
         document.documentElement.style.setProperty('--nav-bg-color', '#3a3b3d');
+        document.documentElement.style.setProperty('--nav-bg-color-hover', '#353738');
         document.documentElement.style.setProperty('--nav-text-color', 'white');
         document.documentElement.style.setProperty('--nav-hover-color', '#eae5e5');
         document.documentElement.style.setProperty('--main-bg-color', '#27919a');
@@ -35,6 +36,7 @@ export class ThemeService {
         break;
       case 'green': {
         document.documentElement.style.setProperty('--nav-bg-color', '#3a3b3d');
+        document.documentElement.style.setProperty('--nav-bg-color-hover', '#353738');
         document.documentElement.style.setProperty('--nav-text-color', 'white');
         document.documentElement.style.setProperty('--nav-hover-color', '#eae5e5');
         document.documentElement.style.setProperty('--main-bg-color', '#1d7e2d');
@@ -42,15 +44,17 @@ export class ThemeService {
       }
         break;
       case 'black': {
+        document.documentElement.style.setProperty('--nav-bg-color', '#111111');
         document.documentElement.style.setProperty('--nav-bg-color', '#000000');
         document.documentElement.style.setProperty('--nav-text-color', 'white');
         document.documentElement.style.setProperty('--nav-hover-color', '#eae5e5');
-        document.documentElement.style.setProperty('--main-bg-color', '#000000');
-        document.documentElement.style.setProperty('--main-bg-color-hover', '#000000');
+        document.documentElement.style.setProperty('--main-bg-color', '#111111');
+        document.documentElement.style.setProperty('--main-bg-color-hover', '#111111');
       }
         break;
       case 'yellow': {
         document.documentElement.style.setProperty('--nav-bg-color', '#3a3b3d');
+        document.documentElement.style.setProperty('--nav-bg-color-hover', '#353738');
         document.documentElement.style.setProperty('--nav-text-color', 'white');
         document.documentElement.style.setProperty('--nav-hover-color', '#eae5e5');
         document.documentElement.style.setProperty('--main-bg-color', '#b6c031');
