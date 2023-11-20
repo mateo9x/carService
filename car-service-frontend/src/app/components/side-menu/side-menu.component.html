@@ -3,7 +3,7 @@
     <img alt="" src="assets/images/nav-logo.png">
   </div>
   <mat-nav-list class="nav-list">
-    <mat-list-item class="list-item" [style]="'list-item'" routerLink="my-vehicles" [routerLinkActive]="['is-active']">
+    <mat-list-item class="list-item" routerLink="my-vehicles" [routerLinkActive]="['is-active']">
       <span>Pojazdy</span>
       <mat-icon [fontIcon]="'directions_car'"></mat-icon>
     </mat-list-item>
@@ -28,10 +28,25 @@
       <mat-icon [fontIcon]="'insert_drive_file'"></mat-icon>
     </mat-list-item>
   </mat-nav-list>
+  <mat-divider></mat-divider>
   <div class="bottom-container">
-    <div class="icon-container">
-      <mat-icon [fontIcon]="'person'" routerLink="profile" matTooltip="Profil"></mat-icon>
-      <mat-icon [fontIcon]="'logout'" (click)="logout()" matTooltip="Wyloguj się"></mat-icon>
+    <mat-nav-list class="nav-list">
+      <mat-list-item class="list-item" routerLink="profile" [routerLinkActive]="['is-active']">
+        <span>Ustawienia</span>
+        <mat-icon [fontIcon]="'person'"></mat-icon>
+      </mat-list-item>
+      <mat-list-item class="list-item" (click)="logout()" [routerLinkActive]="['is-active']">
+        <span>Wyloguj się</span>
+        <mat-icon [fontIcon]="'logout'"></mat-icon>
+      </mat-list-item>
+    </mat-nav-list>
+    <div class="slide-container">
+      <mat-icon [fontIcon]="'light_mode'"></mat-icon>
+      <mat-slide-toggle (change)="changeTheme($event.checked)" [(ngModel)]="darkMode"></mat-slide-toggle>
+      <mat-icon [fontIcon]="'nightlight'"></mat-icon>
+    </div>
+    <div class="profile-container">
+      <span>{{user.firstName}} {{user.lastName}}</span>
     </div>
   </div>
 </div>

@@ -75,7 +75,7 @@ public class TimelineService {
                 .id(timelineHistoryId.incrementAndGet())
                 .timestamp(Timestamp.from(inspection.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .title("Wykonany przegląd")
-                .description(String.format("Przegląd przy przebiegu: %s km, Następny przegląd: %s km", inspection.getCurrentMileage(), inspection.getNextServiceMileage()))
+                .description(String.format("Przegląd przy przebiegu: %s km. Następny przegląd: %s km", inspection.getCurrentMileage(), inspection.getNextServiceMileage()))
                 .build();
 
     }
