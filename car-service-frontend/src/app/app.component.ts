@@ -49,11 +49,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }));
   }
 
-  logout() {
-    this.authenticationService.logout();
-    this.dialog.closeAll();
-  }
-
   prepareSpinner() {
     this.subscriptions.add(this.spinnerService.loading.subscribe({
       next: (response) => {
