@@ -1,7 +1,7 @@
 <div class="container">
   <h4>Przeglądy</h4>
   <div class="top-nav">
-    <mat-select placeholder="Wybierz pojazd" (valueChange)="getInspectionsForVehicle($event)">
+    <mat-select placeholder="Wybierz pojazd" (valueChange)="getInspectionsForVehicle($event)" class="mat-select-label">
       <ng-container *ngIf="vehicles.length > 0; else noVehicles">
         <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{vehicle.brand}} {{vehicle.model}}
           ({{vehicle.licensePlate}})

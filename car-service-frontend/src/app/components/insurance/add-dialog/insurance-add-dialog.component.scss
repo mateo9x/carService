@@ -3,6 +3,8 @@ form {
   flex-direction: column;
   padding: 50px;
   gap: 20px;
+  background-color: var(--router-bg-color);
+  color: var(--router-text-color);
 }
 
 h4 {

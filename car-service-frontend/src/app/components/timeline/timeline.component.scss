@@ -33,7 +33,7 @@ ngx-timeline {
 
 ::ng-deep {
   .icon {
-    background: var(--main-bg-color) !important;
+    background: var(--checkbox-border-color) !important;
   }
 }
 
@@ -63,16 +63,18 @@ ngx-timeline {
 .event.enableAnimation:not(:hover) {
   padding: 0;
   transition: all .5s ease-in-out;
+  background-color: var(--router-bg-color);
 }
 
 .event.enableAnimation:hover {
   padding: 1rem;
   transition: all .5s ease-in-out;
+  background-color: var(--router-bg-color);
 }
 
 .event:not(.hour) {
   background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0 3px 6px #244a6e52;
+  box-shadow: 0 3px 6px var(--router-text-color);
 }
 
 .event-container.reverse {
@@ -117,6 +119,7 @@ ngx-timeline {
   padding: 10px;
   overflow-wrap: anywhere;
 }
+
 .event {
   background: white;
   border-radius: 0.8rem;
@@ -126,4 +129,18 @@ ngx-timeline {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  color: var(--router-text-color);
+}
+
+::ng-deep {
+  .center-icon-container {
+    background: none !important;
+  }
+  .event-title {
+     color: var(--router-text-color) !important;
+   }
+
+  .event-description {
+    color: var(--router-text-color) !important;
+  }
 }

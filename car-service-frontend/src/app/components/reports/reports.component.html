@@ -15,14 +15,14 @@
       <mat-error *ngIf="hasFormError('vehicles', 'required')">Pole wymagane</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <mat-select placeholder="Wybierz zakres danych" formControlName="reportRanges" multiple>
+      <mat-select placeholder="Wybierz zakres danych" formControlName="reportRanges" multiple class="mat-select-label">
         <mat-option *ngFor="let reportRange of reportRanges" [value]="reportRange.value">{{reportRange.label}}
         </mat-option>
       </mat-select>
       <mat-error *ngIf="hasFormError('reportRanges', 'required')">Pole wymagane</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <mat-select placeholder="Wybierz format" formControlName="reportType">
+      <mat-select placeholder="Wybierz format" formControlName="reportType" class="mat-select-label">
         <mat-option *ngFor="let reportType of reportTypes" [value]="reportType">{{reportType}}
         </mat-option>
       </mat-select>

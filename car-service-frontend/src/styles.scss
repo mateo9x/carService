@@ -1,12 +1,15 @@
 :root {
-  --nav-bg-color: #4b5057;
-  --nav-bg-color-hover: #3b3f44;
+  --nav-bg-color: #373b41;
+  --nav-bg-color-hover: #373a41;
   --nav-text-color: white;
   --nav-hover-color: #eae5e5;
   --main-bg-color: #27919a;
   --main-bg-color-hover: #1f646b;
   --main-text-color: white;
-  --mat-icon-color: var(--main-bg-color) !important;
+  --router-bg-color: white;
+  --router-text-color: white;
+  --checkbox-border-color: #27919a;
+  --mat-icon-color: #27919a;
   --mat-stepper-header-edit-state-icon-background-color: var(--main-bg-color) !important;
   --mat-stepper-header-done-state-icon-background-color: var(--main-bg-color) !important;
   --mat-stepper-header-selected-state-icon-background-color: var(--main-bg-color) !important;
@@ -61,7 +64,8 @@
   --mdc-filled-text-field-focus-active-indicator-color: var(--main-bg-color) !important;
   --mdc-linear-progress-active-indicator-color: var(--main-bg-color) !important;
   --mat-option-selected-state-label-text-color: var(--main-bg-color) !important;
-  --mat-select-focused-arrow-color: var(--main-bg-color) !important;
+  --mat-select-focused-arrow-color: var(--checkbox-border-color) !important;
+  --mat-select-enabled-arrow-color: var(--checkbox-border-color) !important;
 }
 
 html, body {
@@ -69,6 +73,7 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
+  color: var(--router-text-color);
 }
 
 * {
@@ -173,6 +178,14 @@ body {
   color: white !important;
 }
 
+.mat-select-label {
+  color: var(--router-text-color) !important;
+}
+
+.mat-select-label .mat-mdc-select-placeholder {
+  color: var(--router-text-color) !important;
+}
+
 mat-icon {
   transform: scale(2);
 }
@@ -228,4 +241,5 @@ mat-icon:hover {
 h4 {
   text-align: center;
   font-family: Orbitron, Roboto, sans-serif;
+  color: var(--router-text-color);
 }
