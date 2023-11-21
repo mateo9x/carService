@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {User} from './models/user.model';
 import {AuthenticationService} from './services/authentication.service';
 import {filter, Subscription} from 'rxjs';
@@ -19,6 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
   loading = false;
   subscriptions: Subscription = new Subscription();
   darkMode = false;
+  isMobile = false;
 
   constructor(private authenticationService: AuthenticationService,
               private spinnerService: SpinnerService,
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.setUser();
     this.prepareSpinner();
     this.setTheme();
+    this.isMobileView();
   }
 
   ngOnDestroy() {
@@ -90,5 +92,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   setTheme() {
     this.darkMode = this.themeService.loadTheme();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  isMobileView() {
+    this.isMobile = window.innerWidth < 800;
   }
 }

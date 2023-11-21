@@ -27,12 +27,16 @@ export class ThemeService {
   private overrideColors(themeMode: string) {
     switch (themeMode) {
       case 'light': {
-        document.documentElement.style.setProperty('--nav-bg-color', '#3a3b3d');
-        document.documentElement.style.setProperty('--nav-bg-color-hover', '#353738');
+        document.documentElement.style.setProperty('--nav-bg-color', '#373b41');
+        document.documentElement.style.setProperty('--nav-bg-color-hover', '#373a41');
         document.documentElement.style.setProperty('--nav-text-color', 'white');
         document.documentElement.style.setProperty('--nav-hover-color', '#eae5e5');
         document.documentElement.style.setProperty('--main-bg-color', '#27919a');
         document.documentElement.style.setProperty('--main-bg-color-hover', '#1f646b');
+        document.documentElement.style.setProperty('--router-bg-color', 'white');
+        document.documentElement.style.setProperty('--router-text-color', 'black');
+        document.documentElement.style.setProperty('--mat-icon-color', '#27919a');
+        document.documentElement.style.setProperty('--checkbox-border-color', '#27919a');
       }
         break;
       case 'dark': {
@@ -42,6 +46,10 @@ export class ThemeService {
         document.documentElement.style.setProperty('--nav-hover-color', '#eae5e5');
         document.documentElement.style.setProperty('--main-bg-color', '#111111');
         document.documentElement.style.setProperty('--main-bg-color-hover', '#111111');
+        document.documentElement.style.setProperty('--router-bg-color', 'rgba(17,17,17,0.98)');
+        document.documentElement.style.setProperty('--router-text-color', 'white');
+        document.documentElement.style.setProperty('--mat-icon-color', 'white');
+        document.documentElement.style.setProperty('--checkbox-border-color', 'white');
       }
         break;
     }

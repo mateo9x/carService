@@ -1,16 +1,13 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {AuthenticationService} from '../../services/authentication.service';
 import {MatDialog} from '@angular/material/dialog';
-import {User} from '../../models/user.model';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
-  selector: 'side-menu',
-  templateUrl: './side-menu.component.html',
-  styleUrls: ['./side-menu.component.scss']
+  selector: 'mobile-side-menu',
+  templateUrl: './mobile-side-menu.component.html',
+  styleUrls: ['./mobile-side-menu.component.scss']
 })
-export class SideMenuComponent {
-  @Input()
-  user!: User;
+export class MobileSideMenuComponent {
   @Input()
   darkMode!: boolean;
   @Output()

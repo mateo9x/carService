@@ -8,7 +8,7 @@
 }
 
 side-menu {
-  width: 280px !important;
+  width: inherit;
 }
 
 .router-section {
@@ -16,6 +16,7 @@ side-menu {
   height: 100%;
   width: calc(100% - 280px);
   overflow: auto;
+  background-color: var(--router-bg-color);
 }
 
 .non-authenticated-router > .router-section {
@@ -41,4 +42,16 @@ side-menu {
 
 .mat-mdc-progress-spinner {
   --mdc-circular-progress-active-indicator-color: var(--main-bg-color);
+}
+
+// MOBILE
+
+@media (max-width: 800px) {
+  .side-menu {
+    width: 60px;
+  }
+
+  .router-section {
+    width: calc(100% - 60px);
+  }
 }
