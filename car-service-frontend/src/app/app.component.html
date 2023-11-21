@@ -3,7 +3,8 @@
   <ng-container *ngIf="userLogged; else nonAuthenticated">
     <div class="authenticated-router">
       <div class="side-menu">
-        <side-menu [user]="userLogged" [darkMode]="darkMode" (themeChangeEmit)="changeTheme($event)"></side-menu>
+        <mobile-side-menu [darkMode]="darkMode" (themeChangeEmit)="changeTheme($event)" *ngIf="isMobile"></mobile-side-menu>
+        <side-menu [user]="userLogged" [darkMode]="darkMode" (themeChangeEmit)="changeTheme($event)" *ngIf="!isMobile"></side-menu>
       </div>
       <div class="router-section">
         <router-outlet></router-outlet>

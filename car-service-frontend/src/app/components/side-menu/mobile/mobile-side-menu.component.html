@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="logo-container" routerLink="/">
+    <img alt="" src="assets/images/nav-logo.png">
+  </div>
+  <mat-nav-list class="nav-list">
+    <mat-list-item class="list-item" routerLink="my-vehicles" [routerLinkActive]="['is-active']">
+      <mat-icon [fontIcon]="'directions_car'"></mat-icon>
+    </mat-list-item>
+    <mat-list-item class="list-item" routerLink="my-insurances" [routerLinkActive]="['is-active']">
+      <mat-icon [fontIcon]="'credit_card'"></mat-icon>
+    </mat-list-item>
+    <mat-list-item class="list-item" routerLink="my-inspections" [routerLinkActive]="['is-active']">
+      <mat-icon [fontIcon]="'car_repair'"></mat-icon>
+    </mat-list-item>
+    <mat-list-item class="list-item" routerLink="my-expenses" [routerLinkActive]="['is-active']">
+      <mat-icon [fontIcon]="'attach_money'"></mat-icon>
+    </mat-list-item>
+    <mat-list-item class="list-item" routerLink="timeline" [routerLinkActive]="['is-active']">
+      <mat-icon [fontIcon]="'timeline'"></mat-icon>
+    </mat-list-item>
+    <mat-list-item class="list-item" routerLink="reports" [routerLinkActive]="['is-active']">
+      <mat-icon [fontIcon]="'insert_drive_file'"></mat-icon>
+    </mat-list-item>
+  </mat-nav-list>
+  <mat-divider></mat-divider>
+  <div class="bottom-container">
+    <mat-nav-list class="nav-list">
+      <mat-list-item class="list-item" routerLink="profile" [routerLinkActive]="['is-active']">
+        <mat-icon [fontIcon]="'person'"></mat-icon>
+      </mat-list-item>
+      <mat-list-item class="list-item" (click)="logout()" [routerLinkActive]="['is-active']">
+        <mat-icon [fontIcon]="'logout'"></mat-icon>
+      </mat-list-item>
+    </mat-nav-list>
+    <div class="slide-container">
+      <mat-slide-toggle (change)="changeTheme($event.checked)" [(ngModel)]="darkMode"></mat-slide-toggle>
+    </div>
+  </div>
+</div>

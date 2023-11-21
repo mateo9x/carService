@@ -153,6 +153,10 @@ body {
   --mdc-switch-selected-focus-track-color: #e0e0e0;
 }
 
+.mat-mdc-raised-button[disabled][disabled] {
+  color: var(--router-text-color) !important;;
+}
+
 .mat-calendar-body-cell-content.mat-focus-indicator:hover {
   color: white !important;
 }

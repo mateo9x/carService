@@ -61,6 +61,7 @@ import {TimelineComponent} from './components/timeline/timeline.component';
 import {NgxTimelineModule} from '@frxjs/ngx-timeline';
 import {MatListModule} from '@angular/material/list';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MobileSideMenuComponent} from './components/side-menu/mobile/mobile-side-menu.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MyExpensionCardComponent,
     ConfirmDialogComponent,
     ReportsComponent,
-    TimelineComponent
+    TimelineComponent,
+    MobileSideMenuComponent
   ],
     imports: [
         BrowserModule,
