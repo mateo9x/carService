@@ -16,5 +16,14 @@ form {
 }
 
 mat-select {
-  max-width: 300px;
+  width: 300px;
+}
+
+
+// MEDIA
+
+@media (max-width: 800px) {
+  form {
+    flex-direction: column;
+  }
 }

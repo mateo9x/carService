@@ -144,3 +144,13 @@ ngx-timeline {
     color: var(--router-text-color) !important;
   }
 }
+
+// MEDIA
+
+@media (max-width: 800px) {
+  ngx-timeline {
+    padding: 10px;
+    margin: 0 auto;
+    width: calc(100vw - 60px);
+  }
+}
