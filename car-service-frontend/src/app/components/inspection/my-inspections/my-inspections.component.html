@@ -1,16 +1,18 @@
 <div class="container">
   <h4>Przeglądy</h4>
   <div class="top-nav">
-    <mat-select placeholder="Wybierz pojazd" (valueChange)="getInspectionsForVehicle($event)" class="mat-select-label">
-      <ng-container *ngIf="vehicles.length > 0; else noVehicles">
-        <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{vehicle.brand}} {{vehicle.model}}
-          ({{vehicle.licensePlate}})
-        </mat-option>
-      </ng-container>
-      <ng-template #noVehicles>
-        <mat-option>Brak pojazdów</mat-option>
-      </ng-template>
-    </mat-select>
+    <mat-form-field>
+      <mat-select placeholder="Wybierz pojazd" (valueChange)="getInspectionsForVehicle($event)">
+        <ng-container *ngIf="vehicles.length > 0; else noVehicles">
+          <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{vehicle.brand}} {{vehicle.model}}
+            ({{vehicle.licensePlate}})
+          </mat-option>
+        </ng-container>
+        <ng-template #noVehicles>
+          <mat-option>Brak pojazdów</mat-option>
+        </ng-template>
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <ng-container *ngIf="inspections.length > 0;else noInspection">
