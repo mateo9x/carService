@@ -47,7 +47,7 @@ public class ReportController {
                 });
 
         if (!hasMapData(reportDataMap)) {
-            throw new ReportException("No data for selected vehicles between selected ranges");
+            return null;
         }
 
         File file;

@@ -31,8 +31,8 @@ export class ReportsComponent implements OnInit, OnDestroy {
     this.form = this.formBuilder.group({
       vehicles: [[], [Validators.required]],
       reportRanges: [[], [Validators.required]],
-      reportType: [null, [Validators.required]],
-      dateFrom: [new Date(), [Validators.required]],
+      reportType: ['XLSX', [Validators.required]],
+      dateFrom: [this.calculateDateFrom(), [Validators.required]],
       dateTo: [new Date(), [Validators.required]]
     });
   }
@@ -96,5 +96,11 @@ export class ReportsComponent implements OnInit, OnDestroy {
       dateFrom: this.dateService.convertDateToJavaLocalDate(this.getDateFromValue())!,
       dateTo: this.dateService.convertDateToJavaLocalDate(this.getDateToValue())!
     } as ReportData
+  }
+
+  private calculateDateFrom(): Date {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() - 7);
+    return currentDate;
   }
 }
