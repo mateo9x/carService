@@ -184,6 +184,9 @@ body {
 
 .mat-select-label {
   color: var(--router-text-color) !important;
+  border: 1px dashed var(--router-text-color);
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .mat-select-label .mat-mdc-select-placeholder {
