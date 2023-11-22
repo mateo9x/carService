@@ -8,8 +8,8 @@
   --main-text-color: white;
   --router-bg-color: white;
   --router-text-color: white;
-  --checkbox-border-color: #27919a;
-  --mat-icon-color: #27919a;
+  --checkbox-border-color: #104a6e;
+  --mat-icon-color: #104a6e;
   --mat-stepper-header-edit-state-icon-background-color: var(--main-bg-color) !important;
   --mat-stepper-header-done-state-icon-background-color: var(--main-bg-color) !important;
   --mat-stepper-header-selected-state-icon-background-color: var(--main-bg-color) !important;
@@ -239,11 +239,15 @@ mat-icon:hover {
 .checkbox-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 h4 {
   text-align: center;
   font-family: Orbitron, Roboto, sans-serif;
   color: var(--router-text-color);
+}
+
+mat-select, mat-form-field {
+  width: 300px;
 }

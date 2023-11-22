@@ -41,3 +41,10 @@ my-insurance-card {
   bottom: 1%;
   left: 50%;
 }
+
+// MEDIA
+@media (max-width: 800px) {
+  .button-container {
+    left: unset;
+  }
+}
