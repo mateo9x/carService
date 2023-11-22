@@ -39,3 +39,11 @@
 mat-icon {
   transform: scale(1);
 }
+
+// MEDIA
+
+@media (max-width: 800px) {
+  .container {
+    flex-direction: column;
+  }
+}
