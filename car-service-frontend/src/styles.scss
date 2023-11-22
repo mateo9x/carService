@@ -91,8 +91,8 @@ body {
 }
 
 @font-face {
-  font-family: 'Orbitron';
-  src: url('../src/assets/fonts/Orbitron.ttf');
+  font-family: 'neuropol';
+  src: url('../src/assets/fonts/neuropol.otf');
 }
 
 /* ANGULAR MATERIAL */
@@ -236,7 +236,7 @@ mat-icon:hover {
 
 h4 {
   text-align: center;
-  font-family: Orbitron, Roboto, sans-serif;
+  font-family: neuropol, Roboto, sans-serif;
   color: var(--router-text-color);
 }
 

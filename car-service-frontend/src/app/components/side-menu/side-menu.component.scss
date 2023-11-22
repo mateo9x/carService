@@ -43,8 +43,9 @@
   color: #9999a9;
 }
 
-.list-item span {
-  font-family: Orbitron;
+.list-item span, .profile-container > span {
+  color: white;
+  font-family: neuropol, Roboto, sans-serif;
 }
 
 mat-icon {
@@ -71,11 +72,6 @@ mat-icon {
   justify-content: center;
   gap: 20px;
   padding: 10px;
-}
-
-.profile-container > span {
-  color: white;
-  font-family: 'Orbitron', 'Roboto', serif;
 }
 
 .icon-container {

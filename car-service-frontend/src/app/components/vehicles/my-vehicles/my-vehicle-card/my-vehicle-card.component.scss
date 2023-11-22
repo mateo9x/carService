@@ -5,6 +5,8 @@
   height: 100%;
   width: 100%;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+  padding: 10px 0;
+  border-radius: 10px;
 }
 
 .flex-container {
@@ -13,7 +15,7 @@
   justify-content: center;
   flex-direction: column;
   padding: 10px;
-  gap: 10px;
+  gap: 20px;
 }
 
 .icon-container {
