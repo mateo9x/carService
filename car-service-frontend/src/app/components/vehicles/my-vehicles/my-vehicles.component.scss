@@ -1,6 +1,8 @@
-.wrapper {
-  width: 100%;
-  height: 100%;
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   padding: 10px;
 }
 
@@ -24,4 +26,11 @@ my-vehicle-card {
   align-items: center;
   justify-content: center;
   font-weight: bold;
+}
+
+// MEDIA
+@media (max-width: 800px) {
+  .button-container {
+    left: unset;
+  }
 }
