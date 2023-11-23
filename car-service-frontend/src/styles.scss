@@ -91,8 +91,8 @@ body {
 }
 
 @font-face {
-  font-family: 'neuropol';
-  src: url('../src/assets/fonts/neuropol.otf');
+  font-family: 'Sansation';
+  src: url('../src/assets/fonts/Sansation_Regular.ttf');
 }
 
 /* ANGULAR MATERIAL */
@@ -236,7 +236,7 @@ mat-icon:hover {
 
 h4 {
   text-align: center;
-  font-family: neuropol, Roboto, sans-serif;
+  font-family: Sansation, Roboto, sans-serif;
   color: var(--router-text-color);
 }
 
