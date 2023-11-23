@@ -31,12 +31,6 @@ ngx-timeline {
   gap: 20px;
 }
 
-::ng-deep {
-  .icon {
-    background: var(--checkbox-border-color) !important;
-  }
-}
-
 .period-label-container {
   display: flex;
   align-items: center;
@@ -49,108 +43,16 @@ ngx-timeline {
   color: white;
 }
 
-.event-wrapper-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.event.enableAnimation {
-  border-radius: 10px
-}
-
-.event.enableAnimation:not(:hover) {
-  padding: 0;
-  transition: all .5s ease-in-out;
-  background-color: var(--router-bg-color);
-}
-
-.event.enableAnimation:hover {
-  padding: 1rem;
-  transition: all .5s ease-in-out;
-  background-color: var(--router-bg-color);
-}
-
-.event:not(.hour) {
-  background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0 3px 6px var(--router-text-color);
-}
-
-.event-container.reverse {
-  flex-direction: row-reverse;
-}
-
-.event-container .event-info-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0.1rem;
-  flex: 88 88 0;
-}
-
-.arrow.right {
-  filter: drop-shadow(2px 0px 0px rgba(36, 74, 110, .1333333333));
-  border-left: 0.5rem solid white;
-}
-
-.arrow {
-  width: 0;
-  height: 0;
-  border-top: 0.5rem solid transparent;
-  border-bottom: 0.5rem solid transparent;
-  border-radius: 6px;
-  z-index: 10;
-}
-
-.arrow.left {
-  filter: drop-shadow(-1px 0px 0px rgba(36, 74, 110, .1333333333));
-  border-right: 0.5rem solid white;
-}
-
-.event-title {
-  font-weight: bold;
-}
-
-.event-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 10px;
-  overflow-wrap: anywhere;
-}
-
-.event {
-  background: white;
-  border-radius: 0.8rem;
-  padding: 1rem;
-  width: 600px;
-  margin: 1rem 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  color: var(--router-text-color);
-}
-
 ::ng-deep {
+  .icon {
+    background: var(--checkbox-border-color) !important;
+  }
+
+  .event-container.reverse, .event.enableAnimation {
+    color: black;
+  }
+
   .center-icon-container {
     background: none !important;
-  }
-  .event-title {
-     color: var(--router-text-color) !important;
-   }
-
-  .event-description {
-    color: var(--router-text-color) !important;
-  }
-}
-
-// MEDIA
-
-@media (max-width: 800px) {
-  ngx-timeline {
-    padding: 10px;
-    margin: 0 auto;
-    width: calc(100vw - 60px);
   }
 }
