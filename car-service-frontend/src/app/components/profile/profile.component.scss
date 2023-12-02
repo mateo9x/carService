@@ -20,3 +20,16 @@
 a {
   color: var(--router-text-color);
 }
+
+// MEDIA
+
+@media (max-width: 800px) {
+  .menu-nav > a {
+    width: 100%;
+  }
+  .menu-nav {
+    height: auto;
+    flex-direction: column;
+    gap: 0;
+  }
+}

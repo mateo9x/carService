@@ -228,6 +228,11 @@ mat-icon:hover {
   background-size: 100% 1px;
 }
 
+.nav-link-active {
+  background-position: 100% 100%;
+  background-size: 100% 1px;
+}
+
 .checkbox-container {
   display: flex;
   align-items: center;
