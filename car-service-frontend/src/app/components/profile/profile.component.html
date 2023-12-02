@@ -1,7 +1,7 @@
 <div class="menu-nav">
-  <a class="nav-link" routerLink="about-me">O mnie</a>
-  <a class="nav-link" routerLink="update-password">Aktualizuj hasło</a>
-  <a class="nav-link" routerLink="preferences">Preferencje</a>
+  <a class="nav-link" routerLink="about-me" [routerLinkActive]="['nav-link-active']">O mnie</a>
+  <a class="nav-link" routerLink="update-password" [routerLinkActive]="['nav-link-active']">Aktualizuj hasło</a>
+  <a class="nav-link" routerLink="preferences" [routerLinkActive]="['nav-link-active']">Preferencje</a>
 </div>
 <div class="router-section">
   <router-outlet></router-outlet>

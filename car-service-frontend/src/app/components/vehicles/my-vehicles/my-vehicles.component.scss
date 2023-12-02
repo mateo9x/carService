@@ -18,7 +18,6 @@ my-vehicle-card {
 .button-container {
   position: absolute;
   bottom: 1%;
-  left: 50%;
 }
 
 #noVehicles {
@@ -26,11 +25,4 @@ my-vehicle-card {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-}
-
-// MEDIA
-@media (max-width: 800px) {
-  .button-container {
-    left: unset;
-  }
 }
