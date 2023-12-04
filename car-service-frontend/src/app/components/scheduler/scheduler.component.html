@@ -1,0 +1,68 @@
+<div class="container">
+  <h4>Terminarz</h4>
+
+  <div class="date-container">
+    <mat-icon class="arrows" (click)="previousMonth()" matTooltip="Poprzedni miesiąc">arrow_left</mat-icon>
+
+    <mat-form-field>
+      <mat-label>Data od</mat-label>
+      <input matInput [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom" disabled>
+      <mat-datepicker-toggle matIconSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFrom></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Data do</mat-label>
+      <input matInput [matDatepicker]="pickerTo" [(ngModel)]="dateTo" disabled>
+      <mat-datepicker-toggle matIconSuffix [for]="pickerTo"></mat-datepicker-toggle>
+      <mat-datepicker #pickerTo></mat-datepicker>
+    </mat-form-field>
+
+    <mat-icon class="arrows" (click)="nextMonth()" matTooltip="Następny miesiąc">arrow_right</mat-icon>
+
+  </div>
+
+  <table>
+    <ng-container *ngIf="tableData.length > 0; else noData">
+      <tr>
+        <ng-container *ngFor="let dayName of weekDayNames">
+          <td class="day-name">{{dayName}}</td>
+        </ng-container>
+      </tr>
+      <ng-container *ngFor="let row of getMaxRowNumber()">
+        <tr>
+          <ng-container *ngFor="let data of tableData; let i = index">
+            <ng-container *ngIf="data.row === row">
+              <tbody [class]="data.disabled? 'disabled': null" class="data-container">
+              <th class="day-number">{{ data.day }}</th>
+              <ng-container *ngFor="let event of data.events">
+                <tbody class="event-container">
+                <td class="event-info" (click)="openEditEvent(event, data.date)"><span>{{event.time}} {{event.info | titlecase}}</span></td>
+                <td class="event-icon-container">
+                  <mat-icon class="event-icon" *ngIf="event.notify" matTooltip="Alert włączony">notifications_on</mat-icon>
+                  <mat-icon class="event-icon" *ngIf="!event.notify" matTooltip="Alert wyłączony">notifications_off</mat-icon>
+                  <mat-icon class="event-icon" (click)="deleteConfirmDialog(event, data.date)" matTooltip="Usuń">delete_sweep</mat-icon>
+                </td>
+                </tbody>
+              </ng-container>
+              <td class="add-container">
+                <mat-icon class="add-icon" [class]="data.disabled? 'disabled': null"
+                          (click)="!data.disabled? openNewEvent(data.date) : null" *ngIf="!data.disabled">close
+                </mat-icon>
+              </td>
+              </tbody>
+            </ng-container>
+          </ng-container>
+        </tr>
+      </ng-container>
+
+    </ng-container>
+
+    <ng-template #noData>
+      <tr class="no-data-row">
+        <td class="padding_20"><strong>Wczytywanie danych nie powiodło się :(</strong></td>
+      </tr>
+    </ng-template>
+
+  </table>
+</div>

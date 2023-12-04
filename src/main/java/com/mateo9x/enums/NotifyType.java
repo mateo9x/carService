@@ -2,5 +2,6 @@ package com.mateo9x.enums;
 
 public enum NotifyType {
     INSURANCE,
-    INSPECTION
+    INSPECTION,
+    SCHEDULER_EVENT
 }

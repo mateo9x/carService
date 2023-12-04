@@ -14,6 +14,7 @@ import {MyInspectionsComponent} from './components/inspection/my-inspections/my-
 import {MyExpensesComponent} from './components/expension/my-expenses/my-expenses.component';
 import {ReportsComponent} from './components/reports/reports.component';
 import {TimelineComponent} from './components/timeline/timeline.component';
+import {SchedulerComponent} from './components/scheduler/scheduler.component';
 
 const ROUTES: Routes = [
   {
@@ -98,6 +99,12 @@ const ROUTES: Routes = [
     path: 'timeline',
     component: TimelineComponent,
     title: 'Oś czasu',
+    canActivate: [() => inject(AppGuard).isAuthenticated()]
+  },
+  {
+    path: 'scheduler',
+    component: SchedulerComponent,
+    title: 'Terminarz',
     canActivate: [() => inject(AppGuard).isAuthenticated()]
   },
   {
