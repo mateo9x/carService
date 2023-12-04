@@ -62,6 +62,12 @@ import {NgxTimelineModule} from '@frxjs/ngx-timeline';
 import {MatListModule} from '@angular/material/list';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MobileSideMenuComponent} from './components/side-menu/mobile/mobile-side-menu.component';
+import {SchedulerComponent} from './components/scheduler/scheduler.component';
+import {SchedulerAddDialogComponent} from './components/scheduler/scheduler-add-dialog/scheduler-add-dialog.component';
+import {
+  SchedulerEditDialogComponent
+} from './components/scheduler/scheduler-edit-dialog/scheduler-edit-dialog.component';
+import {NgxMaskDirective, provideEnvironmentNgxMask} from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -94,32 +100,36 @@ import {MobileSideMenuComponent} from './components/side-menu/mobile/mobile-side
     ConfirmDialogComponent,
     ReportsComponent,
     TimelineComponent,
-    MobileSideMenuComponent
+    MobileSideMenuComponent,
+    SchedulerComponent,
+    SchedulerAddDialogComponent,
+    SchedulerEditDialogComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        MatButtonModule,
-        MatInputModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatSnackBarModule,
-        MatProgressSpinnerModule,
-        MatMenuModule,
-        MatIconModule,
-        MatDialogModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatSelectModule,
-        MatTooltipModule,
-        MatCheckboxModule,
-        AttachmentPipe,
-        NgxTimelineModule,
-        MatListModule,
-        MatSlideToggleModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatCheckboxModule,
+    AttachmentPipe,
+    NgxTimelineModule,
+    MatListModule,
+    MatSlideToggleModule,
+    NgxMaskDirective
+  ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
     {
@@ -133,6 +143,7 @@ import {MobileSideMenuComponent} from './components/side-menu/mobile/mobile-side
     {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'},
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
+    provideEnvironmentNgxMask(),
     AppGuard, DatePipe],
   bootstrap: [AppComponent]
 })

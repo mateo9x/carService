@@ -1,0 +1,41 @@
+<form [formGroup]="form">
+  <h4>Dodaj wydarzenie</h4>
+  <mat-form-field>
+    <mat-label>Pojazd</mat-label>
+    <mat-select formControlName="vehicleId">
+      <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">
+        {{vehicle.brand}} {{vehicle.model}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="hasFormError('vehicleId','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Dzień</mat-label>
+    <input matInput formControlName="day"/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Czas</mat-label>
+    <input matInput mask="00:00" formControlName="time"/>
+    <mat-error *ngIf="hasFormError('time','required')">Pole wymagane</mat-error>
+    <mat-error *ngIf="hasFormError('time','format')">Nieprawidłowy format godziny</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Info</mat-label>
+    <textarea matInput formControlName="info"></textarea>
+    <mat-error *ngIf="hasFormError('info','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+
+  <div class="checkbox-container">
+    <mat-label>Powiadamiaj</mat-label>
+    <mat-checkbox formControlName="notify"></mat-checkbox>
+  </div>
+  <mat-form-field>
+    <mat-label>Alert przed [h]</mat-label>
+    <input matInput formControlName="notifyTimeBefore">
+    <mat-error *ngIf="hasFormError('notifyTimeBefore','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+  <div class="button-container">
+    <button mat-raised-button (click)="cancel()">Anuluj</button>
+    <button mat-raised-button (click)="addEvent()">Dodaj wydarzenie</button>
+  </div>
+</form>

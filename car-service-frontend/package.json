@@ -21,7 +21,9 @@
     "@angular/router": "^17.0.4",
     "@frxjs/ngx-timeline": "^17.0.1",
     "bootstrap": "^5.3.2",
+    "date-fns": "^3.0.0-alpha.2",
     "file-saver": "^2.0.5",
+    "ngx-mask": "^17.0.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"

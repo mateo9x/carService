@@ -65,6 +65,20 @@ public class MailService {
         }
     }
 
+    public void sendSchedulerEventNotify(UserDto user, String vehicleName) {
+        String userFullName = user.getFirstName() + " " + user.getLastName();
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("noreply@carservice.pl");
+        message.setTo(user.getEmail());
+        message.setSubject("Car Service - Przypomnienie");
+        message.setText("Witaj " + userFullName + String.format("!\n\nZbliża się termin wydarzenia dla pojazdu %s.\n\nPozdrawiamy :)", vehicleName));
+        try {
+            javaMailSender.send(message);
+        } catch (Exception e) {
+            log.warn("Nie udało się wysłać maila dotyczącego przypomnienia dla użytkownika: {} i pojazdu: {}, z powodu: {}", user.getEmail(), vehicleName, e.getMessage());
+        }
+    }
+
     public void sendInsuranceNotify(UserDto user, LocalDate upcomingPaymentDeadline, String vehicleName) {
         String userFullName = user.getFirstName() + " " + user.getLastName();
         SimpleMailMessage message = new SimpleMailMessage();
