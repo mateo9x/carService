@@ -169,4 +169,8 @@ export class SchedulerComponent {
     this.dateTo = new Date(this.dateFrom.getFullYear(), this.dateFrom.getMonth() + 1, 0);
     this.getSchedulesForSelectedWeek();
   }
+
+  isMobile(): boolean {
+    return window.innerWidth < 800;
+  }
 }
