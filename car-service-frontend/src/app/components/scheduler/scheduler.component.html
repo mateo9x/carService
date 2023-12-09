@@ -24,7 +24,7 @@
 
   <table>
     <ng-container *ngIf="tableData.length > 0; else noData">
-      <tr>
+      <tr *ngIf="!isMobile()">
         <ng-container *ngFor="let dayName of weekDayNames">
           <td class="day-name">{{dayName}}</td>
         </ng-container>
