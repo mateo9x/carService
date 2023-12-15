@@ -68,6 +68,7 @@ import {
   SchedulerEditDialogComponent
 } from './components/scheduler/scheduler-edit-dialog/scheduler-edit-dialog.component';
 import {NgxMaskDirective, provideEnvironmentNgxMask} from 'ngx-mask';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -128,7 +129,8 @@ import {NgxMaskDirective, provideEnvironmentNgxMask} from 'ngx-mask';
     NgxTimelineModule,
     MatListModule,
     MatSlideToggleModule,
-    NgxMaskDirective
+    NgxMaskDirective,
+    MatBadgeModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},

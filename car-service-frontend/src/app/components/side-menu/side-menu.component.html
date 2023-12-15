@@ -51,6 +51,8 @@
     </div>
     <div class="profile-container">
       <span>{{user.firstName}} {{user.lastName}}</span>
+      <mat-icon [matBadge]="annotations.length" *ngIf="annotations.length > 0" matTooltip="Powiadomienia">notifications_on</mat-icon>
+      <mat-icon matBadge="0" *ngIf="annotations.length === 0" matTooltip="Brak powiadomień" aria-hidden="false">notifications_off</mat-icon>
     </div>
   </div>
 </div>
