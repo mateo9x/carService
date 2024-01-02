@@ -14,4 +14,5 @@ export class NotifiesComponent {
   close() {
     this.closeEmit.emit();
   }
+
 }

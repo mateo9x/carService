@@ -7,10 +7,6 @@
   height: 100%;
 }
 
-side-menu {
-  width: inherit;
-}
-
 .router-section {
   padding: 20px;
   height: 100%;
@@ -46,7 +42,14 @@ side-menu {
 
 notifies {
   position: absolute;
-  z-index: 100;
+  z-index: 1000;
+  left: 280px;
+  top: 10px;
+  padding: 10px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
+  width: calc(100vw - 280px);
+  border-radius: 10px;
+  background-color: var(--router-bg-color);
 }
 
 // MOBILE
@@ -59,5 +62,11 @@ notifies {
   .router-section {
     width: calc(100% - 60px);
     padding: 0;
+  }
+
+  notifies {
+    left: 0;
+    top: 0;
+    width: 100vw;
   }
 }
