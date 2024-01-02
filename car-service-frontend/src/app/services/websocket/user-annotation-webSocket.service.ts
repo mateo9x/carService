@@ -1,43 +1,25 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Annotation} from '../../models/annotation.model';
-import {Stomp} from "@stomp/stompjs";
-import {environment} from '../../../environments/environment';
+import {WebSocketService} from './webSocket.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAnnotationWebSocketService {
-  notifiesObservable = new BehaviorSubject<Annotation[] | []>([]);
-  stompClient: any;
+  notifiesObservable = new BehaviorSubject<any[] | []>([]);
 
-  public connect(userId: string) {
+  constructor(private webSocketService: WebSocketService) {
+  }
 
-    const socket = new WebSocket(environment.webSocketUrl + '/stocks');
-    socket.onerror = (event) => console.log(event);
-    socket.onopen = (event) => console.log(event);
-    socket.onclose = (event) => console.log(event);
-    socket.onmessage = (event) => console.log(event);
-    this.stompClient = Stomp.over(socket);
-    const _this = this;
-    this.stompClient.debug = () => {
-    };
-    this.stompClient.connect({}, function () {
-      _this.sendMessage(userId);
-      _this.stompClient.subscribe('/ws/annotations', function (data: any) {
-        if (JSON.parse(data.body)) {
-          _this.pushAnnotations(JSON.parse(data.body));
-        }
-      });
+  public connect() {
+    this.webSocketService.connect('notifies');
+    this.webSocketService.data.subscribe({
+      next: (data) => this.notifiesObservable.next(data)
     });
   }
 
-  public sendMessage(userId: string) {
-    this.stompClient.send(
-      '/current/annotations',
-      {},
-      userId
-    );
+  public sendMessage(data: any) {
+    this.webSocketService.sendMessage(data);
   }
 
   public pushAnnotations(data: any) {
@@ -45,7 +27,7 @@ export class UserAnnotationWebSocketService {
   }
 
   public disconnect() {
-    this.stompClient.disconnect();
+    this.webSocketService.disconnect();
   }
 
 }

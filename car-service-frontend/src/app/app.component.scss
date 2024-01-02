@@ -44,6 +44,11 @@ side-menu {
   --mdc-circular-progress-active-indicator-color: var(--checkbox-border-color);
 }
 
+notifies {
+  position: absolute;
+  z-index: 100;
+}
+
 // MOBILE
 
 @media (max-width: 800px) {

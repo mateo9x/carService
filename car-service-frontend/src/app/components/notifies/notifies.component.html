@@ -1,0 +1,6 @@
+<div class="wrapper">
+  <ng-container *ngFor="let notify of notifies">
+    {{ notify }}
+  </ng-container>
+  <mat-icon [fontIcon]="'close'" (click)="close()"></mat-icon>
+</div>

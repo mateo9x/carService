@@ -41,6 +41,8 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**")
                         .permitAll()
+                        .requestMatchers("/notifies/**")
+                        .permitAll()
                         .requestMatchers("/**")
                         .authenticated()
                 )
