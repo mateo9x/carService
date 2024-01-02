@@ -1,41 +1,42 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {AuthenticationService} from '../../services/authentication.service';
 import {MatDialog} from '@angular/material/dialog';
 import {User} from '../../models/user.model';
-import {UserAnnotationWebSocketService} from '../../services/websocket/user-annotation-webSocket.service';
-import {Annotation} from '../../models/annotation.model';
 
 @Component({
   selector: 'side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss']
 })
-export class SideMenuComponent implements OnInit {
+export class SideMenuComponent {
   @Input()
   user!: User;
   @Input()
   darkMode!: boolean;
+  @Input()
+  amountOfNotifies!: number;
   @Output()
   themeChangeEmit: EventEmitter<boolean> = new EventEmitter<boolean>();
-  annotations: Annotation[] = [];
+  @Output()
+  openNotifyDialogEmit: EventEmitter<void> = new EventEmitter<void>();
+  @Output()
+  logoutEmit: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private authenticationService: AuthenticationService,
-              private dialog: MatDialog,
-              private webSocketService: UserAnnotationWebSocketService) {
-  }
-
-  ngOnInit() {
-    this.webSocketService.notifiesObservable.subscribe({
-      next: (annotations) => this.annotations = annotations
-    })
+              private dialog: MatDialog) {
   }
 
   logout() {
+    this.logoutEmit.emit();
     this.authenticationService.logout();
     this.dialog.closeAll();
   }
 
   changeTheme(value: boolean) {
     this.themeChangeEmit.emit(value);
+  }
+
+  openNotifies() {
+    this.openNotifyDialogEmit.emit();
   }
 }

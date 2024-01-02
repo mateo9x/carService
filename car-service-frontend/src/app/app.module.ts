@@ -69,6 +69,7 @@ import {
 } from './components/scheduler/scheduler-edit-dialog/scheduler-edit-dialog.component';
 import {NgxMaskDirective, provideEnvironmentNgxMask} from 'ngx-mask';
 import {MatBadgeModule} from '@angular/material/badge';
+import {NotifiesComponent} from './components/notifies/notifies.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MobileSideMenuComponent,
     SchedulerComponent,
     SchedulerAddDialogComponent,
-    SchedulerEditDialogComponent
+    SchedulerEditDialogComponent,
+    NotifiesComponent
   ],
   imports: [
     BrowserModule,

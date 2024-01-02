@@ -27,6 +27,10 @@
   </mat-nav-list>
   <mat-divider></mat-divider>
   <div class="bottom-container">
+    <div class="notify-container">
+      <mat-icon [matBadge]="amountOfNotifies" *ngIf="amountOfNotifies > 0" matTooltip="Powiadomienia" aria-hidden="false" (click)="openNotifies()">notifications_on</mat-icon>
+      <mat-icon matBadge="0" *ngIf="amountOfNotifies === 0" matTooltip="Brak powiadomień" aria-hidden="false">notifications_off</mat-icon>
+    </div>
     <mat-nav-list class="nav-list">
       <mat-list-item class="list-item" routerLink="profile" [routerLinkActive]="['is-active']">
         <mat-icon [fontIcon]="'person'"></mat-icon>
@@ -38,7 +42,5 @@
     <div class="slide-container">
       <mat-slide-toggle (change)="changeTheme($event.checked)" [(ngModel)]="darkMode"></mat-slide-toggle>
     </div>
-    <mat-icon [matBadge]="annotations.length" *ngIf="annotations.length > 0" matTooltip="Powiadomienia" aria-hidden="false">notifications_on</mat-icon>
-    <mat-icon matBadge="0" *ngIf="annotations.length === 0" matTooltip="Brak powiadomień" aria-hidden="false">notifications_off</mat-icon>
   </div>
 </div>
