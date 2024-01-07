@@ -43,6 +43,8 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers("/notifies/**")
                         .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/vehicle-coordinates")
+                        .permitAll()
                         .requestMatchers("/**")
                         .authenticated()
                 )
