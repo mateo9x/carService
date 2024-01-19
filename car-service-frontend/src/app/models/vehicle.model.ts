@@ -9,6 +9,7 @@ export class Vehicle {
   engineType: string;
   transmissionType: string;
   purchaseMileage: number;
+  active?: boolean;
 
   constructor(brand: string, model: string, productionYear: number, licensePlate: string, vin: string, purchaseDate: string, engineType: string, transmissionType: string, purchaseMileage: number, id?: string) {
     this.brand = brand;
