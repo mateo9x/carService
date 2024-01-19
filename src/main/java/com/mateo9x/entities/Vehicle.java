@@ -25,4 +25,5 @@ public class Vehicle {
     private String engineType;
     private String transmissionType;
     private Long purchaseMileage;
+    private Boolean active;
 }

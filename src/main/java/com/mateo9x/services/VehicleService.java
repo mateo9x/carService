@@ -54,10 +54,29 @@ public class VehicleService {
     }
 
     public Vehicle getVehicleById(String vehicleId) {
-       return vehicleRepository.findById(vehicleId).orElse(null);
+        return vehicleRepository.findById(vehicleId).orElse(null);
+    }
+
+    public void setVehicleAsActive(String vehicleId) {
+        List<Vehicle> myVehicles = getMyVehicles();
+        myVehicles.stream()
+                .filter(vehicle -> Boolean.TRUE.equals(vehicle.getActive()))
+                .findFirst()
+                .ifPresent(vehicle -> updateVehicleActiveStatus(vehicle, false));
+
+        myVehicles.stream()
+                .filter(vehicle -> vehicleId.equals(vehicle.getId()))
+                .findFirst()
+                .ifPresent(vehicle -> updateVehicleActiveStatus(vehicle, true));
+
     }
 
     private void getUserVehicles(List<Vehicle> vehicles, User user) {
         vehicles.addAll(user.getVehicles().stream().filter(Objects::nonNull).toList());
+    }
+
+    private void updateVehicleActiveStatus(Vehicle vehicle, boolean active) {
+        vehicle.setActive(active);
+        vehicleRepository.save(vehicle);
     }
 }

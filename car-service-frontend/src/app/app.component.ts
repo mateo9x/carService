@@ -109,11 +109,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.webSocketService.connect();
   }
 
-  logout() {
-    this.closeNotifyDialog();
-    this.closeUserAnnotationWebSocket();
-  }
-
   closeUserAnnotationWebSocket() {
     this.webSocketService.disconnect();
   }

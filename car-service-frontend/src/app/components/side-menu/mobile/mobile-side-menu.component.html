@@ -18,6 +18,10 @@
     <mat-list-item class="list-item" routerLink="timeline" [routerLinkActive]="['is-active']">
       <mat-icon [fontIcon]="'timeline'"></mat-icon>
     </mat-list-item>
+    <mat-list-item class="list-item" routerLink="map" [routerLinkActive]="['is-active']">
+      <span>Mapa</span>
+      <mat-icon [fontIcon]="'map'"></mat-icon>
+    </mat-list-item>
     <mat-list-item class="list-item" routerLink="scheduler" [routerLinkActive]="['is-active']">
       <mat-icon [fontIcon]="'calendar_month'"></mat-icon>
     </mat-list-item>
@@ -27,10 +31,6 @@
   </mat-nav-list>
   <mat-divider></mat-divider>
   <div class="bottom-container">
-    <div class="notify-container">
-      <mat-icon [matBadge]="amountOfNotifies" *ngIf="amountOfNotifies > 0" matTooltip="Powiadomienia" aria-hidden="false" (click)="openNotifies()">notifications_on</mat-icon>
-      <mat-icon matBadge="0" *ngIf="amountOfNotifies === 0" matTooltip="Brak powiadomień" aria-hidden="false">notifications_off</mat-icon>
-    </div>
     <mat-nav-list class="nav-list">
       <mat-list-item class="list-item" routerLink="profile" [routerLinkActive]="['is-active']">
         <mat-icon [fontIcon]="'person'"></mat-icon>

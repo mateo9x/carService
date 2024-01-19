@@ -7,11 +7,9 @@
     <div class="authenticated-router">
       <div class="side-menu">
         <mobile-side-menu [darkMode]="darkMode" (themeChangeEmit)="changeTheme($event)"
-                          (openNotifyDialogEmit)="openNotifyMenu()" (logoutEmit)="logout()"
-                          [amountOfNotifies]="notifies.length" *ngIf="isMobile"></mobile-side-menu>
+                          (openNotifyDialogEmit)="openNotifyMenu()" *ngIf="isMobile"></mobile-side-menu>
         <side-menu [user]="userLogged" [darkMode]="darkMode" (themeChangeEmit)="changeTheme($event)"
-                   (openNotifyDialogEmit)="openNotifyMenu()" (logoutEmit)="logout()"
-                   [amountOfNotifies]="notifies.length" *ngIf="!isMobile"></side-menu>
+                   (openNotifyDialogEmit)="openNotifyMenu()" *ngIf="!isMobile"></side-menu>
       </div>
       <div class="router-section">
         <router-outlet></router-outlet>
