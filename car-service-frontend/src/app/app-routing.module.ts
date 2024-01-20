@@ -15,6 +15,7 @@ import {MyExpensesComponent} from './components/expension/my-expenses/my-expense
 import {ReportsComponent} from './components/reports/reports.component';
 import {TimelineComponent} from './components/timeline/timeline.component';
 import {SchedulerComponent} from './components/scheduler/scheduler.component';
+import {MapComponent} from "./components/map/map.component";
 
 const ROUTES: Routes = [
   {
@@ -108,6 +109,12 @@ const ROUTES: Routes = [
     canActivate: [() => inject(AppGuard).isAuthenticated()]
   },
   {
+    path: 'map',
+    component: MapComponent,
+    title: 'Mapa',
+    canActivate: [() => inject(AppGuard).isAuthenticated()]
+  },
+  {
     path: '**',
     component: NotFoundComponent,
     title: 'Strona nie znaleziona'
@@ -115,7 +122,7 @@ const ROUTES: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(ROUTES)],
+  imports: [RouterModule.forRoot(ROUTES, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
