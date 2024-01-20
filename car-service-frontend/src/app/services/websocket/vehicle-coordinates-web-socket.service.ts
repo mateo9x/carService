@@ -5,8 +5,9 @@ import {WebSocketService} from './webSocket.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserAnnotationWebSocketService {
-  notifiesObservable = new BehaviorSubject<any[] | []>([]);
+export class VehicleCoordinatesWebSocketService {
+  private vehicleCoordinatesObservable = new BehaviorSubject<any[] | []>([]);
+  vehicleCoordinates$ = this.vehicleCoordinatesObservable.asObservable();
 
   constructor(private webSocketService: WebSocketService) {
   }
@@ -14,7 +15,7 @@ export class UserAnnotationWebSocketService {
   public connect() {
     this.webSocketService.connect('notifies');
     this.webSocketService.data.subscribe({
-      next: (data) => this.notifiesObservable.next(data)
+      next: (data) => this.vehicleCoordinatesObservable.next(data)
     });
   }
 
@@ -23,7 +24,7 @@ export class UserAnnotationWebSocketService {
   }
 
   public pushAnnotations(data: any) {
-    this.notifiesObservable.next(data);
+    this.vehicleCoordinatesObservable.next(data);
   }
 
   public disconnect() {

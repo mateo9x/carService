@@ -12,8 +12,6 @@ export class MobileSideMenuComponent {
   darkMode!: boolean;
   @Output()
   themeChangeEmit: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output()
-  openNotifyDialogEmit: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private authenticationService: AuthenticationService,
               private dialog: MatDialog) {
