@@ -27,7 +27,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final AuthenticationFacade authenticationFacade;
     private final UserConverter userConverter;
     private final MailService mailService;
 
@@ -47,14 +46,14 @@ public class UserService {
     }
 
     public void addVehicleToLoggedUser(Vehicle vehicle) {
-        Optional<User> userOptional = findUserByEmail(authenticationFacade.getCurrentUser().getUsername());
+        Optional<User> userOptional = findUserByEmail(AuthenticationFacade.getCurrentUser().getUsername());
         userOptional.ifPresentOrElse(user -> addVehicleToLoggedUser(user, vehicle), () -> {
             throw new UsernameNotFoundException("Użytkownik nie został znaleziony!");
         });
     }
 
     public void updatePassword(String newPassword) {
-        Optional<User> userOptional = findUserByEmail(authenticationFacade.getCurrentUser().getUsername());
+        Optional<User> userOptional = findUserByEmail(AuthenticationFacade.getCurrentUser().getUsername());
         userOptional.ifPresentOrElse(user -> updatePassword(user, newPassword), () -> {
             throw new UsernameNotFoundException("Użytkownik nie został znaleziony!");
         });
@@ -86,8 +85,7 @@ public class UserService {
     }
 
     public Optional<User> getUserLogged() {
-        String email = authenticationFacade.getCurrentUser().getUsername();
-        return userRepository.findByEmail(email);
+        return userRepository.findByEmail(AuthenticationFacade.getCurrentUsername().orElse(null));
     }
 
     public List<UserDto> getAllUsers() {

@@ -1,5 +1,28 @@
 <div class="container">
-
+  <div class="vehicle-container">
+    <div class="vehicle-title-container">
+      <h4>Dane pojazdów</h4>
+      <mat-icon [fontIcon]="'expand_more'" (click)="togglePanel()" matTooltip="Rozwiń"
+                *ngIf="!panelExpanded"></mat-icon>
+      <mat-icon [fontIcon]="'expand_less'" (click)="togglePanel()" *ngIf="panelExpanded"></mat-icon>
+    </div>
+    <div *ngIf="panelExpanded" class="vehicle-data-container">
+      <div class="bg-white columns-container">
+        <h5>Nazwa pojazdu</h5>
+        <h5>Szerokość geograficzna</h5>
+        <h5>Długość geograficzna</h5>
+        <h5>Czas</h5>
+      </div>
+      <div class="coordinate-container" *ngFor="let coordinate of vehicleCoordinates | keyvalue">
+        <div class="bg-white coordinate-child-container" *ngFor="let dataCoordinate of coordinate.value">
+          <span>{{ getVehicleName(coordinate.key) }}</span>
+          <span>{{ dataCoordinate.latitude }}</span>
+          <span>{{ dataCoordinate.longitude }}</span>
+          <span>{{ dataCoordinate.time }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="map-container">
     <div class="map-frame">
       <div id="map"></div>

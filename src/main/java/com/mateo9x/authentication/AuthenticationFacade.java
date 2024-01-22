@@ -20,12 +20,17 @@ public class AuthenticationFacade {
     private final AuthenticationManager authenticationManager;
     private final UserAuthenticationService userAuthenticationService;
 
-    public AuthenticatedUser getCurrentUser() {
+    public static AuthenticatedUser getCurrentUser() {
         return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
                 .filter(authentication -> !(authentication instanceof AnonymousAuthenticationToken))
                 .map(Authentication::getPrincipal)
                 .map(AuthenticatedUser.class::cast)
                 .orElse(null);
+    }
+
+    public static Optional<String> getCurrentUsername() {
+        return Optional.ofNullable(getCurrentUser())
+                .map(AuthenticatedUser::getUsername);
     }
 
     public JwtTokenResponse authenticate(AuthenticationRequest request) {

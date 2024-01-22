@@ -2,29 +2,23 @@ package com.mateo9x.authentication;
 
 import com.mateo9x.entities.InvalidJwtToken;
 import com.mateo9x.repositories.InvalidJwtTokenRepository;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.CompressionCodecs;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import jakarta.annotation.PostConstruct;
+import org.springframework.web.socket.WebSocketSession;
 
+import java.net.URI;
 import java.security.Key;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -34,6 +28,8 @@ import java.util.concurrent.TimeUnit;
 @AllArgsConstructor
 public final class JwtService {
     private static final String AUTHORIZATION_HEADER = "Authorization";
+    private static final String WS_AUTHORIZATION_PARAMETER = "token";
+    private static final String WS_AUTHORIZATION_QUERY = "token=";
     private static final String BEARER = "Bearer ";
     private static final Key KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private static final Long EXPIRATION_TIME = 86400000L;
@@ -97,10 +93,22 @@ public final class JwtService {
         }
     }
 
-    public String getJwtToken(HttpServletRequest httpServletRequest) {
+    public String getJwtTokenFromHeader(HttpServletRequest httpServletRequest) {
         return Optional.ofNullable(httpServletRequest.getHeader(AUTHORIZATION_HEADER))
                 .filter(header -> header.startsWith(BEARER))
                 .map(header -> header.substring(BEARER.length()))
+                .orElse(null);
+    }
+
+    public String getJwtTokenFromWebSocketUrl(HttpServletRequest httpServletRequest) {
+        return httpServletRequest.getParameter(WS_AUTHORIZATION_PARAMETER);
+    }
+
+    public String getJwtTokenFromWebSocketSession(WebSocketSession session) {
+        return Optional.ofNullable(session.getUri())
+                .map(URI::getQuery)
+                .filter(query -> query.startsWith(WS_AUTHORIZATION_QUERY))
+                .map(header -> header.substring(WS_AUTHORIZATION_QUERY.length() ))
                 .orElse(null);
     }
 

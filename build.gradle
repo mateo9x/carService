@@ -44,6 +44,8 @@ dependencies {
 	implementation 'org.apache.poi:poi-ooxml:5.2.0'
 	implementation 'com.itextpdf:itextpdf:5.5.13.3'
 	implementation 'e-iceblue:spire.xls:13.11.0'
+	implementation 'com.sun.mail:jakarta.mail:2.0.1'
+	implementation 'com.sun.activation:jakarta.activation:2.0.1'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'

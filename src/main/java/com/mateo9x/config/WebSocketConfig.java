@@ -1,5 +1,7 @@
 package com.mateo9x.config;
 
+import com.mateo9x.authentication.CarServiceUserDetailsService;
+import com.mateo9x.authentication.JwtService;
 import com.mateo9x.services.VehicleCoordinateService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -15,14 +17,17 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 public class WebSocketConfig implements WebSocketConfigurer {
 
     private final VehicleCoordinateService vehicleCoordinateService;
+    private final JwtService jwtService;
+    private final CarServiceUserDetailsService carServiceUserDetailsService;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(notifyWebSocketHandler(), "/notifies").setAllowedOrigins("*");
+        registry.addHandler(notifyWebSocketHandler(), "/notifies")
+                .setAllowedOrigins("*");
     }
 
     @Bean
     public WebSocketHandler notifyWebSocketHandler() {
-        return new NotifyWebSocketHandler(vehicleCoordinateService);
+        return new NotifyWebSocketHandler(vehicleCoordinateService, jwtService, carServiceUserDetailsService);
     }
 }

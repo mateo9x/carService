@@ -1,8 +1,8 @@
 package com.mateo9x.config;
 
 import com.mateo9x.authentication.AuthenticatedUser;
-import com.mateo9x.authentication.JwtService;
 import com.mateo9x.authentication.CarServiceUserDetailsService;
+import com.mateo9x.authentication.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import jakarta.servlet.FilterChain;
@@ -30,11 +30,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String jwt = jwtService.getJwtToken(request);
+        String jwt = jwtService.getJwtTokenFromHeader(request);
         if (jwt == null) {
-            filterChain.doFilter(request, response);
-            return;
+            String jwtFromWebSocket = jwtService.getJwtTokenFromWebSocketUrl(request);
+            if (jwtFromWebSocket == null) {
+                filterChain.doFilter(request, response);
+                return;
+            }
+            validate(request, response, filterChain, jwtFromWebSocket);
         }
+        if (jwt != null) {
+            validate(request, response, filterChain, jwt);
+        }
+    }
+
+    private void validate(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain, String jwt) throws IOException {
         try {
             log.debug("Validating JWT: " + jwt);
             Jws<Claims> claimsJws = jwtService.validateJwt(jwt);
