@@ -239,7 +239,7 @@ mat-icon:hover {
   justify-content: space-between;
 }
 
-h4 {
+h4, h5 {
   text-align: center;
   font-family: Sansation, Roboto, sans-serif;
   color: var(--router-text-color);
@@ -247,4 +247,8 @@ h4 {
 
 mat-select, mat-form-field {
   width: 300px;
+}
+
+.bg-white {
+  background: white;
 }

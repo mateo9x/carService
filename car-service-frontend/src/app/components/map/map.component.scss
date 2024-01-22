@@ -1,6 +1,66 @@
+.vehicle-container {
+  position: absolute;
+  top: 5px;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+  width: calc(100vw - 300px);
+  left: 290px;
+}
+
+.vehicle-title-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.vehicle-title-container > mat-icon {
+  transform: scale(1);
+}
+
+.vehicle-data-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 1001;
+  background: white;
+  width: 100%;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.columns-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.coordinate-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
+}
+
+.coordinate-child-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.coordinate-child-container:hover {
+  background: #373a41 ;
+  color: white;
+  cursor: pointer;
+}
+
+span + span {
+  margin-left: 5px;
+}
+
 .map-container {
   position: absolute;
-  top: 0;
+  top: 40px;
   left: 260px;
   right: 0;
   bottom: 0;
