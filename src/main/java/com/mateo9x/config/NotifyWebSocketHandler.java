@@ -1,7 +1,9 @@
 package com.mateo9x.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.mateo9x.authentication.AuthenticatedUser;
 import com.mateo9x.authentication.CarServiceUserDetailsService;
 import com.mateo9x.authentication.JwtService;
@@ -15,12 +17,14 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @AllArgsConstructor
 public class NotifyWebSocketHandler extends TextWebSocketHandler {
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = prepareObjectMapper();
     private final List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
     private final VehicleCoordinateService coordinateService;
     private final JwtService jwtService;
@@ -29,7 +33,6 @@ public class NotifyWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         authenticate(session);
-        objectMapper.registerModule(new JavaTimeModule());
         for (int i = 0; i < 1000; i++) {
             TextMessage message = new TextMessage(objectMapper.writeValueAsString(
                     coordinateService.getVehicleCoordinatesGrouped()));
@@ -52,5 +55,14 @@ public class NotifyWebSocketHandler extends TextWebSocketHandler {
         AuthenticatedUser authenticatedUser = carServiceUserDetailsService.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken.authenticated(authenticatedUser, authenticatedUser.getPassword(), authenticatedUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+    }
+
+    private static ObjectMapper prepareObjectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        JavaTimeModule javaTimeModule = new JavaTimeModule();
+        javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ISO_DATE_TIME));
+        mapper.registerModule(javaTimeModule);
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        return mapper;
     }
 }
