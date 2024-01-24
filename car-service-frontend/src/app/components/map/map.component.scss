@@ -24,8 +24,14 @@
   position: absolute;
   z-index: 1001;
   background: white;
+  opacity: 0.9;
   width: 100%;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.coordinate-child-container > * {
+  flex-grow: 1;
+  flex-basis: 0;
 }
 
 .columns-container {
@@ -49,7 +55,7 @@
 }
 
 .coordinate-child-container:hover {
-  background: #373a41 ;
+  background: #373a41;
   color: white;
   cursor: pointer;
 }
@@ -74,4 +80,19 @@ span + span {
 
 #map {
   height: 100%;
+}
+
+
+// MOBILE
+
+@media (max-width: 800px) {
+  .vehicle-container {
+    width: calc(100vw - 90px);
+    left: 80px;
+  }
+
+  .map-container {
+    width: calc(100vw - 90px);
+    left: 50px;
+  }
 }
