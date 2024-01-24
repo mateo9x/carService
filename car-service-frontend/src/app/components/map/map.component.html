@@ -7,19 +7,19 @@
       <mat-icon [fontIcon]="'expand_less'" (click)="togglePanel()" *ngIf="panelExpanded"></mat-icon>
     </div>
     <div *ngIf="panelExpanded" class="vehicle-data-container">
-      <div class="bg-white columns-container">
+      <div class="columns-container">
         <h4>Nazwa pojazdu</h4>
         <h4>Szerokość geograficzna</h4>
         <h4>Długość geograficzna</h4>
         <h4>Czas</h4>
       </div>
       <div class="coordinate-container" *ngFor="let coordinate of vehicleCoordinates">
-        <div class="bg-white coordinate-child-container" *ngFor="let dataCoordinate of coordinate.data"
-             (mouseenter)="onCoordinateSelect(dataCoordinate)" (mouseleave)="onCoordinateUnSelect()">
+        <div class="coordinate-child-container" *ngFor="let dataCoordinate of coordinate.data"
+             (mouseenter)="onCoordinateSelect(dataCoordinate, coordinate.vehicleName)" (mouseleave)="onCoordinateUnSelect()">
           <span>{{ coordinate.vehicleName }}</span>
-          <span>{{ dataCoordinate.latitude }}°</span>
-          <span>{{ dataCoordinate.longitude }}°</span>
-          <span>{{ dataCoordinate.time | date: 'YYYY-MM-dd HH:mm:SS' }}</span>
+          <span class="text-center">{{ dataCoordinate.latitude }}°</span>
+          <span class="text-right">{{ dataCoordinate.longitude }}°</span>
+          <span class="text-right">{{ dataCoordinate.time | date: 'YYYY-MM-dd HH:mm:SS' }}</span>
         </div>
       </div>
     </div>

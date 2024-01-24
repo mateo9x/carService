@@ -249,10 +249,14 @@ mat-select, mat-form-field {
   width: 300px;
 }
 
-.bg-white {
-  background: white;
-}
-
 .leaflet-shadow-pane {
   display: none !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }

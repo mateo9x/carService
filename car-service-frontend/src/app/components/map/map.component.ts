@@ -18,7 +18,6 @@ export class MapComponent implements OnInit, OnDestroy {
   map: any;
   vehicles: Vehicle[] = [];
   panelExpanded: boolean = false;
-  markers: Marker[] = [];
   markerOpened: Marker | null = null;
 
   constructor(private webSocketService: VehicleCoordinatesWebSocketService,
@@ -67,7 +66,7 @@ export class MapComponent implements OnInit, OnDestroy {
           const vehicleCoordinatesPerVehicle = vehicleCoordinates[key as keyof typeof vehicleCoordinates];
           const vehicleName = this.getVehicleName(key);
           this.vehicleCoordinates.push(new VehicleCoordinateWrapper(vehicleName, vehicleCoordinatesPerVehicle));
-          this.addMarkers(vehicleCoordinatesPerVehicle, vehicleName);
+          this.addMarker(vehicleCoordinatesPerVehicle[0], vehicleName);
         })
       }
     });
@@ -88,26 +87,25 @@ export class MapComponent implements OnInit, OnDestroy {
     return vehicle?.brand + ' ' + vehicle?.model;
   }
 
-  private addMarkers(vehicleCoordinates: VehicleCoordinate[], vehicleName: string): void {
-    this.markers = [];
-    vehicleCoordinates.forEach((coordinate) => {
+  private addMarker(coordinate: VehicleCoordinate, vehicleName: string, coordinateSelect?: boolean): void {
       const time = this.dateService.convertDateToJavaLocalDate(coordinate.time);
       const marker = L.marker(latLng(coordinate.latitude, coordinate.longitude))
         .bindPopup(`<b>Pojazd:</b> ${vehicleName}<br><b>Szerokość:</b> ${coordinate.latitude}°<br><b>Długość:</b> ${coordinate.longitude}°<br><b>Czas:</b> ${time}`)
         .addTo(this.map);
-      this.markers.push(marker);
-    });
+      if (coordinateSelect) {
+        this.markerOpened = marker;
+        marker.togglePopup();
+      }
   }
 
-  onCoordinateSelect(vehicleCoordinate: VehicleCoordinate) {
-    const markerFound = this.markers.find((marker) => marker.getLatLng().lng === vehicleCoordinate.longitude && marker.getLatLng().lat === vehicleCoordinate.latitude);
-    markerFound?.togglePopup();
-    this.markerOpened = markerFound!;
+  onCoordinateSelect(vehicleCoordinate: VehicleCoordinate, vehicleName: string) {
+    this.addMarker(vehicleCoordinate, vehicleName, true);
   }
 
   onCoordinateUnSelect() {
     if (this.markerOpened) {
       this.markerOpened?.togglePopup();
+      this.markerOpened.removeFrom(this.map);
       this.markerOpened = null;
     }
   }

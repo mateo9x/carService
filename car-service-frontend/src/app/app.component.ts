@@ -97,6 +97,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @HostListener('window:resize', ['$event'])
   isMobileView() {
-    this.isMobile = window.innerWidth < 800;
+    this.isMobile = window.innerWidth <= 800;
   }
 }
