@@ -12,4 +12,4 @@ With this application You can:
 - Generate report for selected vehicles, data range (Inspection, Insurance, Expension) and dates range
 - Configure annotations for upcoming oil inspections, services, insurances payments etc.
 
-Mails are send to #mail-microservice through Kafka which handles messages to be send.
+Mails are send to # mail-microservice through Kafka which handles messages to be send.
