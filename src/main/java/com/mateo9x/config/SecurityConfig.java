@@ -43,6 +43,8 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**")
                         .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/kafka/**")
+                        .permitAll()
                         .requestMatchers("/**")
                         .authenticated()
                 )
