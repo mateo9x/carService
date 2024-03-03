@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 /*
     Class preparing templates with messages and sending them on kafka to mail-microservice
@@ -28,11 +29,12 @@ public class MailService {
 
     public void sendResetPasswordUrl(User user) {
         String url = appProperties.getAppUrl() + "/(nonAuthenticated:new-password)?" + user.getResetPasswordToken();
-        String userFullName = user.getFirstName() + " " + user.getLastName();
         final String subject = EMAIL_SUBJECT_PREFIX + "Resetowanie hasła";
-        final String message = "Witaj " + userFullName + "!\n\nPoniżej znajduje się link do zresetowania hasła:\n\n" + url;
+        final Map<String, String> replacementStrings = Map.of("FIRSTNAME", user.getFirstName(),
+                "LASTNAME", user.getLastName(),
+                "RESET_PASSWORD_URL", url);
 
-        KafkaMailDto kafkaMailDto = prepareKafkaMail(user.getEmail(), subject, message, null);
+        KafkaMailDto kafkaMailDto = prepareKafkaMail(user.getEmail(), subject, null, "carservice/resetpassword", replacementStrings);
         sendMessageOnKafka(kafkaMailDto);
     }
 
@@ -41,7 +43,7 @@ public class MailService {
         final String subject = EMAIL_SUBJECT_PREFIX + "Rejestracja konta";
         final String message = "Witaj " + userFullName + "!\n\nTwoje konto w aplikacji Car Service zostało pomyślnie zarejestrowane.\n\nPozdrawiamy :)";
 
-        KafkaMailDto kafkaMailDto = prepareKafkaMail(user.getEmail(), subject, message, null);
+        KafkaMailDto kafkaMailDto = prepareKafkaMail(user.getEmail(), subject, message, null, null);
         sendMessageOnKafka(kafkaMailDto);
     }
 
@@ -50,7 +52,7 @@ public class MailService {
         final String subject = EMAIL_SUBJECT_PREFIX + "Przegląd";
         final String message = "Witaj " + userFullName + String.format("!\n\nZbliża się termin wykonania przeglądu pojazdu %s.\nNajbliższy przegląd przy przebiegu: %s\n\nPozdrawiamy :)", vehicleName, inspection.getNextServiceMileage().toString());
 
-        KafkaMailDto kafkaMailDto = prepareKafkaMail(user.getEmail(), subject, message, null);
+        KafkaMailDto kafkaMailDto = prepareKafkaMail(user.getEmail(), subject, message, null, null);
         sendMessageOnKafka(kafkaMailDto);
     }
 
@@ -59,7 +61,7 @@ public class MailService {
         final String subject = EMAIL_SUBJECT_PREFIX + "Przypomnienie";
         final String message = "Witaj " + userFullName + String.format("!\n\nZbliża się termin wydarzenia dla pojazdu %s.\n\nPozdrawiamy :)", vehicleName);
 
-        KafkaMailDto kafkaMailDto = prepareKafkaMail(user.getEmail(), subject, message, null);
+        KafkaMailDto kafkaMailDto = prepareKafkaMail(user.getEmail(), subject, message, null, null);
         sendMessageOnKafka(kafkaMailDto);
     }
 
@@ -68,7 +70,7 @@ public class MailService {
         final String subject = EMAIL_SUBJECT_PREFIX + "Ubezpieczenie";
         final String message = "Witaj " + userFullName + String.format("!\n\nZbliża się termin zapłaty ubezpieczenia dla pojazdu %s.\nData najbliższej spłaty: %s\n\nPozdrawiamy :)", vehicleName, upcomingPaymentDeadline);
 
-        KafkaMailDto kafkaMailDto = prepareKafkaMail(user.getEmail(), subject, message, null);
+        KafkaMailDto kafkaMailDto = prepareKafkaMail(user.getEmail(), subject, message, null, null);
         sendMessageOnKafka(kafkaMailDto);
     }
 
@@ -76,13 +78,14 @@ public class MailService {
         kafkaService.sendMessage(EMAIL_TOPIC_NAME, kafkaMailDto);
     }
 
-    private KafkaMailDto prepareKafkaMail(String to, String subject, String message, String templatePath) {
+    private KafkaMailDto prepareKafkaMail(String to, String subject, String message, String templatePath, Map<String, String> replacementStrings) {
         return KafkaMailDto.builder()
                 .from(EMAIL_FROM)
                 .to(to)
                 .subject(subject)
                 .message(message)
                 .templatePath(templatePath)
+                .replacementStrings(replacementStrings)
                 .build();
     }
 }
