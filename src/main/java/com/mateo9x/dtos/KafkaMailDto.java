@@ -10,4 +10,5 @@ public class KafkaMailDto {
     String to;
     String subject;
     String message;
+    String templatePath;
 }
