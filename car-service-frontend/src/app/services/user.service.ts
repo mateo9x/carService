@@ -4,6 +4,7 @@ import {UserApiService} from './api/user-api.service';
 import {SnackBarService, SnackBarType} from '../util/services/snack-bar.service';
 import {Router} from '@angular/router';
 import {SpinnerService} from '../util/services/spinner.service';
+import {Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -47,13 +48,15 @@ export class UserService {
     });
   }
 
-  startResetPasswordProcedure(email: string) {
+  startResetPasswordProcedure(email: string): Observable<boolean> {
+    let result = false;
     this.setSpinner(true);
     this.apiService.startResetPasswordProcedure(email).subscribe({
       next: () => {
         this.setSpinner(false);
         this.router.navigate(['']).then(() => this.snackBarService.openSnackBar('Link do odzyskania konta został wysłany na wskazany email', SnackBarType.SUCCESS));
-      },
+        result = true;
+        },
       error: (error) => {
         this.setSpinner(false);
         if (error.error) {
@@ -61,8 +64,10 @@ export class UserService {
         } else {
           this.snackBarService.openSnackBar('Nie udało się wygenerować próby resetu hasła', SnackBarType.ERROR);
         }
+        result = false;
       }
     });
+    return of(result);
   }
 
   isResetPasswordTokenValid(token: string) {

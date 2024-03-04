@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../../services/user.service';
+import {filter} from "rxjs";
 
 @Component({
   selector: 'reset-password',
@@ -9,6 +10,7 @@ import {UserService} from '../../../services/user.service';
 })
 export class ResetPasswordComponent {
   form: FormGroup;
+  mailSent = false;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService) {
@@ -20,7 +22,14 @@ export class ResetPasswordComponent {
   resetPassword() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      this.userService.startResetPasswordProcedure(this.getEmailControl().value);
+      const result = this.userService.startResetPasswordProcedure(this.getEmailControl().value);
+      result
+        .pipe(
+          filter((result) => result)
+        )
+        .subscribe({
+          next: () => this.mailSent = true
+        });
     }
   }
 
