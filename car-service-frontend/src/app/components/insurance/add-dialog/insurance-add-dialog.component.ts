@@ -33,17 +33,17 @@ export class InsuranceAddDialogComponent implements OnInit, OnDestroy {
   }
 
   startAcSubscription() {
-   this.acSubscription = this.formService.getAcControl(this.form).valueChanges.subscribe({
-     next: (value) => {
-       const acProtectionTypesControl = this.formService.getAcProtectionTypesControl(this.form);
-      if (value) {
-        acProtectionTypesControl.enable();
-      } else {
-        acProtectionTypesControl.setValue(null);
-        acProtectionTypesControl.disable();
+    this.acSubscription = this.formService.getAcControl(this.form).valueChanges.subscribe({
+      next: (value) => {
+        const acProtectionTypesControl = this.formService.getAcProtectionTypesControl(this.form);
+        if (value) {
+          acProtectionTypesControl.enable();
+        } else {
+          acProtectionTypesControl.setValue(null);
+          acProtectionTypesControl.disable();
+        }
       }
-     }
-   });
+    });
   }
 
   cancel() {
@@ -64,6 +64,7 @@ export class InsuranceAddDialogComponent implements OnInit, OnDestroy {
   setDateTo() {
     const newDateTo = new Date(this.formService.getDateFromControl(this.form).value);
     newDateTo.setFullYear(newDateTo.getFullYear() + 1, newDateTo.getMonth(), newDateTo.getDate());
+    newDateTo.setDate(newDateTo.getDate() - 1);
     const dateToControl = this.formService.getDateToControl(this.form);
     dateToControl.setValue(newDateTo)
   }
