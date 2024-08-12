@@ -31,7 +31,10 @@ export class DictionaryService {
         return [
           {label: 'PZU', value: 'PZU'},
           {label: 'Uniqa', value: 'UNIQA'},
-          {label: 'Link4', value: 'LINK4'}
+          {label: 'Link4', value: 'LINK4'},
+          {label: 'Warta', value: 'WARTA'},
+          {label: 'Tui', value: 'TUI'},
+          {label: 'Hdi', value: 'HDI'},
         ]
       case DictionaryType.LOAN_PARTS_AMOUNT:
         return [
