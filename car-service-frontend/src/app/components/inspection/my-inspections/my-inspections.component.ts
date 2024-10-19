@@ -72,17 +72,17 @@ export class MyInspectionsComponent implements OnInit {
     }
   }
 
-  deleteInspection(id: string) {
+  deleteInspection(inspection: Inspection) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Usuń przegląd',
-        message: 'Czy na pewno chcesz usunąć wybrany przegląd?'
+        message: `Czy na pewno chcesz usunąć wybrany przegląd (${inspection.date}) ?`
       }
     });
     dialogRef.afterClosed().subscribe({
       next: (value) => {
         if (value) {
-          this.inspectionService.deleteInspection(id).subscribe({
+          this.inspectionService.deleteInspection(inspection.id!).subscribe({
             next: () => {
               this.getInspectionsForVehicle(this.vehicleIdSelected as string);
               this.snackBarService.openSnackBar('Przegląd usunięty pomyślnie', SnackBarType.SUCCESS);

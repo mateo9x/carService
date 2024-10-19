@@ -18,7 +18,7 @@
   <ng-container *ngIf="expenses.length > 0;else noExpenses">
     <div class="my-expension-cards-container" *ngFor="let expension of expenses">
       <my-expension-card [expension]="expension"
-                         (deleteExpensionEmitter)="deleteExpension($event)"></my-expension-card>
+                         (deleteExpensionEmitter)="deleteExpension(expension)"></my-expension-card>
     </div>
   </ng-container>
 

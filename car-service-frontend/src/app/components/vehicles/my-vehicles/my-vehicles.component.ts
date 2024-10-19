@@ -85,17 +85,17 @@ export class MyVehiclesComponent implements OnInit {
       });
   }
 
-  deleteVehicle(id: string) {
+  deleteVehicle(vehicle: Vehicle) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Usuń pojazd',
-        message: 'Czy na pewno chcesz usunąć wybrany pojazd?'
+        message: `Czy na pewno chcesz usunąć wybrany pojazd ${vehicle.brand} ${vehicle.model} (${vehicle.licensePlate}) ?`
       }
     });
     dialogRef.afterClosed().subscribe({
       next: (value) => {
         if (value) {
-          this.vehicleService.deleteVehicle(id).subscribe({
+          this.vehicleService.deleteVehicle(vehicle.id!).subscribe({
             next: () => {
               this.snackBarService.openSnackBar('Pojazd usunięty pomyślnie', SnackBarType.SUCCESS);
               this.getMyVehicles();

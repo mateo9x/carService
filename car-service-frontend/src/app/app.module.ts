@@ -27,7 +27,7 @@ import {NotFoundComponent} from './components/handlers/not-found/not-found.compo
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {VehicleAddDialogComponent} from './components/vehicles/add-dialog/vehicle-add-dialog.component';
-import {DatePipe} from '@angular/common';
+import {DatePipe, NgOptimizedImage} from '@angular/common';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 import {ProfileComponent} from './components/profile/profile.component';
@@ -70,6 +70,7 @@ import {
 import {NgxMaskDirective, provideEnvironmentNgxMask} from 'ngx-mask';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MapComponent} from "./components/map/map.component";
+import {MyVehiclesGalleryComponent} from "./components/vehicles/gallery/my-vehicles-gallery.component";
 
 @NgModule({
   declarations: [
@@ -106,34 +107,36 @@ import {MapComponent} from "./components/map/map.component";
     SchedulerComponent,
     SchedulerAddDialogComponent,
     SchedulerEditDialogComponent,
-    MapComponent
+    MapComponent,
+    MyVehiclesGalleryComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatInputModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatIconModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSelectModule,
-    MatTooltipModule,
-    MatCheckboxModule,
-    AttachmentPipe,
-    NgxTimelineModule,
-    MatListModule,
-    MatSlideToggleModule,
-    NgxMaskDirective,
-    MatBadgeModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatMenuModule,
+        MatIconModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        MatTooltipModule,
+        MatCheckboxModule,
+        AttachmentPipe,
+        NgxTimelineModule,
+        MatListModule,
+        MatSlideToggleModule,
+        NgxMaskDirective,
+        MatBadgeModule,
+        NgOptimizedImage
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
     {

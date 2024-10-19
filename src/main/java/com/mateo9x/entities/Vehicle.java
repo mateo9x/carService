@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.net.URI;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -26,4 +28,6 @@ public class Vehicle {
     private String transmissionType;
     private Long purchaseMileage;
     private Boolean active;
+    private List<String> attachmentsNames;
+    private List<URI> attachmentsUri;
 }

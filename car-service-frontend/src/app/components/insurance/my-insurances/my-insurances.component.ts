@@ -72,17 +72,17 @@ export class MyInsurancesComponent implements OnInit {
     }
   }
 
-  deleteInsurance(id: string) {
+  deleteInsurance(insurance: Insurance) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Usuń ubezpieczenie',
-        message: 'Czy na pewno chcesz usunąć wybrane ubezpieczenie?'
+        message: `Czy na pewno chcesz usunąć wybrane ubezpieczenie ${insurance.company} (${insurance.dateFrom} - ${insurance.dateTo}) ?`
       }
     });
     dialogRef.afterClosed().subscribe({
       next: (value) => {
         if (value) {
-          this.insuranceService.deleteInsurance(id).subscribe({
+          this.insuranceService.deleteInsurance(insurance.id!).subscribe({
             next: () => {
               this.getInsurancesForVehicle(this.vehicleIdSelected as string);
               this.snackBarService.openSnackBar('Ubezpieczenie usunięte pomyślnie', SnackBarType.SUCCESS);

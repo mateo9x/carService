@@ -1,7 +1,8 @@
 package com.mateo9x.enums;
 
 public enum AttachmentType {
-    EXPENSION("expension/");
+    EXPENSION("expension/"),
+    VEHICLE("vehicle/");
 
     private final String value;
 

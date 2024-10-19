@@ -1,0 +1,34 @@
+<div class="container">
+  <h4>Galeria pojazdów</h4>
+  <div class="top-nav">
+    <mat-form-field>
+      <mat-select placeholder="Wybierz pojazd" (valueChange)="getGalleryForVehicle($event)">
+        <ng-container *ngIf="vehicles.length > 0; else noVehicles">
+          <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{ vehicle.brand }} {{ vehicle.model }}
+            ({{ vehicle.licensePlate }})
+          </mat-option>
+        </ng-container>
+        <ng-template #noVehicles>
+          <mat-option>Brak pojazdów</mat-option>
+        </ng-template>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <ng-container *ngIf="vehicleUris.length > 0; else noPhotos">
+    <ng-container *ngFor="let uri of vehicleUris">
+      <img [src]="uri" alt="" height="500" width="1000">
+    </ng-container>
+    </ng-container>
+    <ng-template #noPhotos>
+      <div>Brak zdjęć</div>
+    </ng-template>
+
+
+
+
+    <div class="button-container">
+      <button mat-raised-button (click)="openAddVehiclePhotosDialog()">Dodaj zdjęcia</button>
+    </div>
+
+</div>

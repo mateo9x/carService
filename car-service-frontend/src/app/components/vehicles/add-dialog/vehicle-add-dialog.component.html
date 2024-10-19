@@ -45,7 +45,7 @@
     <mat-label>Rodzaj silnika</mat-label>
     <mat-select formControlName="engineType">
       <mat-option *ngFor="let engineType of engineTypes" [value]="engineType.value">
-        {{engineType.label}}
+        {{ engineType.label }}
       </mat-option>
     </mat-select>
     <mat-error *ngIf="hasFormError('engineType','required')">Pole wymagane</mat-error>
@@ -54,7 +54,7 @@
     <mat-label>Rodzaj skrzyni</mat-label>
     <mat-select formControlName="transmissionType">
       <mat-option *ngFor="let transmissionType of transmissionTypes" [value]="transmissionType.value">
-        {{transmissionType.label}}
+        {{ transmissionType.label }}
       </mat-option>
     </mat-select>
     <mat-error *ngIf="hasFormError('transmissionType','required')">Pole wymagane</mat-error>
