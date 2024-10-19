@@ -7,9 +7,11 @@ import com.mateo9x.entities.Inspection;
 import com.mateo9x.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Map;
 
 /*
@@ -26,6 +28,7 @@ public class MailService {
 
     private final AppProperties appProperties;
     private final KafkaService kafkaService;
+    private final Environment environment;
 
     public void sendResetPasswordUrl(User user) {
         String url = appProperties.getAppUrl() + "/(nonAuthenticated:new-password)?" + user.getResetPasswordToken();
@@ -75,7 +78,10 @@ public class MailService {
     }
 
     private void sendMessageOnKafka(KafkaMailDto kafkaMailDto) {
-        kafkaService.sendMessage(EMAIL_TOPIC_NAME, kafkaMailDto);
+        Arrays.stream(environment.getActiveProfiles())
+                .filter("kafka"::equals)
+                .findFirst()
+                .ifPresent(profile -> kafkaService.sendMessage(EMAIL_TOPIC_NAME, kafkaMailDto));
     }
 
     private KafkaMailDto prepareKafkaMail(String to, String subject, String message, String templatePath, Map<String, String> replacementStrings) {
