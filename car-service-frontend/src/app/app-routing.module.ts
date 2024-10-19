@@ -16,6 +16,7 @@ import {ReportsComponent} from './components/reports/reports.component';
 import {TimelineComponent} from './components/timeline/timeline.component';
 import {SchedulerComponent} from './components/scheduler/scheduler.component';
 import {MapComponent} from "./components/map/map.component";
+import {MyVehiclesGalleryComponent} from "./components/vehicles/gallery/my-vehicles-gallery.component";
 
 const ROUTES: Routes = [
   {
@@ -70,6 +71,12 @@ const ROUTES: Routes = [
     path: 'my-vehicles',
     component: MyVehiclesComponent,
     title: 'Pojazdy',
+    canActivate: [() => inject(AppGuard).isAuthenticated()]
+  },
+  {
+    path: 'my-vehicles-gallery',
+    component: MyVehiclesGalleryComponent,
+    title: 'Galeria pojazdów',
     canActivate: [() => inject(AppGuard).isAuthenticated()]
   },
   {

@@ -41,6 +41,8 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers(HttpMethod.POST, "/vehicle-coordinates")
                         .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/attachments/{attachmentType}/{fileName}")
+                        .permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**")
                         .permitAll()
                         .requestMatchers("/**")

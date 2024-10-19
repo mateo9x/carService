@@ -72,17 +72,17 @@ export class MyExpensesComponent implements OnInit {
     }
   }
 
-  deleteExpension(id: string) {
+  deleteExpension(expension: Expension) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Usuń wydatek',
-        message: 'Czy na pewno chcesz usunąć wybrany wydatek?'
+        message: `Czy na pewno chcesz usunąć wybrany wydatek (${expension.amount} PLN) ?`
       }
     });
     dialogRef.afterClosed().subscribe({
       next: (value) => {
         if (value) {
-          this.expensionService.deleteExpension(id).subscribe({
+          this.expensionService.deleteExpension(expension.id!).subscribe({
             next: () => {
               this.getExpensesForVehicle(this.vehicleIdSelected as string);
               this.snackBarService.openSnackBar('Wydatek usunięty pomyślnie', SnackBarType.SUCCESS);
