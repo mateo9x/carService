@@ -10,7 +10,7 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class BrandsAndModelCacheFetchJob {
+public class BrandsAndModelFetchJob {
     private static final String BRAND_AND_MODEL_CACHE_NAME = "brandAndModels";
 
     private final DictionaryApiClientService apiClient;
