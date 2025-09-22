@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CacheController {
 
-    private final CarServiceCache<Object> carServiceCache;
+    private final CarServiceCache carServiceCache;
 
     @GetMapping("/{cacheKey}")
     public ResponseEntity<List<Object>> getCacheDictByKey(@PathVariable String cacheKey) {

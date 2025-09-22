@@ -4,7 +4,7 @@
     <mat-form-field>
       <mat-select placeholder="Wybierz pojazd" (valueChange)="getInsurancesForVehicle($event)">
         <ng-container *ngIf="vehicles.length > 0; else noVehicles">
-          <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{vehicle.brand}} {{vehicle.model}}
+          <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{vehicle.make}} {{vehicle.name}}
             ({{vehicle.licensePlate}})
           </mat-option>
         </ng-container>

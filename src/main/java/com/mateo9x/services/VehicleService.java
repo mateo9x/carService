@@ -50,7 +50,7 @@ public class VehicleService {
 
     public String getVehicleFullNameByVehicleId(String vehicleId) {
         Optional<Vehicle> vehicleOptional = vehicleRepository.findById(vehicleId);
-        return vehicleOptional.map(vehicle -> vehicle.getBrand() + " " + vehicle.getModel() + " (" + vehicle.getLicensePlate() + ")").orElse("");
+        return vehicleOptional.map(vehicle -> vehicle.getMake() + " " + vehicle.getName() + " (" + vehicle.getLicensePlate() + ")").orElse("");
     }
 
     public Vehicle getVehicleById(String vehicleId) {

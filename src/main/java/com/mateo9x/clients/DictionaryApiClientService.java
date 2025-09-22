@@ -1,10 +1,9 @@
 package com.mateo9x.clients;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mateo9x.clients.model.MakeNameDictResponse;
 import com.mongodb.BasicDBObject;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -16,27 +15,16 @@ import java.util.List;
 public class DictionaryApiClientService {
 
     private final RestClient modelsApiClient;
+    private final ObjectMapper objectMapper;
 
-    public List<BrandModelResponse> fetchBrandAndModels() {
-        return (List<BrandModelResponse>) modelsApiClient
+    public List<MakeNameDictResponse> fetchCarMakesAndNamesDict() {
+        Object response = modelsApiClient
                 .get()
                 .uri("/models/v2")
                 .retrieve()
                 .body(BasicDBObject.class)
                 .get("data");
-    }
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class BrandModelResponse {
-        private Long id;
-        @JsonProperty("make_id")
-        private Long brandId;
-        @JsonProperty("make")
-        private String brand;
-        @JsonProperty("name")
-        private String model;
+        return objectMapper.convertValue(response, new TypeReference<>() {});
     }
 
 }

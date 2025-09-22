@@ -1,23 +1,19 @@
 <form [formGroup]="form">
   <h4>Edytuj pojazd</h4>
   <mat-form-field>
-    <mat-select placeholder="Wybierz typ pojazdu" formControlName="type">
-      <mat-option *ngFor="let type of vehicleTypes" [value]="type.value">{{type.label}}
-      </mat-option>
-    </mat-select>
-    <mat-error *ngIf="hasFormError('type','required')">Pole wymagane</mat-error>
-  </mat-form-field>
-  <mat-form-field>
     <mat-label>Marka</mat-label>
-    <mat-select placeholder="Wybierz markę pojazdu" formControlName="brand">
-      <mat-option *ngFor="let brand of vehicleBrands" [value]="brand.value">{{brand.label}}
+    <mat-select placeholder="Wybierz markę pojazdu" formControlName="make" (selectionChange)="onCarMakeChange($event)">
+      <mat-option *ngFor="let make of vehicleMakes" [value]="make.make">{{make.make}}
       </mat-option>
     </mat-select>
     <mat-error *ngIf="hasFormError('brand','required')">Pole wymagane</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Model</mat-label>
-    <input matInput formControlName="model">
+    <mat-select placeholder="Wybierz model pojazdu" formControlName="name">
+      <mat-option *ngFor="let name of getCarNamesFiltered()" [value]="name.name">{{name.name}}
+      </mat-option>
+    </mat-select>
     <mat-error *ngIf="hasFormError('model','required')">Pole wymagane</mat-error>
   </mat-form-field>
   <mat-form-field>

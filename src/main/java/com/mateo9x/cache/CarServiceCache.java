@@ -9,11 +9,11 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class CarServiceCache<T> {
+public class CarServiceCache {
 
-    private final Cache<String, List<T>> CACHE = Caffeine.newBuilder().build();
+    private static final Cache<String, List<Object>> CACHE = Caffeine.newBuilder().build();
 
-    public List<T> getCacheValues(String cacheName) {
+    public List<Object> getCacheValues(String cacheName) {
         log.info("Getting cache for key: {}", cacheName);
         return CACHE.getIfPresent(cacheName);
     }
@@ -23,7 +23,7 @@ public class CarServiceCache<T> {
         CACHE.invalidate(cacheName);
     }
 
-    public void setCacheValues(String cacheName, List<T> values) {
+    public void setCacheValues(String cacheName, List<Object> values) {
         log.info("Setting cache for key: {}", cacheName);
         CACHE.put(cacheName, values);
     }

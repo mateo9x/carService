@@ -3,6 +3,9 @@ import {FormGroup} from '@angular/forms';
 import {VehicleAddDialogFormService} from './vehicle-add-dialog-form.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {DictionaryService, DictionaryType} from '../../../services/dictionary.service';
+import {CacheType} from "../../cache/cache-type.enum";
+import {CarMakeModel, CarNameModel} from "../../../models/brand-make.model";
+import {forkJoin} from "rxjs";
 
 @Component({
   selector: 'vehicle-add-dialog',
@@ -14,7 +17,9 @@ export class VehicleAddDialogComponent implements OnInit {
   todayDate = new Date();
   engineTypes = this.getDictionary(DictionaryType.ENGINE_TYPES);
   transmissionTypes = this.getDictionary(DictionaryType.TRANSMISSION_TYPES);
-  vehicleBrands: any[] = [];
+  vehicleMakes: CarMakeModel[] = [];
+  vehicleNames: CarNameModel[] = [];
+  makeValue: string = '';
 
   constructor(private dialogRef: MatDialogRef<any>,
               private formService: VehicleAddDialogFormService,
@@ -23,7 +28,13 @@ export class VehicleAddDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dictionaryService.getCachedDictionary('brands').subscribe((values) => this.vehicleBrands = values)
+    forkJoin([
+      this.dictionaryService.getCachedDictionary(CacheType.CAR_MAKES),
+      this.dictionaryService.getCachedDictionary(CacheType.CAR_NAMES)
+    ]).subscribe(([makes, names]: [CarMakeModel[], CarNameModel[]]) => {
+      this.vehicleMakes = makes;
+      this.vehicleNames = names;
+    })
   }
 
   cancel() {
@@ -46,6 +57,18 @@ export class VehicleAddDialogComponent implements OnInit {
     const minYear = this.formService.getProductionYearControl(this.form).value;
     date.setUTCFullYear(minYear, 0, 1);
     return date;
+  }
+
+  onCarMakeChange(makeSelected: any) {
+    this.makeValue = makeSelected?.value;
+  }
+
+  getCarNamesFiltered(): CarNameModel[] {
+    if (this.makeValue?.length > 0) {
+      const makeFound = this.vehicleMakes.find((make) => make.make === this.makeValue);
+      return this.vehicleNames.filter((carName) => carName.makeId === makeFound?.makeId);
+    }
+    return this.vehicleNames;
   }
 
   hasFormError(controlName: string, errorName: string) {

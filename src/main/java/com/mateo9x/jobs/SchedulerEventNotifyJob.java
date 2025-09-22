@@ -55,7 +55,7 @@ public class SchedulerEventNotifyJob {
     }
 
     private String prepareVehicleName(Vehicle vehicle) {
-        return vehicle.getBrand() + " " + vehicle.getModel() + " (" + vehicle.getLicensePlate() + ")";
+        return vehicle.getMake() + " " + vehicle.getName() + " (" + vehicle.getLicensePlate() + ")";
     }
 
     private boolean notifyHasBeenSentAlready(String inspectionId) {

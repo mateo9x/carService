@@ -89,7 +89,7 @@ export class MyVehiclesComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Usuń pojazd',
-        message: `Czy na pewno chcesz usunąć wybrany pojazd ${vehicle.brand} ${vehicle.model} (${vehicle.licensePlate}) ?`
+        message: `Czy na pewno chcesz usunąć wybrany pojazd ${vehicle.make} ${vehicle.name} (${vehicle.licensePlate}) ?`
       }
     });
     dialogRef.afterClosed().subscribe({

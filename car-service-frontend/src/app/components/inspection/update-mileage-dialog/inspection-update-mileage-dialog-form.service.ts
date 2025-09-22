@@ -16,8 +16,8 @@ export class InspectionUpdateMileageDialogFormService {
   getFormGroup(vehicle: Vehicle): FormGroup {
     return this.fb.group({
       vehicleId: [vehicle.id as string, [Validators.required]],
-      brand: [{value: vehicle.brand, disabled: true}, [Validators.required]],
-      model: [{value: vehicle.model, disabled: true}, [Validators.required]],
+      brand: [{value: vehicle.make, disabled: true}, [Validators.required]],
+      model: [{value: vehicle.name, disabled: true}, [Validators.required]],
       licensePlate: [{value: vehicle.licensePlate, disabled: true}, [Validators.required]],
       currentMileage: [null, [Validators.required]]
     });
