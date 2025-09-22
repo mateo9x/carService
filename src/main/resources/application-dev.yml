@@ -1,0 +1,9 @@
+#DB
+spring.data.mongodb.uri: mongodb://root:pass@localhost:27017/carService?authSource=admin
+server.servlet.context-path: /api/v1
+
+#KAFKA
+spring.kafka.producer.bootstrap-servers: localhost:9092
+
+#CUSTOM
+car-service.app-url: http://localhost:8080

@@ -29,7 +29,7 @@ export class MyVehicleCardComponent {
   }
 
   getDictionaryLabel(value: string, type: DictionaryType) {
-    return this.dictionaryService.getDictionary(type)
+    return this.dictionaryService.getDictEntry(type)
       .filter((dic) => dic.value === value)
       .map((dic) => dic.label);
   }

@@ -1,8 +1,18 @@
 <form [formGroup]="form">
   <h4>Edytuj pojazd</h4>
   <mat-form-field>
+    <mat-select placeholder="Wybierz typ pojazdu" formControlName="type">
+      <mat-option *ngFor="let type of vehicleTypes" [value]="type.value">{{type.label}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="hasFormError('type','required')">Pole wymagane</mat-error>
+  </mat-form-field>
+  <mat-form-field>
     <mat-label>Marka</mat-label>
-    <input matInput formControlName="brand">
+    <mat-select placeholder="Wybierz markę pojazdu" formControlName="brand">
+      <mat-option *ngFor="let brand of vehicleBrands" [value]="brand.value">{{brand.label}}
+      </mat-option>
+    </mat-select>
     <mat-error *ngIf="hasFormError('brand','required')">Pole wymagane</mat-error>
   </mat-form-field>
   <mat-form-field>

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {VehicleAddDialogFormService} from './vehicle-add-dialog-form.service';
 import {MatDialogRef} from '@angular/material/dialog';
@@ -9,16 +9,22 @@ import {DictionaryService, DictionaryType} from '../../../services/dictionary.se
   templateUrl: './vehicle-add-dialog.component.html',
   styleUrls: ['./vehicle-add-dialog.component.scss']
 })
-export class VehicleAddDialogComponent {
+export class VehicleAddDialogComponent implements OnInit {
   form: FormGroup;
   todayDate = new Date();
   engineTypes = this.getDictionary(DictionaryType.ENGINE_TYPES);
   transmissionTypes = this.getDictionary(DictionaryType.TRANSMISSION_TYPES);
+  vehicleTypes = this.getDictionary(DictionaryType.VEHICLE_TYPES);
+  vehicleBrands: any[] = [];
 
   constructor(private dialogRef: MatDialogRef<any>,
               private formService: VehicleAddDialogFormService,
               private dictionaryService: DictionaryService) {
     this.form = this.formService.getFormGroup();
+  }
+
+  ngOnInit() {
+    this.dictionaryService.getCachedDictionary('brands').subscribe((values) => this.vehicleBrands = values)
   }
 
   cancel() {
@@ -33,7 +39,7 @@ export class VehicleAddDialogComponent {
   }
 
   getDictionary(type: DictionaryType) {
-    return this.dictionaryService.getDictionary(type);
+    return this.dictionaryService.getDictEntry(type);
   }
 
   getMinPurchaseDate() {

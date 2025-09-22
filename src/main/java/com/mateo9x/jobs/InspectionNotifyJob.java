@@ -1,4 +1,4 @@
-package com.mateo9x.quartz;
+package com.mateo9x.jobs;
 
 import com.mateo9x.dtos.UserDto;
 import com.mateo9x.entities.Inspection;

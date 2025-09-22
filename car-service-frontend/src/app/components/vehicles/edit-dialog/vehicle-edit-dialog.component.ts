@@ -15,6 +15,8 @@ export class VehicleEditDialogComponent implements OnInit {
   todayDate = new Date();
   engineTypes = this.getDictionary(DictionaryType.ENGINE_TYPES);
   transmissionTypes = this.getDictionary(DictionaryType.TRANSMISSION_TYPES);
+  vehicleTypes = this.getDictionary(DictionaryType.VEHICLE_TYPES);
+  vehicleBrands: any[] = [];
 
   constructor(private dialogRef: MatDialogRef<any>,
               private formService: VehicleEditDialogFormService,
@@ -25,6 +27,7 @@ export class VehicleEditDialogComponent implements OnInit {
 
   ngOnInit() {
     this.formService.convertVehicleToForm(this.form, this.vehicle);
+    this.dictionaryService.getCachedDictionary('brands').subscribe((values) => this.vehicleBrands = values)
   }
 
   cancel() {
@@ -39,7 +42,7 @@ export class VehicleEditDialogComponent implements OnInit {
   }
 
   getDictionary(type: DictionaryType) {
-    return this.dictionaryService.getDictionary(type);
+    return this.dictionaryService.getDictEntry(type);
   }
 
   getMinPurchaseDate() {

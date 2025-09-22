@@ -15,6 +15,7 @@ export class VehicleEditDialogFormService {
   getFormGroup(): FormGroup {
     return this.fb.group({
       id: [null, [Validators.required]],
+      type: [null, [Validators.required, Validators.maxLength(100)]],
       brand: [null, [Validators.required, Validators.maxLength(100)]],
       model: [null, [Validators.required, Validators.maxLength(100)]],
       productionYear: [null, [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]],
@@ -29,6 +30,7 @@ export class VehicleEditDialogFormService {
 
   convertVehicleToForm(form: FormGroup, vehicle: Vehicle): void {
     this.getIdControl(form).setValue(vehicle.id);
+    this.getTypeControl(form).setValue(vehicle.type);
     this.getBrandControl(form).setValue(vehicle.brand);
     this.getModelControl(form).setValue(vehicle.model);
     this.getProductionYearControl(form).setValue(vehicle.productionYear);
@@ -42,6 +44,7 @@ export class VehicleEditDialogFormService {
 
   convertFormToVehicleRequest(form: FormGroup): Vehicle {
     const id = this.getIdControl(form).value;
+    const type = this.getTypeControl(form).value;
     const brand = this.getBrandControl(form).value;
     const model = this.getModelControl(form).value;
     const productionYear = this.getProductionYearControl(form).value;
@@ -53,11 +56,15 @@ export class VehicleEditDialogFormService {
     const engineType = this.getEngineTypeControl(form).value;
     const transmissionType = this.getTransmissionType(form).value;
     const purchaseMileage = this.getPurchaseMileageControl(form).value;
-    return new Vehicle(brand, model, productionYear, licensePlate, vin, purchaseDate, engineType, transmissionType, purchaseMileage, id);
+    return new Vehicle(type, brand, model, productionYear, licensePlate, vin, purchaseDate, engineType, transmissionType, purchaseMileage, id);
   }
 
   getIdControl(form: FormGroup): AbstractControl {
     return form.get('id') as AbstractControl;
+  }
+
+  getTypeControl(form: FormGroup): AbstractControl {
+    return form.get('type') as AbstractControl;
   }
 
   getBrandControl(form: FormGroup): AbstractControl {

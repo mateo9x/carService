@@ -18,6 +18,7 @@ public class Vehicle {
 
     @Id
     private String id;
+    private String type;
     private String brand;
     private String model;
     private Integer productionYear;
