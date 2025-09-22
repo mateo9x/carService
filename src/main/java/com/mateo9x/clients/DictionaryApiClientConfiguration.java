@@ -12,7 +12,7 @@ public class DictionaryApiClientConfiguration {
     public RestClient modelsApiClient() {
         return RestClient.builder()
                 .requestFactory(new HttpComponentsClientHttpRequestFactory())
-                .baseUrl("https://carapi.app/api/models/v2")
+                .baseUrl("https://carapi.app/api")
                 .build();
     }
 }

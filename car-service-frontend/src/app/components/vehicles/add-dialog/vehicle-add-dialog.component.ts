@@ -14,7 +14,6 @@ export class VehicleAddDialogComponent implements OnInit {
   todayDate = new Date();
   engineTypes = this.getDictionary(DictionaryType.ENGINE_TYPES);
   transmissionTypes = this.getDictionary(DictionaryType.TRANSMISSION_TYPES);
-  vehicleTypes = this.getDictionary(DictionaryType.VEHICLE_TYPES);
   vehicleBrands: any[] = [];
 
   constructor(private dialogRef: MatDialogRef<any>,
