@@ -25,14 +25,14 @@ export class MyInsuranceCardComponent {
   }
 
   getDictionaryLabel(value: string, dictionaryType: DictionaryType) {
-    const dictionary = this.dictionaryService.getDictionary(dictionaryType);
+    const dictionary = this.dictionaryService.getDictEntry(dictionaryType);
     return dictionary.filter((dic) => dic.value === value).map((dic) => dic.label);
   }
 
   getDictionaryLabels(values: string[], dictionaryType: DictionaryType) {
     let returnValue = '';
     if (values) {
-      const dictionary = this.dictionaryService.getDictionary(dictionaryType);
+      const dictionary = this.dictionaryService.getDictEntry(dictionaryType);
       values.forEach((value) => returnValue += dictionary.filter((dic) => dic.value === value).map((dic) => dic.label) + ", ")
       if (returnValue.includes(', ', returnValue.length - 2)) {
         returnValue = returnValue.substring(0, returnValue.length - 2);

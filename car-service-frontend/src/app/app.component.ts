@@ -92,7 +92,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   setTheme() {
-    this.darkMode = this.themeService.loadTheme();
+    this.darkMode = this.themeService.isDarkMode();
   }
 
   @HostListener('window:resize', ['$event'])

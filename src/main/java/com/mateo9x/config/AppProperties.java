@@ -10,7 +10,7 @@ import org.springframework.validation.annotation.Validated;
 @Configuration
 @Validated
 @Data
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application.yml")
 public class AppProperties {
 
     @NotNull

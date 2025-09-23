@@ -18,8 +18,8 @@ public class Vehicle {
 
     @Id
     private String id;
-    private String brand;
-    private String model;
+    private String make;
+    private String name;
     private Integer productionYear;
     private String licensePlate;
     private String vin;

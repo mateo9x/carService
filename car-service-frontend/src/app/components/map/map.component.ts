@@ -84,7 +84,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private getVehicleName(vehicleId: string) {
     const vehicle = this.vehicles.find((vehicle) => vehicle.id === vehicleId);
-    return vehicle?.brand + ' ' + vehicle?.model;
+    return vehicle?.make + ' ' + vehicle?.name;
   }
 
   private addMarker(coordinate: VehicleCoordinate, vehicleName: string, coordinateSelect?: boolean): void {

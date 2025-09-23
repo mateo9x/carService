@@ -58,7 +58,7 @@ export class InsuranceAddDialogComponent implements OnInit, OnDestroy {
   }
 
   getDictionary(type: DictionaryType) {
-    return this.dictionaryService.getDictionary(type);
+    return this.dictionaryService.getDictEntry(type);
   }
 
   setDateTo() {

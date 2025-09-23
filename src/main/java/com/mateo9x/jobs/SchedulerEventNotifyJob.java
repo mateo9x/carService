@@ -1,4 +1,4 @@
-package com.mateo9x.quartz;
+package com.mateo9x.jobs;
 
 import com.mateo9x.dtos.UserDto;
 import com.mateo9x.entities.SchedulerEvent;
@@ -55,7 +55,7 @@ public class SchedulerEventNotifyJob {
     }
 
     private String prepareVehicleName(Vehicle vehicle) {
-        return vehicle.getBrand() + " " + vehicle.getModel() + " (" + vehicle.getLicensePlate() + ")";
+        return vehicle.getMake() + " " + vehicle.getName() + " (" + vehicle.getLicensePlate() + ")";
     }
 
     private boolean notifyHasBeenSentAlready(String inspectionId) {

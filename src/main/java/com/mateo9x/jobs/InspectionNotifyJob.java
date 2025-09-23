@@ -1,4 +1,4 @@
-package com.mateo9x.quartz;
+package com.mateo9x.jobs;
 
 import com.mateo9x.dtos.UserDto;
 import com.mateo9x.entities.Inspection;
@@ -62,7 +62,7 @@ public class InspectionNotifyJob {
     }
 
     private String prepareVehicleName(Vehicle vehicle) {
-        return vehicle.getBrand() + " " + vehicle.getModel() + " (" + vehicle.getLicensePlate() + ")";
+        return vehicle.getMake() + " " + vehicle.getName() + " (" + vehicle.getLicensePlate() + ")";
     }
 
     private boolean notifyHasBeenSentAlready(String inspectionId) {

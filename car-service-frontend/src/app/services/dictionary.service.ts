@@ -1,11 +1,19 @@
 import {Injectable} from '@angular/core';
+import {CacheApiService} from "./api/cache-api.service";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DictionaryService {
 
-  public getDictionary(type: DictionaryType): {label: string, value: any}[] {
+  constructor(private apiService: CacheApiService) {}
+
+  public getCachedDictionary(dictType: string): Observable<any[]> {
+    return this.apiService.getCacheDict(dictType);
+  }
+
+  public getDictEntry(type: DictionaryType): { label: string, value: any }[] {
     switch (type) {
       case DictionaryType.ENGINE_TYPES:
         return [
@@ -42,6 +50,11 @@ export class DictionaryService {
           {label: 'Dwie', value: 2},
           {label: 'Cztery', value: 4}
         ];
+      case DictionaryType.VEHICLE_TYPES:
+        return [
+          {label: 'Samochód', value: 'CAR'},
+          {label: 'Motocykl', value: 'BIKE'},
+        ]
       default:
         return [];
     }
@@ -54,5 +67,6 @@ export enum DictionaryType {
   TRANSMISSION_TYPES,
   AC_PROTECTION_TYPES,
   INSURANCE_COMPANIES,
-  LOAN_PARTS_AMOUNT
+  LOAN_PARTS_AMOUNT,
+  VEHICLE_TYPES
 }
